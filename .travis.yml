@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - 8
+cache:
+  yarn: true
+before_install:
+  yarn add codecov
+script:
+  - npm run flow
+  - npm test -- --coverage
+after_success:
+  codecov
