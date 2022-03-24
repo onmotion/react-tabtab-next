@@ -3,7 +3,7 @@ import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs'
 import nodeResolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
-import jsx from 'acorn-jsx';
+
 
 
 
@@ -66,7 +66,7 @@ export default
     external: Object.keys(globals),
     output: output,
     plugins: plugins,
-    acornInjectPlugins: [jsx()]
+    
   
 
   // input: 'src/index.ts',
