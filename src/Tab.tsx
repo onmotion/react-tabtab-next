@@ -3,7 +3,16 @@ import * as React from 'react';
 import styled from 'styled-components';
 import CloseButton from './CloseButton';
 
-const TabStyle = styled.li`
+// const TabLi: React.FC<React.LiHTMLAttributes<HTMLLIElement> & TabProps> = (props: React.LiHTMLAttributes<HTMLLIElement>) => {
+//   return <li {...props}></li>
+// }
+
+const TabLi = React.forwardRef<HTMLLIElement, React.LiHTMLAttributes<HTMLLIElement> & Partial<TabProps>>(
+  (props: React.LiHTMLAttributes<HTMLLIElement> & Partial<TabProps>, ref) => {
+    return <li ref={ref} {...props}>{props.children}</li> 
+  })
+
+const TabStyle = styled(TabLi)`
   display: ${props => props.vertical ? 'block': 'inline-block'};
   ${props => props.vertical ?
     `
@@ -27,7 +36,7 @@ const TabText = styled.span`
 `;
 
 export type TabProps = {
-  CustomTabStyle: () => void,
+  CustomTabStyle: React.FC<Partial<TabProps>>,
   handleTabChange: (event: any) => void,
   handleEdit: (event: any) => void,
   index: number,
@@ -52,7 +61,7 @@ export default class Tab extends React.PureComponent<TabProps> {
     handleTabChange(index);
   }
 
-  clickDelete(event: SyntheticEvent<HTMLButtonElement>) {
+  clickDelete(event: React.SyntheticEvent<HTMLButtonElement>) {
     event.stopPropagation(); // prevent trigger clickTab event.
     const {handleEdit, index} = this.props;
     handleEdit({type: 'delete', index});
