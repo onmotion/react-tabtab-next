@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {styled as themeStyled} from '../../';
+import {styled as themeStyled} from '../..';
 
 let {TabListStyle, ActionButtonStyle, TabStyle, PanelStyle} = themeStyled;
 

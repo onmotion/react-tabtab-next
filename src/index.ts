@@ -21,5 +21,7 @@ export {
   Panel,
   AsyncPanel,
   ExtraButton,
-  TabListStyle, ActionButtonStyle, TabStyle, PanelStyle
+  
 }
+
+export const styled = {TabListStyle, ActionButtonStyle, TabStyle, PanelStyle}
