@@ -1,7 +1,7 @@
 
 import React from "react";
 
-type Props = {
+type TabsProps = {
   defaultIndex?: number,
   activeIndex?: number | null,
   showModalButton?: number | boolean,
@@ -23,8 +23,8 @@ type State = {
   activeIndex: number
 };
 
-export class Tabs extends React.Component<Props, State> {
-  constructor(props: Props) {
+export class Tabs extends React.Component<TabsProps, State> {
+  constructor(props: TabsProps) {
     super(props);
     this.handleTabChange = this.handleTabChange.bind(this);
     this.handleTabSequence = this.handleTabSequence.bind(this);
@@ -34,7 +34,7 @@ export class Tabs extends React.Component<Props, State> {
     };
   }
 
-  static defaultProps = {
+  static defaultProps: Partial<TabsProps> = {
     showModalButton: 4,
     showArrowButton: 'auto',
     onTabChange: () => {},
@@ -47,7 +47,7 @@ export class Tabs extends React.Component<Props, State> {
     }
   }
 
-  getActiveIndex(props: Props) {
+  getActiveIndex(props: TabsProps) {
     const {defaultIndex, activeIndex} = props;
     if (activeIndex)
       return activeIndex;
@@ -56,7 +56,7 @@ export class Tabs extends React.Component<Props, State> {
     return 0;
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  componentWillReceiveProps(nextProps: TabsProps) {
     if (nextProps.activeIndex !== this.props.activeIndex) {
       this.setState({activeIndex: this.getActiveIndex(nextProps)});
     }

@@ -1,12 +1,12 @@
 // @flow
 import * as React from 'react';
 import {SortableElement} from 'react-sortable-hoc';
-import Tab from './Tab';
+import Tab, { TabProps } from './Tab';
 
-const DragTabElement = SortableElement(({children, ...props}) => {
+const DragTabElement = SortableElement(({children, ...props}: Partial<TabProps>) => {
   return (
     // @ts-ignore
-    <Tab index={props.tabIndex} {...props}>
+    <Tab  {...props} index={props.tabIndex}>
       {children}
     </Tab>
   )
@@ -21,13 +21,11 @@ class DragTab extends React.PureComponent {
   render() {
     const {children, ...props} = this.props;
     return (
-      <DragTabElement ref={node => this.__DRAG_TAB_INTERNAL_NODE = node} {...props}>
+      <DragTabElement index={0} ref={node => this.__DRAG_TAB_INTERNAL_NODE = node} {...props}>
         {children}
       </DragTabElement>
     )
   }
 }
-
-// DragTab.displayName = 'DragTab';
 
 export default DragTab;

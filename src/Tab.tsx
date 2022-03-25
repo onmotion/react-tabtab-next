@@ -26,7 +26,7 @@ const TabText = styled.span`
   vertical-align: middle;
 `;
 
-type Props = {
+export type TabProps = {
   CustomTabStyle: () => void,
   handleTabChange: (event: any) => void,
   handleEdit: (event: any) => void,
@@ -34,14 +34,14 @@ type Props = {
   active: boolean,
   closable: boolean,
   vertical: boolean,
-  children: React.Element<any>
+  children: React.ReactNode
 };
 
-export default class Tab extends React.PureComponent<Props> {
+export default class Tab extends React.PureComponent<TabProps> {
 
   __INTERNAL_NODE: React.ElementRef<any>;
 
-  constructor(props: Props) {
+  constructor(props: TabProps) {
     super(props);
     this.clickTab = this.clickTab.bind(this);
     this.clickDelete = this.clickDelete.bind(this);
@@ -79,8 +79,6 @@ export default class Tab extends React.PureComponent<Props> {
     )
   }
 }
-
-Tab.displayName = 'Tab';
 
 export {
   TabStyle

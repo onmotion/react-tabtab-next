@@ -5,7 +5,7 @@ type Props = {
   handleTabChange: (event: any) => void,
   handleTabSequence: (event: any) => void,
   activeIndex: number,
-  children: React.Node
+  children: React.ReactNode
 };
 
 export default class SortMethod extends React.PureComponent<Props> {
