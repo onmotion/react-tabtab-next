@@ -9,7 +9,8 @@
     "noImplicitAny": true,
     "outDir": "./dist",
     "preserveConstEnums": true,
-    "target": "es5"
+    "target": "es5",
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "node_modules"
