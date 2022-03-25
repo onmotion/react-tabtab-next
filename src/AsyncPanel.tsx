@@ -1,12 +1,11 @@
-// @flow
 import * as React from 'react'
-import Panel from './Panel';
+import Panel, { PanelProps } from './Panel';
 
 type Props = {
   loadContent: (cb: Function) => any,
-  render: (data: any) => void,
-  renderLoading: () => void,
-  CustomPanelStyle: () => void,
+  render: (data: any) => React.ReactNode,
+  renderLoading: () => React.ReactNode,
+  CustomPanelStyle: React.FC<Partial<PanelProps>>,
   active: boolean,
   index: number,
   cache: boolean
@@ -68,8 +67,8 @@ export default class AsyncPanelComponent extends React.PureComponent<Props, Stat
     const promise = loadContent(callback);
     if (promise) {
       promise.then(
-        (data) => callback(null, data),
-        (err) => callback(err)
+        (data: any) => callback(null, data),
+        (err: any) => callback(err)
       );
     }    
     if (!this.state.isLoading) {

@@ -9,7 +9,7 @@ const PanelStyle = styled.div<{active: boolean}>`
   ${props => !props.active ? `display: none;` : null}
 `;
 
-type PanelProps = {
+export type PanelProps = {
   children: React.ReactNode,
   CustomPanelStyle: React.FC<Partial<PanelProps>>,
   active: boolean,

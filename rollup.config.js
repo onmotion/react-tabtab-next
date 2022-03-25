@@ -3,22 +3,13 @@ import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs'
 import nodeResolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
+import path from 'path';
+import { terser } from 'rollup-plugin-terser';
 
-
-
-
-const path = 'dist/react-tabtab';
-
+const rootPackagePath = process.cwd();
+const pkg = require(path.join(rootPackagePath, 'package.json'));
+const external = [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})];
 const name = 'Tabtab';
-const globals = {
-  'prop-types': 'PropTypes',
-  'react-dom': 'ReactDOM',
-  react: 'React',
-  'react-sortable-hoc': 'SortableHOC',
-  'classnames': 'classNames',
-  'styled-components': 'styled',
-  'react-poppop': 'PopPop'
-};
 
 //const external = Object.keys(globals);
 
@@ -28,10 +19,10 @@ const esbundle = process.env.ESBUNDLE
 let output;
 if (prod) {
   console.log('Creating production UMD bundle...');
-  output = {file: path + '.min.js', format: 'umd', name};
+  output = {file: 'dist/react-tabtab.min.js', format: 'umd', name};
 } else if (esbundle) {
   console.log('Creating ES modules bundle...');
-  output = {file: path + '.es.js', format: 'es', sourcemap: true};
+  output = {file: 'dist/react-tabtab.es.js', format: 'es', sourcemap: true};
 }
 
 const extensions = ['.js', '.ts', '.tsx'];
@@ -57,13 +48,15 @@ if (prod) {
    
     replace({
       'process.env.NODE_ENV': JSON.stringify(prod ? 'production' : 'development'),
-    })
+      preventAssignment: true
+    }),
+    terser()
   );
 }
 export default 
 {
     input: 'src/index.ts',
-    external: Object.keys(globals),
+    external,
     output: output,
     plugins: plugins,
     

@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import { ReactElement } from 'react';
 
 type Props = {
   children: Array<any>,
@@ -27,7 +28,7 @@ export default class PanelList extends React.PureComponent<Props> {
 
     // to prevent the type of one children is object type
     const result = React.Children.toArray(children).map((child, index) => (
-      React.cloneElement(child, {
+      React.cloneElement(child as ReactElement, {
         key: index,
         active: index === activeIndex,
         index,

@@ -33,7 +33,7 @@ const Wrapper = styled.button`
 type Props = {
   onClick: (event: any) => void,
   disabled: boolean,
-  children: React.Node
+  children: React.ReactNode
 };
 
 export default class ExtraButton extends React.PureComponent<Props> {

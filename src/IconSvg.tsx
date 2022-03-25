@@ -1,6 +1,6 @@
 import React from 'react';
 // The svg path is from react-icons: https://github.com/gorangajic/react-icons/
-const Svg = ({d}) => (
+const Svg = ({d}: {d: string}) => (
   <svg viewBox="0 0 40 40" fill="currentColor" height="1em" width="1em" style={{verticalAlign: 'middle'}}>
     <g><path d={d}/></g>    
   </svg>
