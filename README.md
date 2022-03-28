@@ -4,16 +4,7 @@
   <br/>
 </h1>
 
-[![version](https://img.shields.io/npm/v/react-tabtab.svg)](https://www.npmjs.com/package/react-tabtab/)
-[![travis](https://travis-ci.org/ctxhou/react-tabtab.svg?branch=master)](https://travis-ci.org/ctxhou/react-tabtab)
-[![appveyor](https://ci.appveyor.com/api/projects/status/jn6724u4k4uer53j?svg=true)](https://ci.appveyor.com/project/ctxhou/react-tabtab)
-![david](https://david-dm.org/ctxhou/react-tabtab.svg)
-[![codecov](https://codecov.io/gh/ctxhou/react-tabtab/branch/master/graph/badge.svg)](https://codecov.io/gh/ctxhou/react-tabtab)
-![download](https://img.shields.io/npm/dm/react-tabtab.svg)
-![gzip size](http://img.badgesize.io/https://unpkg.com/react-tabtab/dist/react-tabtab.min.js?compression=gzip)
-
-> A mobile support, draggable, editable and api based Tab for ReactJS. <br/>
-> *Support react >= `v16.3`*
+> A mobile support, draggable, editable and api based Tab for ReactJS. <br/> > _Support react >= `v16.3`_
 
 **Note: Since v2, we don't support v15 and old styled-components version (<4.0.0) [v15 document](https://github.com/ctxhou/react-tabtab/blob/v1.8.4/README.md)**
 
@@ -23,13 +14,13 @@
 
 ## Features
 
-* **Mobile supported** — Touch support. Easy to use on mobile device
-* **Draggable tab** — Support drag and drop tab
-* **Add & Delete** — Tab can be added and deleted
-* **Async content** — Lazy load panel content
-* **Customizable style** — Based on `styled-components`, super easy to customize tab style
-* **API based** — All actions are controllable
-* **ARIA accessible**
+- **Mobile supported** — Touch support. Easy to use on mobile device
+- **Draggable tab** — Support drag and drop tab
+- **Add & Delete** — Tab can be added and deleted
+- **Async content** — Lazy load panel content
+- **Customizable style** — Based on `styled-components`, super easy to customize tab style
+- **API based** — All actions are controllable
+- **ARIA accessible**
 
 ## Table of Contents
 
@@ -37,22 +28,22 @@
 
 - [Installation](#installation)
 - [Usage](#usage)
-  * [Minimal setup](#minimal-setup)
-  * [Draggable tab](#draggable-tab)
-  * [Async Panel](#async-panel)
-  * [Another Example](#another-example)
+  - [Minimal setup](#minimal-setup)
+  - [Draggable tab](#draggable-tab)
+  - [Async Panel](#async-panel)
+  - [Another Example](#another-example)
 - [Components / Api](#components--api)
-  * [&lt;Tabs /&gt;](#lttabs-gt)
-  * [&lt;TabList /&gt;](#lttablist-gt)
-  * [&lt;Tab /&gt;](#lttab-gt)
-  * [&lt;DragTabList /&gt;](#ltdragtablist-gt)
-  * [&lt;DragTab/ &gt;](#ltdragtab-gt)
-  * [&lt;PanelList/ &gt;](#ltpanellist-gt)
-  * [&lt;Panel /&gt;](#ltpanel-gt)
-  * [&lt;AsyncPanel /&gt;](#ltasyncpanel-gt)
+  - [&lt;Tabs /&gt;](#lttabs-gt)
+  - [&lt;TabList /&gt;](#lttablist-gt)
+  - [&lt;Tab /&gt;](#lttab-gt)
+  - [&lt;DragTabList /&gt;](#ltdragtablist-gt)
+  - [&lt;DragTab/ &gt;](#ltdragtab-gt)
+  - [&lt;PanelList/ &gt;](#ltpanellist-gt)
+  - [&lt;Panel /&gt;](#ltpanel-gt)
+  - [&lt;AsyncPanel /&gt;](#ltasyncpanel-gt)
 - [Customize style](#customize-style)
-  * [Use current style](#use-current-style)
-  * [Make your own style](#make-your-own-style)
+  - [Use current style](#use-current-style)
+  - [Make your own style](#make-your-own-style)
 - [Development](#development)
 - [License](#license)
 
@@ -62,27 +53,31 @@
 
 Install it with npm or yarn
 
-Install `styled-components`. Because we put the `styled-components` to the peerDependencies, it suggests by [styled-components official blog](https://www.styled-components.com/docs/faqs#i-am-a-library-author-should-i-bundle-styledcomponents-with-my-library)
-
 ```js
-$ npm install react-tabtab --save
-$ npm install styled-components@^4.0.0 --save
+$ npm install @react-tabtab-next/tabtab --save
 ```
 
 Then, import the module by module bundler like `webpack`, `browserify`
 
 ```js
 // es6
-import {Tabs, DragTabList, DragTab, PanelList, Panel, ExtraButton} from 'react-tabtab';
+import {
+  Tabs,
+  DragTabList,
+  DragTab,
+  PanelList,
+  Panel,
+  ExtraButton
+} from "@react-tabtab-next/tabtab"
 
 // not using es6
-var Tabtab = require('react-tabtab');
-var Tabs = Tabtab.Tabs;
-var DragTabList = Tabtab.DragTabList;
-var DragTab = Tabtab.DragTab;
-var PanelList = Tabtab.PanelList;
-var Panel = Tabtab.Panel;
-var ExtraButton = Tabtab.ExtraButton;
+var Tabtab = require("react-tabtab")
+var Tabs = Tabtab.Tabs
+var DragTabList = Tabtab.DragTabList
+var DragTab = Tabtab.DragTab
+var PanelList = Tabtab.PanelList
+var Panel = Tabtab.Panel
+var ExtraButton = Tabtab.ExtraButton
 ```
 
 UMD build is also available. If you do this, you'll need to include the dependencies:
@@ -94,14 +89,16 @@ For example:
 <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/prop-types@15.6/prop-types.min.js"></script>
 <script src="https://unpkg.com/classnames@2.2.5/index.js"></script>
-<script src="https://unpkg.com/styled-components/dist/styled-components.min.js" type="text/javascript"></script>
+<script
+  src="https://unpkg.com/styled-components/dist/styled-components.min.js"
+  type="text/javascript"
+></script>
 <script src="https://unpkg.com/react-sortable-hoc/dist/umd/react-sortable-hoc.js"></script>
 <script src="https://unpkg.com/react-poppop/dist/react-poppop.min.js"></script>
 <script src="https://unpkg.com/react-tabtab/dist/react-tabtab.min.js"></script>
 ```
 
 You can reference [standalone.html](https://github.com/ctxhou/react-tabtab/blob/master/docs/standalone.html) example.
-
 
 ## Usage
 
@@ -111,9 +108,9 @@ All the actions are api based. It means there is `no state` in the component. De
 ### Minimal setup
 
 ```js
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import {Tabs, TabList, Tab, PanelList, Panel} from 'react-tabtab';
+import React, { Component } from "react"
+import ReactDOM from "react-dom"
+import { Tabs, TabList, Tab, PanelList, Panel } from "react-tabtab"
 
 class Basic extends Component {
   render() {
@@ -132,7 +129,7 @@ class Basic extends Component {
   }
 }
 
-ReactDOM.render(<Basic/>, document.getElementById('root'));
+ReactDOM.render(<Basic />, document.getElementById("root"))
 ```
 
 It's simple to use. Zero configuration!
@@ -140,36 +137,38 @@ It's simple to use. Zero configuration!
 ### Draggable tab
 
 ```js
-import React, {Component} from 'react';
-import {Tabs, DragTabList, DragTab, PanelList, Panel} from 'react-tabtab';
-import {simpleSwitch} from 'react-tabtab/lib/helpers/move';
+import React, { Component } from "react"
+import { Tabs, DragTabList, DragTab, PanelList, Panel } from "react-tabtab"
+import { simpleSwitch } from "react-tabtab/lib/helpers/move"
 
 export default class Drag extends Component {
   constructor(props) {
-    super(props);
-    this.handleTabChange = this.handleTabChange.bind(this);
-    this.handleTabSequenceChange = this.handleTabSequenceChange.bind(this);
+    super(props)
+    this.handleTabChange = this.handleTabChange.bind(this)
+    this.handleTabSequenceChange = this.handleTabSequenceChange.bind(this)
     this.state = {
-      activeIndex: 0,
+      activeIndex: 0
     }
   }
 
   handleTabChange(index) {
-    this.setState({activeIndex: index});
+    this.setState({ activeIndex: index })
   }
 
-  handleTabSequenceChange({oldIndex, newIndex}) {
-    const {tabs} = this.state;
-    const updateTabs = simpleSwitch(tabs, oldIndex, newIndex);
-    this.setState({tabs: updateTabs, activeIndex: newIndex});
+  handleTabSequenceChange({ oldIndex, newIndex }) {
+    const { tabs } = this.state
+    const updateTabs = simpleSwitch(tabs, oldIndex, newIndex)
+    this.setState({ tabs: updateTabs, activeIndex: newIndex })
   }
 
   render() {
-    const {activeIndex} = this.state;
+    const { activeIndex } = this.state
     return (
-      <Tabs activeIndex={activeIndex}
-            onTabChange={this.handleTabChange}
-            onTabSequenceChange={this.handleTabSequenceChange}>
+      <Tabs
+        activeIndex={activeIndex}
+        onTabChange={this.handleTabChange}
+        onTabSequenceChange={this.handleTabSequenceChange}
+      >
         <DragTabList>
           <DragTab>DragTab1</DragTab>
           <DragTab>DragTab2</DragTab>
@@ -182,7 +181,7 @@ export default class Drag extends Component {
     )
   }
 }
-ReactDOM.render(<Basic/>, document.getElementById('root'));
+ReactDOM.render(<Basic />, document.getElementById("root"))
 ```
 
 Based on above example, the different to implement `normal tab` or `drag tab` is using different wrapper and child.
@@ -221,17 +220,14 @@ In some case, if the data is large or we want to save the bandwidth, lazy loadin
 Moreover, you can mix lazy load panel with normal panel!
 
 ```js
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import {Tabs, TabList, Tab, PanelList, AsyncPanel, Panel} from 'react-tabtab';
+import React, { Component } from "react"
+import ReactDOM from "react-dom"
+import { Tabs, TabList, Tab, PanelList, AsyncPanel, Panel } from "react-tabtab"
 
 function loadContentFunc(callback) {
   setTimeout(() => {
-    callback(null, [
-      {product: 'json'},
-      {product: 'joseph'}
-    ]);
-  }, 100);
+    callback(null, [{ product: "json" }, { product: "joseph" }])
+  }, 100)
 }
 
 // You also can provide promise as return function:
@@ -251,10 +247,11 @@ class AsyncTab extends Component {
         </TabList>
         <PanelList>
           <Panel>Content1</Panel>
-          <AsyncPanel loadContent={loadContentFunc}
-                      render={data => (<div>{JSON.stringify(data)}</div>)}
-                      renderLoading={() => (<div>Loading...</div>)}
-                      cache={true}
+          <AsyncPanel
+            loadContent={loadContentFunc}
+            render={(data) => <div>{JSON.stringify(data)}</div>}
+            renderLoading={() => <div>Loading...</div>}
+            cache={true}
           />
         </PanelList>
       </Tabs>
@@ -262,7 +259,7 @@ class AsyncTab extends Component {
   }
 }
 
-ReactDOM.render(<AsyncTab/>, document.getElementById('root'));
+ReactDOM.render(<AsyncTab />, document.getElementById("root"))
 ```
 
 To implement lazy loading, use `AsyncPanel` to wrap your panel content. Remember to provide `loadContent`, `render`, `renderLoading` these 3 props.
@@ -283,10 +280,10 @@ Live example: [Link](https://ctxhou.github.io/react-tabtab/#async)
 
 Except drag and drop tab, `react-tabtab` also support other usable application, like:
 
-* Add and close button: [Example](https://ctxhou.github.io/react-tabtab/#add-close)
-* Modal view at mobile support: [Example](https://ctxhou.github.io/react-tabtab/#modal)
-* Auto detect number of tab and make it scrollable
-* **All the action is controllable**:[Example](https://ctxhou.github.io/react-tabtab/#complicated)
+- Add and close button: [Example](https://ctxhou.github.io/react-tabtab/#add-close)
+- Modal view at mobile support: [Example](https://ctxhou.github.io/react-tabtab/#modal)
+- Auto detect number of tab and make it scrollable
+- **All the action is controllable**:[Example](https://ctxhou.github.io/react-tabtab/#complicated)
 
 All of these features are api based, so you can customize each action on demand.
 
@@ -513,9 +510,9 @@ For example, if you want to use `material-design`, import the style and pass to 
 **Example:**
 
 ```js
-import {Component} from 'react';
-import {Tabs, TabList, Tab, PanelList, Panel} from 'react-tabtab';
-import * as customStyle from 'react-tabtab/lib/themes/material-design';
+import { Component } from "react"
+import { Tabs, TabList, Tab, PanelList, Panel } from "react-tabtab"
+import * as customStyle from "react-tabtab/lib/themes/material-design"
 
 class Customized extends Component {
   render() {
@@ -544,35 +541,35 @@ If current theme doesn't meet your demand, follow this three steps and create a 
 **First step: import current style**
 
 ```js
-import styled from 'styled-components';
-import { styled as styledTabTab } from 'react-tabtab';
+import styled from "styled-components"
+import { styled as styledTabTab } from "react-tabtab"
 
-let {TabListStyle, ActionButtonStyle, TabStyle, PanelStyle} = styledTabTab;
+let { TabListStyle, ActionButtonStyle, TabStyle, PanelStyle } = styledTabTab
 ```
 
 **Second: extend style and export it**
 
 ```js
-import styled from 'styled-components';
-import { styled as styledTabTab } from 'react-tabtab';
+import styled from "styled-components"
+import { styled as styledTabTab } from "react-tabtab"
 
-let {TabListStyle, ActionButtonStyle, TabStyle, PanelStyle} = styledTabTab;
+let { TabListStyle, ActionButtonStyle, TabStyle, PanelStyle } = styledTabTab
 
 TabListStyle = styled(TabListStyle)`
   // write css
-`;
+`
 
 TabStyle = styled(TabStyle)`
   // write css
-`;
+`
 
 ActionButtonStyle = styled(ActionButtonStyle)`
   // write css
-`;
+`
 
 PanelStyle = styled(PanelStyle)`
   // write css
-`;
+`
 
 // need to follow this object naming
 module.exports = {
@@ -593,6 +590,7 @@ When you finish the new `react-tabtab` style, feel free to add it to `theme/` fo
 $ yarn
 $ npm start
 ```
+
 ## License
 
 MIT [@ctxhou](github.com/ctxhou)

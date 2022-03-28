@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "description": "A mobile support, draggable, editable and api based Tab for ReactJS",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "typings": "src/",
   "scripts": {
     "start": "node devServer.js",
     "build": "rimraf dist && rollup -c ../../rollup.config.js",
