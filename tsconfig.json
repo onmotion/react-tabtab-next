@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "module": "commonjs",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "target": "es5",
+    "baseUrl": ".",
+    "paths": {
+      "@react-tabtab-next": ["packages/*/src"],
+      "*": ["node_modules", "packages"]
+    }
+  },
+  "exclude": ["node_modules"]
+}

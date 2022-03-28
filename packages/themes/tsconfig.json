@@ -1,23 +1,5 @@
 {
-  "compilerOptions": {
-    "experimentalDecorators": true,
-    "module": "commonjs",
-    "jsx": "react",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "allowJs": true,
-    "target": "ES2020",
-    "noImplicitAny": true,
-    "declaration": true, // Создавать ли соответствующие файлы ".d.ts"?
-    "emitDecoratorMetadata": true,
-    "moduleResolution": "node",
-    "sourceMap": false,
-    "skipLibCheck": true,
-    "baseUrl": ".",
-    "outDir": "dist",
-    "paths": {
-      "*": ["node_modules/*"]
-    }
-  },
-  "files": ["index.ts"]
+  "extends": "../../tsconfig.json",
+  "include": ["src/**/*"],
+  "files": ["src/index.ts"]
 }

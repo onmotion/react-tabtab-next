@@ -7,7 +7,7 @@ const rootPackagePath = process.cwd();
 const input = path.join(rootPackagePath, "src/index.ts");
 const pkg = require(path.join(rootPackagePath, "package.json"));
 
-const outputDir = path.join(rootPackagePath, "lib");
+const outputDir = path.join(rootPackagePath, "dist");
 const pgkName = pkg.name.split("/").pop();
 
 const external = [
@@ -23,7 +23,7 @@ export default [
     input,
     output: {
       exports: "named",
-      file: path.join(outputDir, `cjs/${pgkName}.js`),
+      file: path.join(outputDir, `${pgkName}.js`),
       format: "cjs"
     },
     external,
@@ -35,7 +35,7 @@ export default [
     input,
     output: {
       exports: "named",
-      file: path.join(outputDir, `cjs/${pgkName}.min.js`),
+      file: path.join(outputDir, `${pgkName}.min.js`),
       format: "cjs"
     },
     external,
