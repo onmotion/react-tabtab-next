@@ -2,22 +2,17 @@
   "name": "react-tabtab-next",
   "version": "3.0.0",
   "description": "A mobile support, draggable, editable and api based Tab for ReactJS",
-  "main": "dist/react-tabtab.min.js",
-  "types": "dist/index.d.ts",
-  "typings": "src/index.ts",
   "workspaces": [
     "./packages/*"
   ],
   "scripts": {
     "start": "node devServer.js",
-    "build": "npm run build:dist",
-    "build:lib": "rimraf ./lib && cross-env BABEL_ENV=production babel --extensions '.ts' src -d lib",
-    "build:dist": "rimraf dist && rollup -c",
+    "build:tabtab": "npm run build --prefix packages/tabtab",
+    "build:themes": "npm run build --prefix packages/themes",
+    "build": "npm run build:tabtab & npm run build:themes",
     "lint": "eslint src example test",
     "test": "jest",
     "test:watch": "NODE_ENV=test npm test -- --watch",
-    "flow": "flow check",
-    "flow:watch": "flow-watch",
     "gh-pages": "rimraf _gh-pages && npm run gh-pages:build && npm run gh-pages:publish",
     "gh-pages:build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
     "gh-pages:publish": "git-directory-deploy --directory _gh-pages --branch gh-pages",
@@ -37,9 +32,6 @@
     "tab",
     "tabtab"
   ],
-  "files": [
-    "dist"
-  ],
   "publishConfig": {
     "access": "public"
   },
@@ -56,8 +48,10 @@
     "@rollup/plugin-node-resolve": "^13.1.3",
     "@rollup/plugin-replace": "^4.0.0",
     "@rollup/plugin-typescript": "^8.3.1",
+    "@types/estree": "^0.0.51",
     "@types/react": "^17.0.42",
     "classnames": "^2.2.5",
+    "compression-webpack-plugin": "^9.2.0",
     "invariant": "^2.2.2",
     "prop-types": "^15.6.0",
     "react-icons": "^4.3.1",
@@ -70,24 +64,21 @@
     "rollup-plugin-terser": "^7.0.2",
     "styled-components": "^5.3.5",
     "tslib": "^2.3.1",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.3",
+    "webpack": "^5.70.0"
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.24",
     "babel-cli": "^6.26.0",
-    "compression-webpack-plugin": "^1.0.1",
     "cross-env": "^5.1.1",
     "enzyme": "^3.7.0",
     "enzyme-to-json": "^3.2.2",
-    "eslint": "^4.0.0",
-    "eslint-config-google": "^0.4.0",
-    "eslint-config-prettier": "^2.6.0",
-    "eslint-plugin-flowtype": "^2.39.1",
-    "eslint-plugin-flowtype-errors": "^3.3.6",
-    "eslint-plugin-jest": "^21.2.0",
-    "eslint-plugin-prettier": "^2.3.1",
-    "eslint-plugin-react": "^7.5.1",
-    "extract-text-webpack-plugin": "^3.0.1",
+    "eslint": "^8.12.0",
+    "eslint-config-google": "*",
+    "eslint-config-prettier": "*",
+    "eslint-plugin-jest": "*",
+    "eslint-plugin-prettier": "*",
+    "eslint-plugin-react": "*",
     "git-directory-deploy": "^1.5.1",
     "html-webpack-plugin": "^2.30.1",
     "husky": "^0.14.3",
@@ -99,13 +90,12 @@
     "react": ">=16.3.0",
     "react-content-loader": "^3.1.1",
     "rimraf": "^2.6.2",
-    "webpack": "^3.3.0",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.18.2"
   },
   "peerDependencies": {
-    "react": ">= 16.3.0 < 17.0.0-0"
+    "react": ">= 16.3.0"
   },
   "jest": {
     "setupFiles": [

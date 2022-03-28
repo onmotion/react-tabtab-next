@@ -3,8 +3,7 @@
     "prettier",
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:jest/recommended",
-    "plugin:flowtype/recommended"
+    "plugin:jest/recommended"
   ],
   "parser": "babel-eslint",
   "parserOptions": {
@@ -17,19 +16,12 @@
     "es6": true,
     "jest": true
   },
-  "plugins": [
-    "prettier",
-    "react",
-    "jest",
-    "flowtype"
-  ],
+  "plugins": ["prettier", "react", "jest"],
   "rules": {
     "switch-colon-spacing": 0,
     "require-jsdoc": 0,
     "react/prop-types": 0,
-    "no-unused-vars": [
-      "error"
-    ],
+    "no-unused-vars": ["error"],
     "no-console": 0
   }
 }

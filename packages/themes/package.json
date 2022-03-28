@@ -1,0 +1,43 @@
+{
+  "name": "@react-tabtab-next/themes",
+  "version": "3.0.0",
+  "description": "A mobile support, draggable, editable and api based Tab for ReactJS",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "node devServer.js",
+    "build": "tsc",
+    "lint": "eslint src example test",
+    "test": "jest",
+    "test:watch": "NODE_ENV=test npm test -- --watch",
+    "flow": "flow check",
+    "flow:watch": "flow-watch",
+    "gh-pages": "rimraf _gh-pages && npm run gh-pages:build && npm run gh-pages:publish",
+    "gh-pages:build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
+    "gh-pages:publish": "git-directory-deploy --directory _gh-pages --branch gh-pages",
+    "prepublish": "npm run build",
+    "validate": "npm ls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onmotion/react-tabtab-next.git",
+    "directory": "packages/themes"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "onmotion",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/onmotion/react-tabtab-next/issues"
+  },
+  "homepage": "https://github.com/onmotion/react-tabtab-next#readme",
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {
+    "react": ">= 16.3.0"
+  }
+}
