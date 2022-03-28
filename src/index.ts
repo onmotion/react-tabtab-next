@@ -9,7 +9,7 @@ import PanelList from './PanelList';
 import Panel, {PanelStyle} from './Panel';
 import AsyncPanel from './AsyncPanel';
 import ExtraButton from './ExtraButton';
-
+import md from './themes/material-design'
 
 export {
   Tabs,
@@ -25,3 +25,5 @@ export {
 }
 
 export const styled = {TabListStyle, ActionButtonStyle, TabStyle, PanelStyle}
+
+export const themes = {md}

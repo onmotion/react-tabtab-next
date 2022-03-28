@@ -18,9 +18,11 @@ module.exports = function (api) {
   }
 
   return {
-    presets: [
+    presets: ["@babel/preset-typescript",
+
       ['@babel/env', presetOptions],
-      '@babel/typescript'
+     // '@babel/typescript'
+      
     ],
     plugins,
     exclude,
