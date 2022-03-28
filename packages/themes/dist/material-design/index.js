@@ -14,7 +14,7 @@ TabListStyle = (0, styled_components_1.default)(TabListStyle) `
 `;
 TabStyle = (0, styled_components_1.default)(TabStyle) `
   color: rgba(238, 110, 115, 0.7);
-  transition: color 0.28s ease;
+  // transition: color 0.28s ease;
   border: 0;
   ${(props) => props.active && !props.vertical
     ? `
@@ -39,7 +39,6 @@ PanelStyle = (0, styled_components_1.default)(PanelStyle) `
   border-right: 1px solid rgba(0, 0, 0, 0.12);
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   padding: 30px 30px;
-  transition: box-shadow 0.25s, -webkit-box-shadow 0.25s;
   border-radius: 2px;
 `;
 exports.default = {

@@ -1,12 +1,12 @@
-import styled from "styled-components";
-import { styled as themeStyled } from "../..";
+import styled from "styled-components"
+import { styled as themeStyled } from "@react-tabtab-next/tabtab"
 
-let { TabListStyle, ActionButtonStyle, TabStyle, PanelStyle } = themeStyled;
+let { TabListStyle, ActionButtonStyle, TabStyle, PanelStyle } = themeStyled
 
 TabListStyle = styled(TabListStyle)`
   background-color: #fff;
   border-bottom: 1px solid #dbdbdb;
-`;
+`
 
 TabStyle = styled(TabStyle)`
   position: relative;
@@ -24,7 +24,7 @@ TabStyle = styled(TabStyle)`
     height: 2px;
     background: #dbdbdb;
   }
-  ${props =>
+  ${(props) =>
     props.active && !props.vertical
       ? `
       &::after {
@@ -35,7 +35,7 @@ TabStyle = styled(TabStyle)`
   &:hover::after {
     background: #3273dc;
   }
-`;
+`
 
 ActionButtonStyle = styled(ActionButtonStyle)`
   background-color: transparent;
@@ -43,13 +43,13 @@ ActionButtonStyle = styled(ActionButtonStyle)`
   &:hover {
     background-color: #eee;
   }
-`;
+`
 
-PanelStyle = styled(PanelStyle)``;
+PanelStyle = styled(PanelStyle)``
 
 export default {
   TabList: TabListStyle,
   ActionButton: ActionButtonStyle,
   Tab: TabStyle,
   Panel: PanelStyle
-};
+}
