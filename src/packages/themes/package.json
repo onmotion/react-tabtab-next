@@ -1,18 +1,12 @@
 {
-  "name": "react-tabtab-next",
+  "name": "@react-tabtab-next/themes",
   "version": "3.0.0",
   "description": "A mobile support, draggable, editable and api based Tab for ReactJS",
-  "main": "dist/react-tabtab.min.js",
-  "types": "dist/index.d.ts",
-  "typings": "src/index.ts",
-  "workspaces": [
-    "./packages/*"
-  ],
+  "main": "index.ts",
+  "typings": "index.ts",
   "scripts": {
     "start": "node devServer.js",
-    "build": "npm run build:dist",
-    "build:lib": "rimraf ./lib && cross-env BABEL_ENV=production babel --extensions '.ts' src -d lib",
-    "build:dist": "rimraf dist && rollup -c",
+    "build": "tsc",
     "lint": "eslint src example test",
     "test": "jest",
     "test:watch": "NODE_ENV=test npm test -- --watch",
@@ -26,7 +20,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/onmotion/react-tabtab-next.git"
+    "url": "git+https://github.com/onmotion/react-tabtab-next.git",
+    "directory": "packages/themes"
   },
   "keywords": [
     "react",
@@ -70,7 +65,8 @@
     "rollup-plugin-terser": "^7.0.2",
     "styled-components": "^5.3.5",
     "tslib": "^2.3.1",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.2",
+    "react-tabtab-next": "workspace:^"
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.24",

@@ -1,15 +1,13 @@
-
 // @flow
-import {Tabs} from './Tabs';
-import TabList, {TabListStyle, ActionButtonStyle} from './TabList';
-import Tab, {TabStyle} from './Tab';
-import DragTabList from './DragTabList';
-import DragTab from './DragTab';
-import PanelList from './PanelList';
-import Panel, {PanelStyle} from './Panel';
-import AsyncPanel from './AsyncPanel';
-import ExtraButton from './ExtraButton';
-import md from './themes/material-design'
+import Tabs from "./Tabs"
+import TabList, { TabListStyle, ActionButtonStyle } from "./TabList"
+import Tab, { TabStyle } from "./Tab"
+import DragTabList from "./DragTabList"
+import DragTab from "./DragTab"
+import PanelList from "./PanelList"
+import Panel, { PanelStyle } from "./Panel"
+import AsyncPanel from "./AsyncPanel"
+import ExtraButton from "./ExtraButton"
 
 export {
   Tabs,
@@ -20,10 +18,7 @@ export {
   PanelList,
   Panel,
   AsyncPanel,
-  ExtraButton,
-  
+  ExtraButton
 }
 
-export const styled = {TabListStyle, ActionButtonStyle, TabStyle, PanelStyle}
-
-export const themes = {md}
+export const styled = { TabListStyle, ActionButtonStyle, TabStyle, PanelStyle }

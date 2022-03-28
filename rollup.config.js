@@ -13,60 +13,49 @@ const external = [
   ...Object.keys(pkg.peerDependencies || {})
 ];
 const name = "Tabtab";
-
-//const external = Object.keys(globals);
-
 const prod = process.env.PRODUCTION;
-const esbundle = process.env.ESBUNDLE;
-
-let output;
-if (prod) {
-  console.log("Creating production UMD bundle...");
-  output = { file: "dist/react-tabtab.min.js", format: "umd", name };
-} else if (esbundle) {
-  console.log("Creating ES modules bundle...");
-  output = {
-    dir: "dist",
-    format: "esm",
-    sourcemap: false,
-    preserveModules: true
-  };
-}
 
 const extensions = [".js", ".ts", ".tsx"];
 
 const plugins = [
   json(),
-
-  // resolve({
-  //   browser: true
-  // }),
   nodeResolve({ extensions }),
   commonjs({
     // ignoreGlobal: true,
-    // exclude: 'src/**'
+    //  exclude: "src/packeges/*"
   }),
   typescript({ tsconfig: "./tsconfig.json" })
 ];
 
-if (prod) {
-  plugins.push(
-    replace({
-      "process.env.NODE_ENV": JSON.stringify(
-        prod ? "production" : "development"
-      ),
-      preventAssignment: true
-    }),
-    terser()
-  );
-}
 export default [
   {
     input: "src/index.ts",
     external,
-    output: output,
-    plugins: plugins
+    output: { file: "dist/react-tabtab.min.js", format: "umd", name },
+    plugins: [
+      ...plugins,
+      [
+        replace({
+          "process.env.NODE_ENV": JSON.stringify(
+            prod ? "production" : "development"
+          ),
+          preventAssignment: true
+        }),
+        terser()
+      ]
+    ]
   }
+  // {
+  //   input: "src/index.ts",
+  //   external,
+  //   output: {
+  //     dir: "dist",
+  //     format: "esm",
+  //     sourcemap: false,
+  //    // preserveModules: true
+  //   },
+  //   plugins: plugins
+  // }
   // {
   //   input: "src/",
   //   external,
