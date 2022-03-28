@@ -9,7 +9,7 @@
     "start": "node devServer.js",
     "build:tabtab": "npm run build --prefix packages/tabtab",
     "build:themes": "npm run build --prefix packages/themes",
-    "build": "npm run build:tabtab & npm run build:themes",
+    "build": "npm run build:tabtab && npm run build:themes",
     "lint": "eslint src example test",
     "test": "jest",
     "test:watch": "NODE_ENV=test npm test -- --watch",

@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "start": "node devServer.js",
-    "build": "tsc",
+    "build": "rimraf dist && tsc",
     "lint": "eslint src example test",
     "test": "jest",
     "test:watch": "NODE_ENV=test npm test -- --watch",
@@ -35,7 +35,9 @@
     "url": "https://github.com/onmotion/react-tabtab-next/issues"
   },
   "homepage": "https://github.com/onmotion/react-tabtab-next#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@react-tabtab-next/tabtab": "*"
+  },
   "devDependencies": {},
   "peerDependencies": {
     "react": ">= 16.3.0"

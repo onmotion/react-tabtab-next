@@ -11,7 +11,7 @@
     "declaration": true, // Создавать ли соответствующие файлы ".d.ts"?
     "emitDecoratorMetadata": true,
     "moduleResolution": "node",
-    "sourceMap": true,
+    "sourceMap": false,
     "skipLibCheck": true,
     "baseUrl": ".",
     "outDir": "dist",
