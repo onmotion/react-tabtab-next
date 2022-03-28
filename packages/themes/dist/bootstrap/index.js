@@ -12,8 +12,6 @@ TabListStyle = (0, styled_components_1.default)(TabListStyle) `
 TabStyle = (0, styled_components_1.default)(TabStyle) `
   border-top-left-radius: .25rem;
   border-top-right-radius: .25rem;
-  transition: color .3s cubic-bezier(.645, .045, .355, 1);
-  transition: background-color .3s cubic-bezier(.645, .045, .355, 1);
   color: ${(props) => (props.active ? "black" : "#007bff")};
   border: 1px solid transparent;
   ${(props) => props.vertical

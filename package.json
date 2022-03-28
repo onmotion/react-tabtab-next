@@ -7,9 +7,9 @@
   ],
   "scripts": {
     "start": "node devServer.js",
-    "build:tabtab": "npm run build --prefix packages/tabtab",
-    "build:themes": "npm run build --prefix packages/themes",
-    "build": "npm run build:tabtab && npm run build:themes",
+    "clean": "lerna run clean",
+    "build": "lerna run build",
+    "dev": "lerna run dev",
     "lint": "eslint src example test",
     "test": "jest",
     "test:watch": "NODE_ENV=test npm test -- --watch",
