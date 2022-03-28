@@ -2,10 +2,9 @@
   "name": "@react-tabtab-next/themes",
   "version": "3.0.0",
   "description": "A mobile support, draggable, editable and api based Tab for ReactJS",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/bundle.min.js",
+  "typings": "src/",
   "scripts": {
-    "start": "node devServer.js",
     "build": "rimraf dist && rollup -c ../../rollup.config.js",
     "lint": "eslint src example test",
     "test": "jest",

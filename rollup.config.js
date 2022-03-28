@@ -1,21 +1,21 @@
-import path from "path";
-import { terser } from "rollup-plugin-terser";
-import json from "@rollup/plugin-json";
-import typescript from "@rollup/plugin-typescript";
+import path from "path"
+import { terser } from "rollup-plugin-terser"
+import json from "@rollup/plugin-json"
+import typescript from "@rollup/plugin-typescript"
 
-const rootPackagePath = process.cwd();
-const input = path.join(rootPackagePath, "src/index.ts");
-const pkg = require(path.join(rootPackagePath, "package.json"));
+const rootPackagePath = process.cwd()
+const input = path.join(rootPackagePath, "src/index.ts")
+const pkg = require(path.join(rootPackagePath, "package.json"))
 
-const outputDir = path.join(rootPackagePath, "dist");
-const pgkName = pkg.name.split("/").pop();
+const outputDir = path.join(rootPackagePath, "dist")
+const pgkName = pkg.name.split("/").pop()
 
 const external = [
   ...Object.keys(pkg.dependencies || {}),
   ...Object.keys(pkg.peerDependencies || {})
-];
+]
 
-const plugins = [json(), typescript()];
+const plugins = [json(), typescript()]
 
 export default [
   // CJS
@@ -23,7 +23,7 @@ export default [
     input,
     output: {
       exports: "named",
-      file: path.join(outputDir, `${pgkName}.js`),
+      file: path.join(outputDir, `bundle.js`),
       format: "cjs"
     },
     external,
@@ -35,10 +35,10 @@ export default [
     input,
     output: {
       exports: "named",
-      file: path.join(outputDir, `${pgkName}.min.js`),
+      file: path.join(outputDir, `bundle.min.js`),
       format: "cjs"
     },
     external,
     plugins: plugins.concat([terser()])
   }
-];
+]
