@@ -48,4 +48,3 @@ exports.default = {
     Tab: TabStyle,
     Panel: PanelStyle
 };
-//# sourceMappingURL=index.js.map

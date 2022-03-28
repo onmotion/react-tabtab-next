@@ -25,4 +25,3 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.md = void 0;
 exports.md = __importStar(require("./material-design"));
-//# sourceMappingURL=index.js.map
