@@ -1,2 +1,2 @@
-import * as md from "./material-design";
+import md from "./material-design";
 export { md };
