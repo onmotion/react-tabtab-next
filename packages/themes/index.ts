@@ -1,1 +1,3 @@
-export * as md from './material-design'
+import * as md from "./material-design"
+
+export { md }
