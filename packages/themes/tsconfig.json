@@ -1,5 +1,11 @@
 {
-  "extends": "../../tsconfig.json",
-  "include": ["src/**/*"],
-  "files": ["src/index.ts"]
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "target": "es5",
+    "baseUrl": "."
+  }
 }

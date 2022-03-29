@@ -5,17 +5,7 @@
   "main": "dist/bundle.min.js",
   "typings": "src/",
   "scripts": {
-    "build": "rimraf dist && rollup -c ../../rollup.config.js",
-    "lint": "eslint src example test",
-    "test": "jest",
-    "test:watch": "NODE_ENV=test npm test -- --watch",
-    "flow": "flow check",
-    "flow:watch": "flow-watch",
-    "gh-pages": "rimraf _gh-pages && npm run gh-pages:build && npm run gh-pages:publish",
-    "gh-pages:build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
-    "gh-pages:publish": "git-directory-deploy --directory _gh-pages --branch gh-pages",
-    "prepublish": "npm run build",
-    "validate": "npm ls"
+    "build": "rimraf dist && rollup -c ../../rollup.config.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +14,17 @@
   },
   "files": [
     "dist"
+  ],
+  "keywords": [
+    "react",
+    "tabs",
+    "react-tab",
+    "react-tabtab",
+    "react-component",
+    "tab",
+    "tabtab",
+    "tabtab-next",
+    "react-tabtab-next"
   ],
   "publishConfig": {
     "access": "public"

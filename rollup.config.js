@@ -18,27 +18,38 @@ const external = [
 const plugins = [json(), typescript()]
 
 export default [
-  // CJS
+  // UMD
   {
     input,
     output: {
+      name: pgkName,
       exports: "named",
       file: path.join(outputDir, `bundle.js`),
-      format: "cjs"
+      format: "umd"
     },
     external,
     plugins
   },
+  // {
+  //   input,
+  //   output: {
+  //     dir: "cjs",
+  //     format: "cjs"
+  //   },
+  //   external,
+  //   plugins
+  // },
 
-  // Minified CJS
+  // Minified UMD
   {
     input,
     output: {
+      name: pgkName,
       exports: "named",
       file: path.join(outputDir, `bundle.min.js`),
-      format: "cjs"
+      format: "umd"
     },
     external,
-    plugins: plugins.concat([terser()])
+    plugins: [...plugins, terser()]
   }
 ]

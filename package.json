@@ -32,16 +32,17 @@
     "tab",
     "tabtab"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
+  "private": true,
   "author": "onmotion",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/onmotion/react-tabtab-next/issues"
   },
   "homepage": "https://github.com/onmotion/react-tabtab-next#readme",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "rollup": "^2.70.1",
+    "rollup-plugin-terser": "^7.0.2",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^21.0.2",
     "@rollup/plugin-json": "^4.1.0",
@@ -49,7 +50,6 @@
     "@rollup/plugin-replace": "^4.0.0",
     "@rollup/plugin-typescript": "^8.3.1"
   },
-  "devDependencies": {},
   "peerDependencies": {
     "react": ">= 16.3.0"
   },
