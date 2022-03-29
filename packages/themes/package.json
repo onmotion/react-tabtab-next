@@ -1,49 +1,49 @@
 {
-  "name": "@react-tabtab-next/themes",
-  "version": "3.0.0",
-  "description": "A mobile support, draggable, editable and api based Tab for ReactJS",
-  "main": "dist/bundle.min.js",
-  "typings": "src/",
-  "scripts": {
-    "build": "rimraf dist && rollup -c ../../rollup.config.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/onmotion/react-tabtab-next.git",
-    "directory": "packages/themes"
-  },
-  "files": [
-    "dist"
-  ],
-  "keywords": [
-    "react",
-    "tabs",
-    "react-tab",
-    "react-tabtab",
-    "react-component",
-    "tab",
-    "tabtab",
-    "tabtab-next",
-    "react-tabtab-next"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": "onmotion",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/onmotion/react-tabtab-next/issues"
-  },
-  "homepage": "https://github.com/onmotion/react-tabtab-next#readme",
-  "dependencies": {
-    "@react-tabtab-next/tabtab": "*",
-    "styled-components": "^5.3.5"
-  },
-  "devDependencies": {
-    "tslib": "^2.3.1"
-  },
-  "peerDependencies": {
-    "react": "^16.3.0 || ^17.0.0",
-    "react-dom": "^16.3.0 || ^17.0.0"
-  }
+    "name": "@react-tabtab-next/themes",
+    "version": "3.0.0",
+    "description": "A mobile support, draggable, editable and api based Tab for ReactJS",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "rimraf dist && rollup -c ../../rollup.config.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/onmotion/react-tabtab-next.git",
+        "directory": "packages/themes"
+    },
+    "files": [
+        "dist"
+    ],
+    "keywords": [
+        "react",
+        "tabs",
+        "react-tab",
+        "react-tabtab",
+        "react-component",
+        "tab",
+        "tabtab",
+        "tabtab-next",
+        "react-tabtab-next"
+    ],
+    "publishConfig": {
+        "access": "public"
+    },
+    "author": "onmotion",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/onmotion/react-tabtab-next/issues"
+    },
+    "homepage": "https://github.com/onmotion/react-tabtab-next#readme",
+    "dependencies": {
+        "@react-tabtab-next/tabtab": "*",
+        "styled-components": "^5.3.5"
+    },
+    "devDependencies": {
+        "tslib": "^2.3.1"
+    },
+    "peerDependencies": {
+        "react": "^16.3.0 || ^17.0.0",
+        "react-dom": "^16.3.0 || ^17.0.0"
+    }
 }
