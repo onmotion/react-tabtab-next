@@ -142,7 +142,7 @@
 
     var DragTabContainer$1 = reactSortableHoc.SortableContainer(function (_a) {
         var children = _a.children;
-        return (React__namespace.createElement("div", { style: { marginTop: '50px' } }, children));
+        return React__namespace.createElement("div", { style: { marginTop: "50px" } }, children);
     });
     var ModalTabListWrapper = /** @class */ (function (_super) {
         tslib.__extends(ModalTabListWrapper, _super);
@@ -150,7 +150,7 @@
             return _super !== null && _super.apply(this, arguments) || this;
         }
         ModalTabListWrapper.prototype.render = function () {
-            return (React__namespace.createElement(DragTabContainer$1, { onSortEnd: this.onSortEnd, axis: 'y', lockAxis: 'y', 
+            return (React__namespace.createElement(DragTabContainer$1, { onSortEnd: this.onSortEnd, axis: "y", lockAxis: "y", 
                 // if no pressDelay, close button cannot be triggered,
                 // because it would always treat click as dnd action
                 pressDelay: 100 }, this.props.children));
@@ -628,3 +628,4 @@
     Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
+//# sourceMappingURL=bundle.js.map

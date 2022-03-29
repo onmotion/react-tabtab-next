@@ -2,6 +2,7 @@ import path from "path"
 import { terser } from "rollup-plugin-terser"
 import json from "@rollup/plugin-json"
 import typescript from "@rollup/plugin-typescript"
+import resolve from "@rollup/plugin-node-resolve"
 
 const rootPackagePath = process.cwd()
 const input = path.join(rootPackagePath, "src/index.ts")
@@ -12,10 +13,11 @@ const pgkName = pkg.name.split("/").pop()
 
 const external = [
   ...Object.keys(pkg.dependencies || {}),
+  ...Object.keys(pkg.devDependencies || {}),
   ...Object.keys(pkg.peerDependencies || {})
 ]
 
-const plugins = [json(), typescript()]
+const plugins = [json(), resolve(), typescript()]
 
 export default [
   // UMD
@@ -25,7 +27,8 @@ export default [
       name: pgkName,
       exports: "named",
       file: path.join(outputDir, `bundle.js`),
-      format: "umd"
+      format: "umd",
+      sourcemap: true
     },
     external,
     plugins
@@ -47,7 +50,8 @@ export default [
       name: pgkName,
       exports: "named",
       file: path.join(outputDir, `bundle.min.js`),
-      format: "umd"
+      format: "umd",
+      sourcemap: true
     },
     external,
     plugins: [...plugins, terser()]

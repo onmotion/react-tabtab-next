@@ -1,11 +1,17 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
     "jsx": "react",
+    "module": "es6",
     "moduleResolution": "node",
-    "removeComments": true,
-    "resolveJsonModule": true,
+    "noImplicitAny": true,
+    "preserveConstEnums": true,
     "target": "es5",
-    "baseUrl": "."
-  }
+    "allowSyntheticDefaultImports": true,
+    "noEmitOnError": true
+  },
+  "exclude": ["node_modules"],
+  "include": ["src/**/*"]
 }

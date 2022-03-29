@@ -10,8 +10,7 @@
     "preserveConstEnums": true,
     "target": "es5",
     "allowSyntheticDefaultImports": true,
-    "declaration": true,
-    "outDir": "cjs"
+    "noEmitOnError": true
   },
   "exclude": ["node_modules"],
   "include": ["src/**/*"]
