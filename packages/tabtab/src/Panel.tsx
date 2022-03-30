@@ -1,37 +1,36 @@
 // @flow
-import * as React from "react"
-import styled from "styled-components"
+import * as React from 'react';
+import styled from 'styled-components';
 
 const PanelStyle = styled.div<{ active: boolean }>`
-  background-color: white;
-  text-align: left;
-  padding: 20px 15px;
-  ${(props) => (!props.active ? `display: none;` : null)}
-`
+    background-color: white;
+    text-align: left;
+    padding: 20px 15px;
+    ${props => (!props.active ? `display: none;` : null)}
+`;
 
 export type PanelProps = {
-  children: React.ReactNode
-  CustomPanelStyle: React.FC<Partial<PanelProps>>
-  active: boolean
-  index: number
-}
+    CustomPanelStyle?: React.FC<Partial<PanelProps>>;
+    active?: boolean;
+    index?: number;
+};
 
 export default class PanelComponent extends React.PureComponent<PanelProps> {
-  render() {
-    const { active, index } = this.props
-    const Panel = this.props.CustomPanelStyle || PanelStyle
-    return (
-      <Panel
-        role="tabpanel"
-        id={`react-tabtab-panel-${index}`}
-        aria-labelledby={`react-tabtab-${index}`}
-        aria-hidden={false}
-        active={active}
-      >
-        {active ? this.props.children : null}
-      </Panel>
-    )
-  }
+    render() {
+        const { active, index } = this.props;
+        const Panel = this.props.CustomPanelStyle || PanelStyle;
+        return (
+            <Panel
+                role="tabpanel"
+                id={`react-tabtab-panel-${index}`}
+                aria-labelledby={`react-tabtab-${index}`}
+                aria-hidden={false}
+                active={active}
+            >
+                {active ? this.props.children : null}
+            </Panel>
+        );
+    }
 }
 
-export { PanelStyle }
+export { PanelStyle };

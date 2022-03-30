@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 declare type Props = {
     onClick: (event: any) => void;
     disabled: boolean;

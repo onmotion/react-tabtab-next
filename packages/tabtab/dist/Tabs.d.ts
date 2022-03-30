@@ -1,29 +1,30 @@
-import React from "react";
+import React from 'react';
+import { Panel, TabList } from '.';
+import Tab from './Tab';
 declare type TabsProps = {
     defaultIndex?: number;
     activeIndex?: number | null;
     showModalButton?: number | boolean;
-    showArrowButton?: "auto" | boolean;
+    showArrowButton?: 'auto' | boolean;
     ExtraButton?: React.ReactNode;
     onTabChange?: (event: any) => void;
     onTabSequenceChange?: (event: any) => void;
     onTabEdit?: (event: any) => void;
     customStyle?: {
-        TabList?: () => void;
-        Tab?: () => void;
-        Panel?: () => void;
-        ActionButton?: () => void;
+        TabList?: React.ElementType<TabList>;
+        Tab?: React.ElementType<Tab>;
+        Panel?: React.ElementType<Panel>;
+        ActionButton?: JSX.Element;
     };
-    children: React.ReactElement;
 };
 declare type State = {
     activeIndex: number;
 };
-export default class Tabs extends React.Component<TabsProps, State> {
+export default class Tabs extends React.PureComponent<TabsProps, State> {
     constructor(props: TabsProps);
     static defaultProps: Partial<TabsProps>;
     getActiveIndex(props: TabsProps): number;
-    componentWillReceiveProps(nextProps: TabsProps): void;
+    componentDidUpdate(prevProps: Readonly<TabsProps>, prevState: Readonly<State>, snapshot?: any): void;
     handleTabChange(index: number): void;
     handleTabSequence({ oldIndex, newIndex }: {
         oldIndex: number;

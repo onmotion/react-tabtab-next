@@ -1,13 +1,13 @@
-// @ts-nocheck
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { AnyStyledComponent } from 'styled-components';
 import invariant from 'invariant';
 import { LeftIcon, RightIcon, BulletIcon } from './IconSvg';
 import { isNumber } from './utils/isType';
 import TabModal from './TabModal';
+import { TabList } from '.';
 
 const buttonWidth = 35;
-const getPadding = ({ showModalButton, showArrowButton }) => {
+const getPadding = ({ showModalButton, showArrowButton }: TabListProps) => {
     let paddingLeft = 0;
     let paddingRight = 0;
     if (showModalButton) {
@@ -29,14 +29,14 @@ const getPadding = ({ showModalButton, showArrowButton }) => {
     return `0 ${paddingRight}px 0 ${paddingLeft}px`;
 };
 
-const TabListStyle = styled.div`
+const TabListStyle = styled(TabList)`
     background-color: white;
     text-align: left;
     position: relative;
     white-space: nowrap;
     overflow: hidden;
     width: auto;
-    padding: ${props => getPadding(props)};
+    padding: ${(props) => getPadding(props)};
 `;
 
 const ListInner = styled.div`
@@ -65,17 +65,17 @@ const ActionButtonStyle = styled.div`
     }
 `;
 
-const makeScrollButton = ActionButton => styled(ActionButton)`
+const makeScrollButton = (ActionButton: React.ElementType) => styled(ActionButton)`
     display: inline-block;
     filter: none;
     position: absolute;
-    ${props => (props.left ? (props.showModalButton ? `left: ${buttonWidth + 2}px` : `left: 0`) : 'right: 0')};
+    ${(props) => (props.left ? (props.showModalButton ? `left: ${buttonWidth + 2}px` : `left: 0`) : 'right: 0')};
     &:hover {
         cursor: pointer;
     }
 `;
 
-const makeFoldButton = ActionButton => styled(ActionButton)`
+const makeFoldButton = (ActionButton: React.ElementType) => styled(ActionButton)`
     display: inline-block;
     filter: none;
     position: absolute;
@@ -85,39 +85,39 @@ const makeFoldButton = ActionButton => styled(ActionButton)`
     }
 `;
 
-type Props = {
-    customStyle: {
-        TabList: React.FC<Partial<Props>>;
-        Tab: JSX.Element;
-        ActionButton: JSX.Element;
+export type TabListProps = {
+    customStyle?: {
+        TabList: React.FC<Partial<TabListProps>>;
+        Tab: React.ElementRef<'div'>;
+        ActionButton: React.ReactElement;
     };
-    activeIndex: number;
-    showArrowButton: 'auto' | boolean;
-    showModalButton: number | boolean;
-    handleTabChange: (event: any) => void;
-    handleTabSequence: (event: any) => void;
-    handleEdit: (event: any) => void;
-    ExtraButton: React.ReactElement<any>;
-    children: React.ReactNode[];
+    showArrowButton?: 'auto' | boolean;
+    showModalButton?: number | boolean;
+    handleTabChange?: (event: any) => void;
+    handleTabSequence?: (event: any) => void;
+    handleEdit?: (event: any) => void;
+    ExtraButton?: JSX.Element;
     hasExtraButton?: boolean;
+    activeIndex?: number;
+    children: React.ReactNode[];
 };
 
 type State = {
     modalIsOpen: boolean;
-    showArrowButton: boolean;
+    showArrowButton: 'auto' | boolean;
     showModalButton: boolean | number;
 };
 
-export default class TabListComponent extends React.Component<Props, State> {
+export default class TabListComponent extends React.PureComponent<TabListProps, State> {
     listContainer: React.ElementRef<'div'>;
-    rightArrowNode: React.ElementRef<'div'>;
-    leftArrowNode: React.ElementRef<'div'>;
+    rightArrowNode: React.ReactElement;
+    leftArrowNode: React.ReactElement;
     listScroll: React.ElementRef<'ul'>;
-    foldNode: React.ElementRef<'div'>;
+    foldNode: React.ReactElement;
     tabRefs: React.ElementRef<'div'>[];
     scrollPosition: number;
 
-    constructor(props: Props) {
+    constructor(props: TabListProps) {
         super(props);
         this.handleScroll = this.handleScroll.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
@@ -130,7 +130,7 @@ export default class TabListComponent extends React.Component<Props, State> {
         this.state = {
             modalIsOpen: false,
             showArrowButton: false,
-            showModalButton: false
+            showModalButton: false,
         };
     }
 
@@ -140,7 +140,7 @@ export default class TabListComponent extends React.Component<Props, State> {
         if (this.props.activeIndex > 0) this.scrollToIndex(this.props.activeIndex, 'left');
     }
 
-    componentDidUpdate(prevProps: Props, prevState: State) {
+    componentDidUpdate(prevProps: TabListProps, prevState: State) {
         if (prevProps.children.length !== this.props.children.length) {
             this.isShowArrowButton();
             this.isShowModalButton();
@@ -166,7 +166,9 @@ export default class TabListComponent extends React.Component<Props, State> {
         }
     }
 
-    getTabNode(tab: any): React.ElementRef<any> {
+    getTabNode(
+        tab: HTMLDivElement & { __INTERNAL_NODE?: any; __DRAG_TAB_INTERNAL_NODE?: any }
+    ): React.ElementRef<'div'> {
         if (tab.__INTERNAL_NODE) {
             // normal tab
             return tab.__INTERNAL_NODE;
@@ -266,30 +268,29 @@ export default class TabListComponent extends React.Component<Props, State> {
         const props = {
             handleTabChange,
             handleEdit,
-            //$FlowFixMe
-            CustomTabStyle: customStyle.Tab
+            CustomTabStyle: customStyle.Tab,
         };
         if (!isModal) {
             this.tabRefs = [];
         }
         return React.Children.map(children, (child, index) =>
-            React.cloneElement(child, {
+            React.cloneElement(child as React.ReactElement, {
                 key: index,
                 active: index === activeIndex,
                 index,
                 tabIndex: index,
-                ref: node => {
+                ref: (node: HTMLDivElement) => {
                     if (!isModal && node) {
                         this.tabRefs.push(node);
                     }
                 },
                 ...props,
-                ...options
+                ...options,
             })
         );
     }
 
-    renderArrowButton(ScrollButton: React.ComponentType<any>) {
+    renderArrowButton(ScrollButton: React.ElementType) {
         const { showArrowButton } = this.state;
         if (showArrowButton) {
             return (
@@ -299,7 +300,7 @@ export default class TabListComponent extends React.Component<Props, State> {
                         onClick={() => {
                             this.handleScroll('left');
                         }}
-                        ref={node => (this.leftArrowNode = node)}
+                        ref={(node: React.ReactElement) => (this.leftArrowNode = node)}
                         showModalButton={this.state.showModalButton}
                     >
                         <LeftIcon />
@@ -308,7 +309,7 @@ export default class TabListComponent extends React.Component<Props, State> {
                         onClick={() => {
                             this.handleScroll('right');
                         }}
-                        ref={node => (this.rightArrowNode = node)}
+                        ref={(node: React.ReactElement) => (this.rightArrowNode = node)}
                     >
                         <RightIcon />
                     </ScrollButton>
@@ -323,8 +324,8 @@ export default class TabListComponent extends React.Component<Props, State> {
         const { modalIsOpen } = this.state;
         const TabList = customStyle.TabList || TabListStyle;
         const ActionButton = customStyle.ActionButton || ActionButtonStyle;
-        const ScrollButton = makeScrollButton(ActionButton);
-        const FoldButton = makeFoldButton(ActionButton);
+        const ScrollButton = makeScrollButton(ActionButton as React.ElementType);
+        const FoldButton = makeFoldButton(ActionButton as React.ElementType);
         invariant(this.props.children, 'React-tabtab Error: You MUST pass at least one tab');
         return (
             <div>
@@ -336,7 +337,7 @@ export default class TabListComponent extends React.Component<Props, State> {
                 >
                     {this.state.showModalButton ? (
                         <FoldButton
-                            ref={node => (this.foldNode = node)}
+                            ref={(node: React.ReactElement) => (this.foldNode = node)}
                             onClick={this.toggleModal.bind(this, true)}
                             showArrowButton={this.state.showArrowButton}
                         >
@@ -344,8 +345,8 @@ export default class TabListComponent extends React.Component<Props, State> {
                         </FoldButton>
                     ) : null}
                     {this.renderArrowButton(ScrollButton)}
-                    <ListInner ref={node => (this.listContainer = node)}>
-                        <ListScroll ref={node => (this.listScroll = node)} role="tablist">
+                    <ListInner ref={(node) => (this.listContainer = node)}>
+                        <ListScroll ref={(node) => (this.listScroll = node)} role="tablist">
                             {this.renderTabs()}
                         </ListScroll>
                     </ListInner>

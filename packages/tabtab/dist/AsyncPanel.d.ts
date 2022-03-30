@@ -4,10 +4,10 @@ declare type Props = {
     loadContent: (cb: (err: any, data?: any) => void) => any;
     render: (data: any) => React.ReactNode;
     renderLoading: () => React.ReactNode;
-    CustomPanelStyle: React.FC<Partial<PanelProps>>;
-    active: boolean;
-    index: number;
-    cache: boolean;
+    CustomPanelStyle?: React.FC<Partial<PanelProps>>;
+    active?: boolean;
+    index?: number;
+    cache?: boolean;
 };
 declare type State = {
     isLoading: boolean;
@@ -20,7 +20,7 @@ export default class AsyncPanelComponent extends React.PureComponent<Props, Stat
     cacheData: any;
     constructor(props: Props);
     componentDidMount(): void;
-    componentWillReceiveProps(nextProps: Props): void;
+    componentDidUpdate(): void;
     loadPanel(): void;
     render(): JSX.Element;
 }

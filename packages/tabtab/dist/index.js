@@ -43,7 +43,7 @@ var Tabs = /** @class */ (function (_super) {
         _this.handleTabSequence = _this.handleTabSequence.bind(_this);
         _this.handleEdit = _this.handleEdit.bind(_this);
         _this.state = {
-            activeIndex: _this.getActiveIndex(props)
+            activeIndex: _this.getActiveIndex(props),
         };
         return _this;
     }
@@ -55,9 +55,9 @@ var Tabs = /** @class */ (function (_super) {
             return defaultIndex;
         return 0;
     };
-    Tabs.prototype.componentWillReceiveProps = function (nextProps) {
-        if (nextProps.activeIndex !== this.props.activeIndex) {
-            this.setState({ activeIndex: this.getActiveIndex(nextProps) });
+    Tabs.prototype.componentDidUpdate = function (prevProps, prevState, snapshot) {
+        if (prevProps.activeIndex !== this.props.activeIndex) {
+            this.setState({ activeIndex: this.getActiveIndex(this.props) });
         }
     };
     Tabs.prototype.handleTabChange = function (index) {
@@ -93,18 +93,18 @@ var Tabs = /** @class */ (function (_super) {
     };
     Tabs.defaultProps = {
         showModalButton: 4,
-        showArrowButton: "auto",
+        showArrowButton: 'auto',
         onTabChange: function () { },
         onTabSequenceChange: function () { },
         customStyle: {
             TabList: null,
             Tab: null,
             Panel: null,
-            ActionButton: null
-        }
+            ActionButton: null,
+        },
     };
     return Tabs;
-}(React__default["default"].Component));
+}(React__default["default"].PureComponent));
 
 // The svg path is from react-icons: https://github.com/gorangajic/react-icons/
 var Svg = function (_a) {
@@ -133,13 +133,16 @@ var SortMethod = /** @class */ (function (_super) {
     SortMethod.prototype.onSortEnd = function (_a) {
         var oldIndex = _a.oldIndex, newIndex = _a.newIndex;
         var _b = this.props, activeIndex = _b.activeIndex, handleTabChange = _b.handleTabChange, handleTabSequence = _b.handleTabSequence;
+        if (activeIndex === undefined) {
+            return;
+        }
         if (oldIndex === newIndex) {
             if (activeIndex !== oldIndex) {
-                handleTabChange(oldIndex);
+                handleTabChange && handleTabChange(oldIndex);
             }
         }
         else {
-            handleTabSequence({ oldIndex: oldIndex, newIndex: newIndex });
+            handleTabSequence && handleTabSequence({ oldIndex: oldIndex, newIndex: newIndex });
         }
     };
     return SortMethod;
@@ -147,7 +150,7 @@ var SortMethod = /** @class */ (function (_super) {
 
 var DragTabContainer$1 = reactSortableHoc.SortableContainer(function (_a) {
     var children = _a.children;
-    return React__namespace.createElement("div", { style: { marginTop: "50px" } }, children);
+    return React__namespace.createElement("div", { style: { marginTop: '50px' } }, children);
 });
 var ModalTabListWrapper = /** @class */ (function (_super) {
     tslib.__extends(ModalTabListWrapper, _super);
@@ -197,7 +200,7 @@ var getPadding = function (_a) {
     }
     return "0 ".concat(paddingRight, "px 0 ").concat(paddingLeft, "px");
 };
-var TabListStyle = styled__default["default"].div(templateObject_1$4 || (templateObject_1$4 = tslib.__makeTemplateObject(["\n    background-color: white;\n    text-align: left;\n    position: relative;\n    white-space: nowrap;\n    overflow: hidden;\n    width: auto;\n    padding: ", ";\n"], ["\n    background-color: white;\n    text-align: left;\n    position: relative;\n    white-space: nowrap;\n    overflow: hidden;\n    width: auto;\n    padding: ", ";\n"])), function (props) { return getPadding(props); });
+var TabListStyle = styled__default["default"](TabListComponent)(templateObject_1$4 || (templateObject_1$4 = tslib.__makeTemplateObject(["\n    background-color: white;\n    text-align: left;\n    position: relative;\n    white-space: nowrap;\n    overflow: hidden;\n    width: auto;\n    padding: ", ";\n"], ["\n    background-color: white;\n    text-align: left;\n    position: relative;\n    white-space: nowrap;\n    overflow: hidden;\n    width: auto;\n    padding: ", ";\n"])), function (props) { return getPadding(props); });
 var ListInner = styled__default["default"].div(templateObject_2$1 || (templateObject_2$1 = tslib.__makeTemplateObject(["\n    overflow: hidden;\n"], ["\n    overflow: hidden;\n"])));
 var ListScroll = styled__default["default"].ul(templateObject_3 || (templateObject_3 = tslib.__makeTemplateObject(["\n    padding-left: 0;\n    position: relative;\n    margin: 0;\n    list-style: none;\n    display: inline-block;\n    transition: transform 0.3s cubic-bezier(0.42, 0, 0.58, 1);\n"], ["\n    padding-left: 0;\n    position: relative;\n    margin: 0;\n    list-style: none;\n    display: inline-block;\n    transition: transform 0.3s cubic-bezier(0.42, 0, 0.58, 1);\n"])));
 var ActionButtonStyle = styled__default["default"].div(templateObject_4 || (templateObject_4 = tslib.__makeTemplateObject(["\n    height: 100%;\n    width: ", "px;\n    text-align: center;\n    border: 1px solid #d9d9d9;\n    border-bottom: 0;\n    border-radius: 4px 4px 0 0;\n    background: #f9f9f9;\n    > svg {\n        padding-top: 11px;\n    }\n"], ["\n    height: 100%;\n    width: ", "px;\n    text-align: center;\n    border: 1px solid #d9d9d9;\n    border-bottom: 0;\n    border-radius: 4px 4px 0 0;\n    background: #f9f9f9;\n    > svg {\n        padding-top: 11px;\n    }\n"])), buttonWidth);
@@ -218,7 +221,7 @@ var TabListComponent = /** @class */ (function (_super) {
         _this.state = {
             modalIsOpen: false,
             showArrowButton: false,
-            showModalButton: false
+            showModalButton: false,
         };
         return _this;
     }
@@ -346,8 +349,7 @@ var TabListComponent = /** @class */ (function (_super) {
         var props = {
             handleTabChange: handleTabChange,
             handleEdit: handleEdit,
-            //$FlowFixMe
-            CustomTabStyle: customStyle.Tab
+            CustomTabStyle: customStyle.Tab,
         };
         if (!isModal) {
             this.tabRefs = [];
@@ -396,7 +398,7 @@ var TabListComponent = /** @class */ (function (_super) {
             modalIsOpen ? (React__namespace.createElement(TabModal, { closeModal: this.toggleModal.bind(this, false), handleTabSequence: handleTabSequence, handleTabChange: handleTabChange, activeIndex: activeIndex }, this.renderTabs({ vertical: true }, true))) : null));
     };
     return TabListComponent;
-}(React__namespace.Component));
+}(React__namespace.PureComponent));
 var templateObject_1$4, templateObject_2$1, templateObject_3, templateObject_4, templateObject_5, templateObject_6;
 
 var CloseWrapper = styled__default["default"].button(templateObject_1$3 || (templateObject_1$3 = tslib.__makeTemplateObject(["\n  display: inline-block;\n  color: #777;\n  margin-left: 5px;\n  padding: 0;\n  vertical-align: middle;\n  border: 0;\n  padding: 2px;\n  outline: 0;\n  &:hover {\n    color: black;\n    background-color: #eee;\n    cursor: pointer;\n    border-radius: 50%;\n  }\n  > svg {\n    vertical-align: middle;\n  }\n"], ["\n  display: inline-block;\n  color: #777;\n  margin-left: 5px;\n  padding: 0;\n  vertical-align: middle;\n  border: 0;\n  padding: 2px;\n  outline: 0;\n  &:hover {\n    color: black;\n    background-color: #eee;\n    cursor: pointer;\n    border-radius: 50%;\n  }\n  > svg {\n    vertical-align: middle;\n  }\n"])));
@@ -417,18 +419,14 @@ var templateObject_1$3;
 //   return <li {...props}></li>
 // }
 var TabLi = React__namespace.forwardRef(function (props, ref) {
-    return (React__namespace.createElement("li", tslib.__assign({ ref: ref }, props), props.children));
+    return React__namespace.createElement("li", tslib.__assign({ ref: ref }, props));
 });
-var TabStyle = styled__default["default"](TabLi)(templateObject_1$2 || (templateObject_1$2 = tslib.__makeTemplateObject(["\n  display: ", ";\n  ", "\n\n  user-select: none;\n  &:hover {\n    cursor: pointer;\n    color: black;\n  }\n"], ["\n  display: ", ";\n  ", "\n\n  user-select: none;\n  &:hover {\n    cursor: pointer;\n    color: black;\n  }\n"])), function (props) { return (props.vertical ? "block" : "inline-block"); }, function (props) {
+var TabStyle = styled__default["default"](TabLi)(templateObject_1$2 || (templateObject_1$2 = tslib.__makeTemplateObject(["\n    display: ", ";\n    ", "\n\n    user-select: none;\n    &:hover {\n        cursor: pointer;\n        color: black;\n    }\n"], ["\n    display: ", ";\n    ", "\n\n    user-select: none;\n    &:hover {\n        cursor: pointer;\n        color: black;\n    }\n"])), function (props) { return (props.vertical ? 'block' : 'inline-block'); }, function (props) {
     return props.vertical
         ? "\n      background-color: white;\n      color: black;\n      padding: 10px 10px;\n      z-index: 100000;\n    "
-        : function (props) {
-            return props.closable
-                ? "padding: 10px 10px 10px 15px;"
-                : "padding: 10px 15px;";
-        };
+        : function (props) { return (props.closable ? 'padding: 10px 10px 10px 15px;' : 'padding: 10px 15px;'); };
 });
-var TabText = styled__default["default"].span(templateObject_2 || (templateObject_2 = tslib.__makeTemplateObject(["\n  vertical-align: middle;\n"], ["\n  vertical-align: middle;\n"])));
+var TabText = styled__default["default"].span(templateObject_2 || (templateObject_2 = tslib.__makeTemplateObject(["\n    vertical-align: middle;\n"], ["\n    vertical-align: middle;\n"])));
 var Tab = /** @class */ (function (_super) {
     tslib.__extends(Tab, _super);
     function Tab(props) {
@@ -444,7 +442,7 @@ var Tab = /** @class */ (function (_super) {
     Tab.prototype.clickDelete = function (event) {
         event.stopPropagation(); // prevent trigger clickTab event.
         var _a = this.props, handleEdit = _a.handleEdit, index = _a.index;
-        handleEdit({ type: "delete", index: index });
+        handleEdit({ type: 'delete', index: index });
     };
     Tab.prototype.render = function () {
         var _this = this;
@@ -461,30 +459,27 @@ var Tab = /** @class */ (function (_super) {
 var templateObject_1$2, templateObject_2;
 
 var DragTabContainer = reactSortableHoc.SortableContainer(function (_a) {
-    var children = _a.children, props = tslib.__rest(_a, ["children"]);
-    return React__default["default"].createElement(TabListComponent, tslib.__assign({}, props), children);
+    var props = tslib.__rest(_a, []);
+    return React__default["default"].createElement(TabListComponent, tslib.__assign({}, props));
 });
-var DragTabList = /** @class */ (function (_super) {
-    tslib.__extends(DragTabList, _super);
-    function DragTabList() {
+var DragTabListComponent = /** @class */ (function (_super) {
+    tslib.__extends(DragTabListComponent, _super);
+    function DragTabListComponent() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    DragTabList.prototype.render = function () {
-        var _a = this.props, children = _a.children, props = tslib.__rest(_a, ["children"]);
+    DragTabListComponent.prototype.render = function () {
+        var props = tslib.__rest(this.props, []);
         return (React__default["default"].createElement(DragTabContainer, tslib.__assign({ onSortEnd: this.onSortEnd, axis: "x", lockAxis: "x", 
             // if no pressDelay, close button cannot be triggered,
             // because it would always treat click as dnd action
-            pressDelay: 100 }, props), children));
+            pressDelay: 100 }, props)));
     };
-    return DragTabList;
+    return DragTabListComponent;
 }(SortMethod));
-DragTabList.displayName = "DragTabList";
 
 var DragTabElement = reactSortableHoc.SortableElement(function (_a) {
-    var children = _a.children, props = tslib.__rest(_a, ["children"]);
-    return (
-    // @ts-ignore
-    React__namespace.createElement(Tab, tslib.__assign({}, props, { index: props.tabIndex }), children));
+    var props = tslib.__rest(_a, []);
+    return React__namespace.createElement(Tab, tslib.__assign({}, props, { index: Number(props.tabIndex) }));
 });
 var DragTab = /** @class */ (function (_super) {
     tslib.__extends(DragTab, _super);
@@ -493,8 +488,8 @@ var DragTab = /** @class */ (function (_super) {
     }
     DragTab.prototype.render = function () {
         var _this = this;
-        var _a = this.props, children = _a.children, props = tslib.__rest(_a, ["children"]);
-        return (React__namespace.createElement(DragTabElement, tslib.__assign({ index: 0, ref: function (node) { return (_this.__DRAG_TAB_INTERNAL_NODE = node); } }, props), children));
+        var props = tslib.__rest(this.props, []);
+        return (React__namespace.createElement(DragTabElement, tslib.__assign({ index: 0, ref: function (node) { return (_this.__DRAG_TAB_INTERNAL_NODE = node); } }, props)));
     };
     return DragTab;
 }(React__namespace.PureComponent));
@@ -522,7 +517,7 @@ var PanelList = /** @class */ (function (_super) {
     return PanelList;
 }(React__namespace.PureComponent));
 
-var PanelStyle = styled__default["default"].div(templateObject_1$1 || (templateObject_1$1 = tslib.__makeTemplateObject(["\n  background-color: white;\n  text-align: left;\n  padding: 20px 15px;\n  ", "\n"], ["\n  background-color: white;\n  text-align: left;\n  padding: 20px 15px;\n  ", "\n"])), function (props) { return (!props.active ? "display: none;" : null); });
+var PanelStyle = styled__default["default"].div(templateObject_1$1 || (templateObject_1$1 = tslib.__makeTemplateObject(["\n    background-color: white;\n    text-align: left;\n    padding: 20px 15px;\n    ", "\n"], ["\n    background-color: white;\n    text-align: left;\n    padding: 20px 15px;\n    ", "\n"])), function (props) { return (!props.active ? "display: none;" : null); });
 var PanelComponent = /** @class */ (function (_super) {
     tslib.__extends(PanelComponent, _super);
     function PanelComponent() {
@@ -545,7 +540,7 @@ var AsyncPanelComponent = /** @class */ (function (_super) {
         _this.cacheData = undefined;
         _this.state = {
             isLoading: false,
-            data: undefined
+            data: undefined,
         };
         return _this;
     }
@@ -553,9 +548,8 @@ var AsyncPanelComponent = /** @class */ (function (_super) {
         if (this.props.active)
             this.loadPanel();
     };
-    AsyncPanelComponent.prototype.componentWillReceiveProps = function (nextProps) {
-        if (nextProps.active)
-            this.loadPanel();
+    AsyncPanelComponent.prototype.componentDidUpdate = function () {
+        this.props.active && this.loadPanel();
     };
     AsyncPanelComponent.prototype.loadPanel = function () {
         var _this = this;
@@ -563,7 +557,7 @@ var AsyncPanelComponent = /** @class */ (function (_super) {
         if (cache && this.cacheData) {
             this.setState({
                 isLoading: false,
-                data: this.cacheData
+                data: this.cacheData,
             });
             return;
         }
@@ -576,7 +570,7 @@ var AsyncPanelComponent = /** @class */ (function (_super) {
             }
             _this.setState({
                 isLoading: false,
-                data: data
+                data: data,
             });
         };
         var promise = loadContent(callback);
@@ -600,12 +594,12 @@ var AsyncPanelComponent = /** @class */ (function (_super) {
         return React__namespace.createElement(PanelComponent, tslib.__assign({}, { CustomPanelStyle: CustomPanelStyle, active: active, index: index }), content);
     };
     AsyncPanelComponent.defaultProps = {
-        cache: true
+        cache: true,
     };
     return AsyncPanelComponent;
 }(React__namespace.PureComponent));
 
-var Wrapper = styled__default["default"].button(templateObject_1 || (templateObject_1 = tslib.__makeTemplateObject(["\n  float: right;\n  border: 1px solid #eee;\n  border-radius: 2px;\n  padding: 3px;\n  margin-top: 10px;\n  margin-left: 2px;\n  display: inline-block;\n  color: #777;\n  vertical-align: middle;\n  /* ", " */\n  &:hover {\n    color: black;\n    cursor: pointer;\n  }\n  &:disabled,\n  &[disabled] {\n    border: 1px solid grey;\n    background-color: #e7e7e7;\n    cursor: not-allowed;\n  }\n"], ["\n  float: right;\n  border: 1px solid #eee;\n  border-radius: 2px;\n  padding: 3px;\n  margin-top: 10px;\n  margin-left: 2px;\n  display: inline-block;\n  color: #777;\n  vertical-align: middle;\n  /* ", " */\n  &:hover {\n    color: black;\n    cursor: pointer;\n  }\n  &:disabled,\n  &[disabled] {\n    border: 1px solid grey;\n    background-color: #e7e7e7;\n    cursor: not-allowed;\n  }\n"])), function (props) {
+var Wrapper = styled__default["default"].button(templateObject_1 || (templateObject_1 = tslib.__makeTemplateObject(["\n    float: right;\n    border: 1px solid #eee;\n    border-radius: 2px;\n    padding: 3px;\n    margin-top: 10px;\n    margin-left: 2px;\n    display: inline-block;\n    color: #777;\n    vertical-align: middle;\n    ", "\n    &:hover {\n        color: black;\n        cursor: pointer;\n    }\n    &:disabled,\n    &[disabled] {\n        border: 1px solid grey;\n        background-color: #e7e7e7;\n        cursor: not-allowed;\n    }\n"], ["\n    float: right;\n    border: 1px solid #eee;\n    border-radius: 2px;\n    padding: 3px;\n    margin-top: 10px;\n    margin-left: 2px;\n    display: inline-block;\n    color: #777;\n    vertical-align: middle;\n    ", "\n    &:hover {\n        color: black;\n        cursor: pointer;\n    }\n    &:disabled,\n    &[disabled] {\n        border: 1px solid grey;\n        background-color: #e7e7e7;\n        cursor: not-allowed;\n    }\n"])), function (props) {
     return props.disabled
         ? "\n    pointer-events: none;\n    color: #AAA;\n    background: #F5F5F5;\n  "
         : null;
@@ -620,7 +614,7 @@ var ExtraButton = /** @class */ (function (_super) {
         return (React__namespace.createElement(Wrapper, { onClick: onClick, disabled: disabled }, this.props.children));
     };
     ExtraButton.defaultProps = {
-        disabled: false
+        disabled: false,
     };
     return ExtraButton;
 }(React__namespace.PureComponent));
@@ -631,7 +625,7 @@ var styled = { TabListStyle: TabListStyle, ActionButtonStyle: ActionButtonStyle,
 
 exports.AsyncPanel = AsyncPanelComponent;
 exports.DragTab = DragTab;
-exports.DragTabList = DragTabList;
+exports.DragTabList = DragTabListComponent;
 exports.ExtraButton = ExtraButton;
 exports.Panel = PanelComponent;
 exports.PanelList = PanelList;

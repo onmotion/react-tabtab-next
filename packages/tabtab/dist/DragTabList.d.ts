@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import SortMethod from "./SortMethod";
-export default class DragTabList extends SortMethod {
+import SortMethod from './SortMethod';
+export default class DragTabListComponent extends SortMethod {
     render(): JSX.Element;
 }

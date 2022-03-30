@@ -5,10 +5,10 @@ type Props = {
     loadContent: (cb: (err: any, data?: any) => void) => any;
     render: (data: any) => React.ReactNode;
     renderLoading: () => React.ReactNode;
-    CustomPanelStyle: React.FC<Partial<PanelProps>>;
-    active: boolean;
-    index: number;
-    cache: boolean;
+    CustomPanelStyle?: React.FC<Partial<PanelProps>>;
+    active?: boolean;
+    index?: number;
+    cache?: boolean;
 };
 
 type State = {
@@ -18,7 +18,7 @@ type State = {
 
 export default class AsyncPanelComponent extends React.PureComponent<Props, State> {
     static defaultProps = {
-        cache: true
+        cache: true,
     };
 
     cacheData: any;
@@ -29,16 +29,15 @@ export default class AsyncPanelComponent extends React.PureComponent<Props, Stat
         this.cacheData = undefined;
         this.state = {
             isLoading: false,
-            data: undefined
+            data: undefined,
         };
     }
 
     componentDidMount() {
         if (this.props.active) this.loadPanel();
     }
-
-    componentWillReceiveProps(nextProps: Props) {
-        if (nextProps.active) this.loadPanel();
+    componentDidUpdate() {
+        this.props.active && this.loadPanel();
     }
 
     loadPanel() {
@@ -46,7 +45,7 @@ export default class AsyncPanelComponent extends React.PureComponent<Props, Stat
         if (cache && this.cacheData) {
             this.setState({
                 isLoading: false,
-                data: this.cacheData
+                data: this.cacheData,
             });
             return;
         }
@@ -59,7 +58,7 @@ export default class AsyncPanelComponent extends React.PureComponent<Props, Stat
             }
             this.setState({
                 isLoading: false,
-                data
+                data,
             });
         };
         const promise = loadContent(callback);

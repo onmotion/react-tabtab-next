@@ -1,8 +1,7 @@
-import * as React from "react";
+import * as React from 'react';
 declare type Props = {
-    children: Array<any>;
-    activeIndex: number;
-    customStyle: {
+    activeIndex?: number;
+    customStyle?: {
         Panel: () => void;
     };
 };

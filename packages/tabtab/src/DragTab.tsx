@@ -1,34 +1,25 @@
 // @flow
-import * as React from "react"
-import { SortableElement } from "react-sortable-hoc"
-import Tab, { TabProps } from "./Tab"
+import * as React from 'react';
+import { SortableElement, SortableElementProps } from 'react-sortable-hoc';
+import Tab, { TabProps } from './Tab';
 
-const DragTabElement = SortableElement(
-  ({ children, ...props }: Partial<TabProps>) => {
-    return (
-      // @ts-ignore
-      <Tab {...props} index={props.tabIndex}>
-        {children}
-      </Tab>
-    )
-  }
-)
+const DragTabElement = SortableElement(({ ...props }: Partial<TabProps>) => {
+    return <Tab {...props} index={Number(props.tabIndex)}></Tab>;
+});
 
 class DragTab extends React.PureComponent {
-  __DRAG_TAB_INTERNAL_NODE: React.ElementRef<any>
+    __DRAG_TAB_INTERNAL_NODE: React.Component<Partial<TabProps> & SortableElementProps, any, any>;
 
-  render() {
-    const { children, ...props } = this.props
-    return (
-      <DragTabElement
-        index={0}
-        ref={(node) => (this.__DRAG_TAB_INTERNAL_NODE = node)}
-        {...props}
-      >
-        {children}
-      </DragTabElement>
-    )
-  }
+    render() {
+        const { ...props } = this.props;
+        return (
+            <DragTabElement
+                index={0}
+                ref={(node) => (this.__DRAG_TAB_INTERNAL_NODE = node)}
+                {...props}
+            ></DragTabElement>
+        );
+    }
 }
 
-export default DragTab
+export default DragTab;

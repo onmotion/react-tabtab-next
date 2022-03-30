@@ -1,20 +1,21 @@
-import styled from "styled-components"
-import { styled as themeStyled } from "@react-tabtab-next/tabtab"
+import styled from 'styled-components';
+import { styled as themeStyled } from '@react-tabtab-next/tabtab';
 
-let { TabListStyle, ActionButtonStyle, TabStyle, PanelStyle } = themeStyled
+let { TabListStyle, TabStyle } = themeStyled;
+const { ActionButtonStyle, PanelStyle } = themeStyled;
 
 TabListStyle = styled(TabListStyle)`
-  border-bottom: 1px solid #eee;
-`
+    border-bottom: 1px solid #eee;
+`;
 
 TabStyle = styled(TabStyle)`
-  border-top-left-radius: .25rem;
-  border-top-right-radius: .25rem;
-  color: ${(props) => (props.active ? "black" : "#007bff")};
-  border: 1px solid transparent;
-  ${(props) =>
-    props.vertical
-      ? `
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    color: ${(props) => (props.active ? 'black' : '#007bff')};
+    border: 1px solid transparent;
+    ${(props) =>
+        props.vertical
+            ? `
       border-top: 1px solid transparent;
       border-bottom: 1px solid #efefef;
       border-left: 1px solid #efefef;
@@ -24,28 +25,28 @@ TabStyle = styled(TabStyle)`
         border-top: 1px solid #efefef;        
       }
     `
-      : `
+            : `
       &:hover {
         border-color: #ddd #ddd #fff;
       }
   `}
-  ${(props) =>
-    props.active && props.vertical
-      ? `
+    ${(props) =>
+        props.active && props.vertical
+            ? `
       background-color: #eee;
     `
-      : null}
+            : null}
   ${(props) =>
-    props.active && !props.vertical
-      ? `
+        props.active && !props.vertical
+            ? `
       border-color: #ddd #ddd #fff;
     `
-      : null}
-`
+            : null}
+`;
 
 export default {
-  TabList: TabListStyle,
-  ActionButton: ActionButtonStyle,
-  Tab: TabStyle,
-  Panel: PanelStyle
-}
+    TabList: TabListStyle,
+    ActionButton: ActionButtonStyle,
+    Tab: TabStyle,
+    Panel: PanelStyle,
+};
