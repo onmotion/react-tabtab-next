@@ -118,7 +118,6 @@ var LeftIcon = function () { return (React__default["default"].createElement(Svg
 var RightIcon = function () { return (React__default["default"].createElement(Svg, { d: "m16.6 10l10 10-10 10-2.3-2.3 7.7-7.7-7.7-7.7z" })); };
 var BulletIcon = function () { return (React__default["default"].createElement(Svg, { d: "m31.7 28.3h-23.4c-1.8 0-3.3 1.5-3.3 3.4s1.5 3.3 3.3 3.3h23.4c1.8 0 3.3-1.5 3.3-3.3s-1.5-3.4-3.3-3.4z m0-11.6h-23.4c-1.8 0-3.3 1.5-3.3 3.3s1.5 3.3 3.3 3.3h23.4c1.8 0 3.3-1.5 3.3-3.3s-1.5-3.3-3.3-3.3z m0-11.7h-23.4c-1.8 0-3.3 1.5-3.3 3.3s1.5 3.4 3.3 3.4h23.4c1.8 0 3.3-1.5 3.3-3.4s-1.5-3.3-3.3-3.3z" })); };
 
-// @flow
 function isNumber(number) {
     return !isNaN(parseInt(number, 10));
 }
@@ -557,7 +556,6 @@ var AsyncPanelComponent = /** @class */ (function (_super) {
     };
     AsyncPanelComponent.prototype.loadPanel = function () {
         var _this = this;
-        console.log('loadPanel');
         var _a = this.props, loadContent = _a.loadContent, cache = _a.cache;
         if (cache && this.cacheData) {
             this.setState({
@@ -568,7 +566,7 @@ var AsyncPanelComponent = /** @class */ (function (_super) {
         }
         var callback = function (err, data) {
             if (err) {
-                console.log('React-Tabtab async panel error:', err);
+                console.error('React-Tabtab async panel error:', err);
             }
             if (cache) {
                 _this.cacheData = data;
@@ -625,7 +623,13 @@ var ExtraButton = /** @class */ (function (_super) {
 }(React__namespace.PureComponent));
 var templateObject_1;
 
+// arrayMove method is import from 'react-sortable-hoc' to unify api interface
+var deleteHelper = {
+    simpleSwitch: reactSortableHoc.arrayMove,
+};
+
 var styled = { TabList: TabListStyle, ActionButton: ActionButtonStyle, Tab: TabStyle, Panel: PanelStyle };
+var helpers = { simpleSwitch: deleteHelper, deleteHelper: deleteHelper };
 
 exports.AsyncPanel = AsyncPanelComponent;
 exports.DragTab = DragTab;
@@ -636,4 +640,5 @@ exports.PanelList = PanelList;
 exports.Tab = Tab;
 exports.TabList = TabListComponent;
 exports.Tabs = Tabs;
+exports.helpers = helpers;
 exports.styled = styled;

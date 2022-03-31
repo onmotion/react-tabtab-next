@@ -1,7 +1,7 @@
 {
     "name": "@react-tabtab-next/themes",
-    "version": "3.0.2",
-    "description": "A mobile support, draggable, editable and api based Tab for ReactJS",
+    "version": "3.0.3",
+    "description": "[TypeScript] Themes for @react-tabtab-next/tabtab",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
@@ -18,7 +18,7 @@
     "keywords": [
         "react",
         "tabs",
-        "react-tab",
+        "drag",
         "react-tabtab",
         "react-component",
         "tab",
@@ -29,7 +29,10 @@
     "publishConfig": {
         "access": "public"
     },
-    "author": "onmotion",
+    "author": {
+        "name": "Alexandr Kozhevnikov",
+        "email": "onmotion1@gmail.com"
+    },
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/onmotion/react-tabtab-next/issues"

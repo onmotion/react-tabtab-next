@@ -12,12 +12,7 @@
         "allowSyntheticDefaultImports": true,
         "noEmitOnError": true,
         "declaration": true,
-        "declarationDir": "dist",
-        "baseUrl": ".",
-        "paths": {
-            "@react-tabtab-next/*": ["packages/*/src"],
-            "*": ["node_modules", "packages"]
-        }
+        "declarationDir": "dist"
     },
     "exclude": ["node_modules"],
     "include": ["src/**/*"]

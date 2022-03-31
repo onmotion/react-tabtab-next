@@ -16,3 +16,11 @@ export declare const styled: {
         active: boolean;
     }, never>;
 };
+export declare const helpers: {
+    simpleSwitch: {
+        simpleSwitch: typeof import("react-sortable-hoc").arrayMove;
+    };
+    deleteHelper: {
+        simpleSwitch: typeof import("react-sortable-hoc").arrayMove;
+    };
+};

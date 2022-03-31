@@ -41,8 +41,6 @@ export default class AsyncPanelComponent extends React.PureComponent<Props, Stat
     }
 
     loadPanel() {
-        console.log('loadPanel');
-
         const { loadContent, cache } = this.props;
         if (cache && this.cacheData) {
             this.setState({
@@ -53,7 +51,7 @@ export default class AsyncPanelComponent extends React.PureComponent<Props, Stat
         }
         const callback = (err: any, data?: any) => {
             if (err) {
-                console.log('React-Tabtab async panel error:', err);
+                console.error('React-Tabtab async panel error:', err);
             }
             if (cache) {
                 this.cacheData = data;

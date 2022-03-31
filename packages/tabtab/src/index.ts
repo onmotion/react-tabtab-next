@@ -8,7 +8,11 @@ import Panel, { PanelStyle } from './Panel';
 import AsyncPanel from './AsyncPanel';
 import ExtraButton from './ExtraButton';
 import { TabListStyle, ActionButtonStyle } from './styledElements';
+import simpleSwitch from './helpers/move';
+import deleteHelper from './helpers/move';
 
 export { Tabs, TabList, Tab, DragTabList, DragTab, PanelList, Panel, AsyncPanel, ExtraButton };
 
 export const styled = { TabList: TabListStyle, ActionButton: ActionButtonStyle, Tab: TabStyle, Panel: PanelStyle };
+
+export const helpers = { simpleSwitch, deleteHelper };
