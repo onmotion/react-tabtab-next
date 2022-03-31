@@ -53,8 +53,8 @@
 
 Install it with npm or yarn
 
-```js
-$ npm install @react-tabtab-next/tabtab --save
+```sh
+npm install @react-tabtab-next/tabtab --save
 ```
 
 Then, import the module by module bundler like `webpack`, `browserify`
@@ -111,16 +111,28 @@ It's simple to use. Zero configuration!
 
 ```js
 import React, { Component } from 'react';
-import { Tabs, DragTabList, DragTab, PanelList, Panel } from '@react-tabtab-next/tabtab';
-import { simpleSwitch } from 'react-tabtab/lib/helpers/move';
+import { Tabs, DragTabList, DragTab, PanelList, Panel, helpers } from '@react-tabtab-next/tabtab';
+
+const makeData = (number, titlePrefix = 'Tab') => {
+    const data = [];
+    for (let i = 0; i < number; i++) {
+        data.push({
+            title: `${titlePrefix} ${i}`,
+            content: <div>Content {i}</div>,
+        });
+    }
+    return data;
+};
 
 export default class Drag extends Component {
     constructor(props) {
         super(props);
         this.handleTabChange = this.handleTabChange.bind(this);
         this.handleTabSequenceChange = this.handleTabSequenceChange.bind(this);
+        const tabs = makeData(3, 'DragTab');
         this.state = {
             activeIndex: 0,
+            tabs,
         };
     }
 
@@ -130,30 +142,32 @@ export default class Drag extends Component {
 
     handleTabSequenceChange({ oldIndex, newIndex }) {
         const { tabs } = this.state;
-        const updateTabs = simpleSwitch(tabs, oldIndex, newIndex);
+        const updateTabs = helpers.simpleSwitch(tabs, oldIndex, newIndex);
         this.setState({ tabs: updateTabs, activeIndex: newIndex });
     }
 
     render() {
-        const { activeIndex } = this.state;
+        const { tabs, activeIndex } = this.state;
+        const tabsTemplate = [];
+        const panelTemplate = [];
+        tabs.forEach((tab, index) => {
+            tabsTemplate.push(<DragTab key={index}>{tab.title}</DragTab>);
+            panelTemplate.push(<Panel key={index}>{tab.content}</Panel>);
+        });
         return (
             <Tabs
                 activeIndex={activeIndex}
                 onTabChange={this.handleTabChange}
                 onTabSequenceChange={this.handleTabSequenceChange}
+                customStyle={this.props.customStyle}
             >
-                <DragTabList>
-                    <DragTab>DragTab1</DragTab>
-                    <DragTab>DragTab2</DragTab>
-                </DragTabList>
-                <PanelList>
-                    <Panel>Content1</Panel>
-                    <Panel>Content2</Panel>
-                </PanelList>
+                <DragTabList>{tabsTemplate}</DragTabList>
+                <PanelList>{panelTemplate}</PanelList>
             </Tabs>
         );
     }
 }
+
 ReactDOM.render(<Drag />, document.getElementById('root'));
 ```
 
@@ -278,19 +292,19 @@ More code examples are avalable [here](https://github.com/ctxhou/react-tabtab/bl
     </tr>
     <tr>
       <td>defaultIndex</td>
-      <td><code>int</code></td>
+      <td><code>number</code></td>
       <td>null</td>
       <td>set the <b>initial</b> active key</td>
     </tr>
     <tr>
       <td>activeIndex</td>
-      <td><code>int</code></td>
+      <td><code>number</code></td>
       <td>null</td>
       <td>control current activeIndex.<br/>You need to pass new activeIndex value if you want to show different tab.</td>
     </tr>
     <tr>
       <td>defaultIndex</td>
-      <td><code>int</code></td>
+      <td><code>number</code></td>
       <td>null</td>
       <td>set the <b>initial</b> active key</td>
     </tr>
@@ -476,21 +490,25 @@ Just extend the default component style and pass it to `customStyle` props.
 
 ### Use current style
 
-You can check the current style at `src/themes` folder.
+Install tabtab themes
+
+```sh
+npm install @react-tabtab-next/themes --save
+```
 
 For example, if you want to use `material-design`, import the style and pass to `customStyle` props.
 
 **Example:**
 
 ```js
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { Tabs, TabList, Tab, PanelList, Panel } from '@react-tabtab-next/tabtab';
-import * as customStyle from 'react-tabtab/lib/themes/material-design';
+import { md } from '@react-tabtab-next/themes';
 
-class Customized extends Component {
+export default class Customized extends Component {
     render() {
         return (
-            <Tabs customStyle={customStyle}>
+            <Tabs customStyle={md}>
                 <TabList>
                     <Tab>Tab1</Tab>
                     <Tab>Tab2</Tab>
@@ -524,33 +542,59 @@ let { TabListStyle, ActionButtonStyle, TabStyle, PanelStyle } = styledTabTab;
 
 ```js
 import styled from 'styled-components';
-import { styled as styledTabTab } from '@react-tabtab-next/tabtab';
+import { styled as themeStyled } from '@react-tabtab-next/tabtab';
 
-let { TabListStyle, ActionButtonStyle, TabStyle, PanelStyle } = styledTabTab;
+let { TabList, ActionButton, Tab, Panel } = themeStyled;
 
-TabListStyle = styled(TabListStyle)`
-    // write css
+TabList = styled(TabList)`
+    background-color: transparent;
+    line-height: 1.2;
+    border: 0;
 `;
 
-TabStyle = styled(TabStyle)`
-    // write css
+Tab = styled(Tab)`
+    padding: 1px 10px;
+    position: relative;
+    font-size: 12px;
+    text-transform: uppercase;
+    border: 0;
+    background: transparent;
+    ${(props) => {
+        console.log(props);
+
+        return props.active && !props.vertical
+            ? `
+      border-bottom: 2px solid #ce93d8;
+    `
+            : null;
+    }}
+    &:hover .tab-label_close-button {
+        opacity: 1;
+    }
+    &:hover {
+        color: unset;
+        background: #89898920;
+    }
 `;
 
-ActionButtonStyle = styled(ActionButtonStyle)`
-    // write css
+ActionButton = styled(ActionButton)`
+    background-color: transparent;
+    border-radius: 0;
+    border: none;
+    opacity: 0.3;
+    transition: opacity 0.2s;
+    & svg {
+        font-size: 21px;
+        padding: 0;
+    }
+    &:hover {
+        opacity: 1;
+    }
 `;
 
-PanelStyle = styled(PanelStyle)`
-    // write css
-`;
+Panel = styled(Panel)``;
 
-// need to follow this object naming
-module.exports = {
-    TabList: TabListStyle,
-    ActionButton: ActionButtonStyle,
-    Tab: TabStyle,
-    Panel: PanelStyle,
-};
+export { TabList, ActionButton, Tab, Panel };
 ```
 
 **Last: import your style and use it!**
@@ -560,8 +604,7 @@ When you finish the new `react-tabtab` style, feel free to add it to `theme/` fo
 ## Development
 
 ```bash
-$ yarn
-$ npm start
+npm i
 ```
 
 ## License
