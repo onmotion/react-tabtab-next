@@ -569,8 +569,6 @@ Tab = styled(Tab)`
     border: 0;
     background: transparent;
     ${(props) => {
-        console.log(props);
-
         return props.active && !props.vertical
             ? `
       border-bottom: 2px solid #ce93d8;

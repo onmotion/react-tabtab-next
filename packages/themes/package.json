@@ -1,6 +1,6 @@
 {
     "name": "@react-tabtab-next/themes",
-    "version": "3.0.4",
+    "version": "3.0.5",
     "description": "[TypeScript] Themes for @react-tabtab-next/tabtab",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
