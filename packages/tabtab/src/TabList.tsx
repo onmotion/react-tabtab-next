@@ -6,8 +6,8 @@ import { isNumber } from './utils/isType';
 import TabModal from './TabModal';
 import { ActionButtonStyle, buttonWidth, ListInner, ListScroll, TabListStyle } from './styledElements';
 import { TabListElement, TabListElementProps } from './TabListElement';
-import Tab from './Tab';
-import Panel from './Panel';
+import Tab, { TabElementProps } from './Tab';
+import Panel, { PanelProps } from './Panel';
 
 const makeScrollButton = (ActionButton: React.ElementType) => styled(ActionButton)`
     display: inline-block;
@@ -32,8 +32,8 @@ const makeFoldButton = (ActionButton: React.ElementType) => styled(ActionButton)
 export type TabListProps = {
     customStyle?: {
         TabList?: React.ElementType<TabListElementProps>;
-        Tab?: React.ElementType<Tab>;
-        Panel?: React.ElementType<Panel>;
+        Tab?: React.ElementType<TabElementProps>;
+        Panel?: React.ElementType<PanelProps>;
         ActionButton?: React.ElementType;
     };
     showArrowButton?: 'auto' | boolean;

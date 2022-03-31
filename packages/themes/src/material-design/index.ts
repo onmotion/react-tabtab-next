@@ -2,15 +2,15 @@ import styled from 'styled-components';
 
 import { styled as themeStyled } from '@react-tabtab-next/tabtab';
 
-let { TabListStyle, ActionButtonStyle, TabStyle, PanelStyle } = themeStyled;
+let { TabList, ActionButton, Tab, Panel } = themeStyled;
 
-TabListStyle = styled(TabListStyle)`
+TabList = styled(TabList)`
     background-color: #fff;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
     border: 0;
 `;
 
-TabStyle = styled(TabStyle)`
+Tab = styled(Tab)`
     color: rgba(238, 110, 115, 0.7);
     // transition: color 0.28s ease;
     border: 0;
@@ -27,7 +27,7 @@ TabStyle = styled(TabStyle)`
     }
 `;
 
-ActionButtonStyle = styled(ActionButtonStyle)`
+ActionButton = styled(ActionButton)`
     background-color: transparent;
     border-radius: 0;
     &:hover {
@@ -35,7 +35,7 @@ ActionButtonStyle = styled(ActionButtonStyle)`
     }
 `;
 
-PanelStyle = styled(PanelStyle)`
+Panel = styled(Panel)`
     border-left: 1px solid rgba(0, 0, 0, 0.12);
     border-right: 1px solid rgba(0, 0, 0, 0.12);
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
@@ -44,8 +44,8 @@ PanelStyle = styled(PanelStyle)`
 `;
 
 export default {
-    TabList: TabListStyle,
-    ActionButton: ActionButtonStyle,
-    Tab: TabStyle,
-    Panel: PanelStyle,
+    TabList: TabList,
+    ActionButton: ActionButton,
+    Tab: Tab,
+    Panel: Panel,
 };

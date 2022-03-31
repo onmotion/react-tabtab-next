@@ -181,7 +181,6 @@ var TabListElement = React.memo(function (props) {
     return React__namespace.createElement("div", tslib.__assign({}, props));
 });
 
-console.log({ TabListElement: TabListElement });
 var buttonWidth = 35;
 var getPadding = function (_a) {
     var showModalButton = _a.showModalButton, showArrowButton = _a.showArrowButton;
@@ -422,10 +421,8 @@ var CloseButton = /** @class */ (function (_super) {
 }(React__namespace.PureComponent));
 var templateObject_1$3;
 
-var TabLi = React__namespace.forwardRef(function (props, ref) {
-    return React__namespace.createElement("li", tslib.__assign({ ref: ref }, props));
-});
-var TabStyle = styled__default["default"](TabLi)(templateObject_1$2 || (templateObject_1$2 = tslib.__makeTemplateObject(["\n    display: ", ";\n    ", "\n\n    user-select: none;\n    &:hover {\n        cursor: pointer;\n        color: black;\n    }\n"], ["\n    display: ", ";\n    ", "\n\n    user-select: none;\n    &:hover {\n        cursor: pointer;\n        color: black;\n    }\n"])), function (props) { return (props.vertical ? 'block' : 'inline-block'); }, function (props) {
+var TabElement = React__namespace.forwardRef(function (props, ref) { return (React__namespace.createElement("li", tslib.__assign({ ref: ref }, props), props.children)); });
+var TabStyle = styled__default["default"](TabElement)(templateObject_1$2 || (templateObject_1$2 = tslib.__makeTemplateObject(["\n    display: ", ";\n    ", "\n\n    user-select: none;\n    &:hover {\n        cursor: pointer;\n        color: black;\n    }\n"], ["\n    display: ", ";\n    ", "\n\n    user-select: none;\n    &:hover {\n        cursor: pointer;\n        color: black;\n    }\n"])), function (props) { return (props.vertical ? 'block' : 'inline-block'); }, function (props) {
     return props.vertical
         ? "\n      background-color: white;\n      color: black;\n      padding: 10px 10px;\n      z-index: 100000;\n    "
         : function (props) { return (props.closable ? 'padding: 10px 10px 10px 15px;' : 'padding: 10px 15px;'); };
@@ -452,9 +449,7 @@ var Tab = /** @class */ (function (_super) {
         var _this = this;
         var _a = this.props, CustomTabStyle = _a.CustomTabStyle, active = _a.active, closable = _a.closable, vertical = _a.vertical, index = _a.index;
         var TabComponent = CustomTabStyle || TabStyle;
-        return (React__namespace.createElement(TabComponent, { ref: function (node) { return (_this.__INTERNAL_NODE = node); }, onClick: this.clickTab, 
-            //  active={active}
-            vertical: vertical, closable: closable, role: "tab", id: "react-tabtab-tab-".concat(index), "aria-controls": "react-tabtab-panel-".concat(index), "aria-selected": active },
+        return (React__namespace.createElement(TabComponent, { ref: function (node) { return (_this.__INTERNAL_NODE = node); }, onClick: this.clickTab, active: active, vertical: vertical, closable: closable, role: "tab", id: "react-tabtab-tab-".concat(index), "aria-controls": "react-tabtab-panel-".concat(index), "aria-selected": active },
             React__namespace.createElement(TabText, null, this.props.children),
             closable ? React__namespace.createElement(CloseButton, { handleDelete: this.clickDelete }) : null));
     };
@@ -557,6 +552,7 @@ var AsyncPanelComponent = /** @class */ (function (_super) {
     };
     AsyncPanelComponent.prototype.loadPanel = function () {
         var _this = this;
+        console.log('loadPanel');
         var _a = this.props, loadContent = _a.loadContent, cache = _a.cache;
         if (cache && this.cacheData) {
             this.setState({
@@ -624,7 +620,7 @@ var ExtraButton = /** @class */ (function (_super) {
 }(React__namespace.PureComponent));
 var templateObject_1;
 
-var styled = { TabListStyle: TabListStyle, ActionButtonStyle: ActionButtonStyle, TabStyle: TabStyle, PanelStyle: PanelStyle };
+var styled = { TabList: TabListStyle, ActionButton: ActionButtonStyle, Tab: TabStyle, Panel: PanelStyle };
 
 exports.AsyncPanel = AsyncPanelComponent;
 exports.DragTab = DragTab;

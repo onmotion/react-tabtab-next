@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { TabListElementProps } from './TabListElement';
-import Tab from './Tab';
-import Panel from './Panel';
+import { TabElementProps } from './Tab';
+import { PanelProps } from './Panel';
 export declare type TabListProps = {
     customStyle?: {
         TabList?: React.ElementType<TabListElementProps>;
-        Tab?: React.ElementType<Tab>;
-        Panel?: React.ElementType<Panel>;
+        Tab?: React.ElementType<TabElementProps>;
+        Panel?: React.ElementType<PanelProps>;
         ActionButton?: React.ElementType;
     };
     showArrowButton?: 'auto' | boolean;

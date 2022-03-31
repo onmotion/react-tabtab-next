@@ -1,6 +1,7 @@
 import React from 'react';
-import { Panel, TabList } from '.';
-import Tab from './Tab';
+import { Panel } from '.';
+import { PanelProps } from './Panel';
+import { TabElementProps } from './Tab';
 import { TabListElementProps } from './TabListElement';
 
 type TabsProps = {
@@ -14,8 +15,8 @@ type TabsProps = {
     onTabEdit?: (event: any) => void;
     customStyle?: {
         TabList?: React.ElementType<TabListElementProps>;
-        Tab?: React.ElementType<Tab>;
-        Panel?: React.ElementType<Panel>;
+        Tab?: React.ElementType<TabElementProps>;
+        Panel?: React.ElementType<PanelProps>;
         ActionButton?: React.ElementType;
     };
 };

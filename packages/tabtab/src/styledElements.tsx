@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { TabListElement, TabListElementProps } from './TabListElement';
 
-console.log({ TabListElement });
-
 export const buttonWidth = 35;
 const getPadding = ({ showModalButton, showArrowButton }: TabListElementProps) => {
     let paddingLeft = 0;

@@ -41,6 +41,8 @@ export default class AsyncPanelComponent extends React.PureComponent<Props, Stat
     }
 
     loadPanel() {
+        console.log('loadPanel');
+
         const { loadContent, cache } = this.props;
         if (cache && this.cacheData) {
             this.setState({

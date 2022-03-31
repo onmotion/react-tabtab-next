@@ -2,13 +2,15 @@ import * as React from 'react';
 import styled from 'styled-components';
 import CloseButton from './CloseButton';
 
-const TabLi = React.forwardRef<HTMLLIElement, React.LiHTMLAttributes<HTMLLIElement> & Partial<TabProps>>(
-    (props: React.LiHTMLAttributes<HTMLLIElement> & Partial<TabProps>, ref) => {
-        return <li ref={ref} {...props}></li>;
-    }
-);
+export type TabElementProps = React.ComponentPropsWithoutRef<'li'> & TabProps;
 
-const TabStyle = styled(TabLi)`
+export const TabElement = React.forwardRef<HTMLLIElement, TabElementProps>((props, ref) => (
+    <li ref={ref} {...props}>
+        {props.children}
+    </li>
+));
+
+const TabStyle = styled(TabElement)`
     display: ${(props) => (props.vertical ? 'block' : 'inline-block')};
     ${(props) =>
         props.vertical
@@ -69,7 +71,7 @@ export default class Tab extends React.PureComponent<TabProps> {
             <TabComponent
                 ref={(node) => (this.__INTERNAL_NODE = node)}
                 onClick={this.clickTab}
-                //  active={active}
+                active={active}
                 vertical={vertical}
                 closable={closable}
                 role="tab"

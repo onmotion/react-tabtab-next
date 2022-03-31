@@ -11,4 +11,4 @@ import { TabListStyle, ActionButtonStyle } from './styledElements';
 
 export { Tabs, TabList, Tab, DragTabList, DragTab, PanelList, Panel, AsyncPanel, ExtraButton };
 
-export const styled = { TabListStyle, ActionButtonStyle, TabStyle, PanelStyle };
+export const styled = { TabList: TabListStyle, ActionButton: ActionButtonStyle, Tab: TabStyle, Panel: PanelStyle };
