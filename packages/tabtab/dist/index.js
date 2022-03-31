@@ -177,7 +177,8 @@ var TabModal = /** @class */ (function (_super) {
     return TabModal;
 }(React__namespace.Component));
 
-var TabListElement = React.memo(function (props) {
+var TabListElement = React.memo(function (_a) {
+    _a.showArrowButton; _a.showModalButton; var props = tslib.__rest(_a, ["showArrowButton", "showModalButton"]);
     return React__namespace.createElement("div", tslib.__assign({}, props));
 });
 
@@ -421,7 +422,10 @@ var CloseButton = /** @class */ (function (_super) {
 }(React__namespace.PureComponent));
 var templateObject_1$3;
 
-var TabElement = React__namespace.forwardRef(function (props, ref) { return (React__namespace.createElement("li", tslib.__assign({ ref: ref }, props), props.children)); });
+var TabElement = React__namespace.forwardRef(function (_a, ref) {
+    _a.active; var props = tslib.__rest(_a, ["active"]);
+    return (React__namespace.createElement("li", tslib.__assign({ ref: ref }, props), props.children));
+});
 var TabStyle = styled__default["default"](TabElement)(templateObject_1$2 || (templateObject_1$2 = tslib.__makeTemplateObject(["\n    display: ", ";\n    ", "\n\n    user-select: none;\n    &:hover {\n        cursor: pointer;\n        color: black;\n    }\n"], ["\n    display: ", ";\n    ", "\n\n    user-select: none;\n    &:hover {\n        cursor: pointer;\n        color: black;\n    }\n"])), function (props) { return (props.vertical ? 'block' : 'inline-block'); }, function (props) {
     return props.vertical
         ? "\n      background-color: white;\n      color: black;\n      padding: 10px 10px;\n      z-index: 100000;\n    "

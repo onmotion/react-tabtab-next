@@ -4,7 +4,7 @@ import CloseButton from './CloseButton';
 
 export type TabElementProps = React.ComponentPropsWithoutRef<'li'> & TabProps;
 
-export const TabElement = React.forwardRef<HTMLLIElement, TabElementProps>((props, ref) => (
+export const TabElement = React.forwardRef<HTMLLIElement, TabElementProps>(({ active, ...props }, ref) => (
     <li ref={ref} {...props}>
         {props.children}
     </li>

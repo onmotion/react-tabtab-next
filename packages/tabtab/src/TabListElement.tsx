@@ -7,6 +7,6 @@ export interface TabListElementProps {
     showModalButton?: number | boolean;
 }
 
-export const TabListElement: FC<TabListElementProps> = memo((props) => {
+export const TabListElement: FC<TabListElementProps> = memo(({ showArrowButton, showModalButton, ...props }) => {
     return <div {...props}></div>;
 });
