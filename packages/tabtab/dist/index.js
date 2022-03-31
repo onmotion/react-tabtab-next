@@ -623,13 +623,12 @@ var ExtraButton = /** @class */ (function (_super) {
 }(React__namespace.PureComponent));
 var templateObject_1;
 
-// arrayMove method is import from 'react-sortable-hoc' to unify api interface
-var deleteHelper = {
-    simpleSwitch: reactSortableHoc.arrayMove,
-};
+function deleteHelper(sequence, deleteIndex) {
+    return sequence.filter(function (_, i) { return i !== deleteIndex; });
+}
 
 var styled = { TabList: TabListStyle, ActionButton: ActionButtonStyle, Tab: TabStyle, Panel: PanelStyle };
-var helpers = { simpleSwitch: deleteHelper, deleteHelper: deleteHelper };
+var helpers = { simpleSwitch: reactSortableHoc.arrayMove, deleteHelper: deleteHelper };
 
 exports.AsyncPanel = AsyncPanelComponent;
 exports.DragTab = DragTab;

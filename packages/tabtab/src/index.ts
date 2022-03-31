@@ -9,7 +9,7 @@ import AsyncPanel from './AsyncPanel';
 import ExtraButton from './ExtraButton';
 import { TabListStyle, ActionButtonStyle } from './styledElements';
 import simpleSwitch from './helpers/move';
-import deleteHelper from './helpers/move';
+import deleteHelper from './helpers/delete';
 
 export { Tabs, TabList, Tab, DragTabList, DragTab, PanelList, Panel, AsyncPanel, ExtraButton };
 

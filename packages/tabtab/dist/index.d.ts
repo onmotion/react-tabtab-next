@@ -7,6 +7,8 @@ import PanelList from './PanelList';
 import Panel from './Panel';
 import AsyncPanel from './AsyncPanel';
 import ExtraButton from './ExtraButton';
+import simpleSwitch from './helpers/move';
+import deleteHelper from './helpers/delete';
 export { Tabs, TabList, Tab, DragTabList, DragTab, PanelList, Panel, AsyncPanel, ExtraButton };
 export declare const styled: {
     TabList: import("styled-components").StyledComponent<import("react").FC<import("./TabListElement").TabListElementProps>, any, {}, never>;
@@ -17,10 +19,6 @@ export declare const styled: {
     }, never>;
 };
 export declare const helpers: {
-    simpleSwitch: {
-        simpleSwitch: typeof import("react-sortable-hoc").arrayMove;
-    };
-    deleteHelper: {
-        simpleSwitch: typeof import("react-sortable-hoc").arrayMove;
-    };
+    simpleSwitch: typeof simpleSwitch;
+    deleteHelper: typeof deleteHelper;
 };
