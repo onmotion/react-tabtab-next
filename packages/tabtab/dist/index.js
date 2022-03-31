@@ -422,8 +422,9 @@ var CloseButton = /** @class */ (function (_super) {
 }(React__namespace.PureComponent));
 var templateObject_1$3;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 var TabElement = React__namespace.forwardRef(function (_a, ref) {
-    _a.active; var props = tslib.__rest(_a, ["active"]);
+    _a.active; _a.closable; var props = tslib.__rest(_a, ["active", "closable"]);
     return (React__namespace.createElement("li", tslib.__assign({ ref: ref }, props), props.children));
 });
 var TabStyle = styled__default["default"](TabElement)(templateObject_1$2 || (templateObject_1$2 = tslib.__makeTemplateObject(["\n    display: ", ";\n    ", "\n\n    user-select: none;\n    &:hover {\n        cursor: pointer;\n        color: black;\n    }\n"], ["\n    display: ", ";\n    ", "\n\n    user-select: none;\n    &:hover {\n        cursor: pointer;\n        color: black;\n    }\n"])), function (props) { return (props.vertical ? 'block' : 'inline-block'); }, function (props) {

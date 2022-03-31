@@ -4,7 +4,8 @@ import CloseButton from './CloseButton';
 
 export type TabElementProps = React.ComponentPropsWithoutRef<'li'> & TabProps;
 
-export const TabElement = React.forwardRef<HTMLLIElement, TabElementProps>(({ active, ...props }, ref) => (
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const TabElement = React.forwardRef<HTMLLIElement, TabElementProps>(({ active, closable, ...props }, ref) => (
     <li ref={ref} {...props}>
         {props.children}
     </li>
