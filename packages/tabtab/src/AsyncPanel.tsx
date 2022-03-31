@@ -36,8 +36,8 @@ export default class AsyncPanelComponent extends React.PureComponent<Props, Stat
     componentDidMount() {
         if (this.props.active) this.loadPanel();
     }
-    componentDidUpdate() {
-        this.props.active && this.loadPanel();
+    componentDidUpdate(prevProps: Props) {
+        this.props.active && !prevProps.active && this.loadPanel();
     }
 
     loadPanel() {

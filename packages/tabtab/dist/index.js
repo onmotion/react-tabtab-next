@@ -547,8 +547,8 @@ var AsyncPanelComponent = /** @class */ (function (_super) {
         if (this.props.active)
             this.loadPanel();
     };
-    AsyncPanelComponent.prototype.componentDidUpdate = function () {
-        this.props.active && this.loadPanel();
+    AsyncPanelComponent.prototype.componentDidUpdate = function (prevProps) {
+        this.props.active && !prevProps.active && this.loadPanel();
     };
     AsyncPanelComponent.prototype.loadPanel = function () {
         var _this = this;

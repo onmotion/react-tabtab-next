@@ -20,7 +20,7 @@ export default class AsyncPanelComponent extends React.PureComponent<Props, Stat
     cacheData: any;
     constructor(props: Props);
     componentDidMount(): void;
-    componentDidUpdate(): void;
+    componentDidUpdate(prevProps: Props): void;
     loadPanel(): void;
     render(): JSX.Element;
 }
