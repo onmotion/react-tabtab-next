@@ -9,7 +9,7 @@ import AsyncPanel from './AsyncPanel';
 import ExtraButton from './ExtraButton';
 export { Tabs, TabList, Tab, DragTabList, DragTab, PanelList, Panel, AsyncPanel, ExtraButton };
 export declare const styled: {
-    TabListStyle: import("styled-components").StyledComponent<typeof TabList, any, {}, never>;
+    TabListStyle: import("styled-components").StyledComponent<import("react").FC<import("./TabListElement").TabListElementProps>, any, {}, never>;
     ActionButtonStyle: import("styled-components").StyledComponent<"div", any, {}, never>;
     TabStyle: import("styled-components").StyledComponent<import("react").ForwardRefExoticComponent<import("react").LiHTMLAttributes<HTMLLIElement> & Partial<import("./Tab").TabProps> & import("react").RefAttributes<HTMLLIElement>>, any, {}, never>;
     PanelStyle: import("styled-components").StyledComponent<"div", any, {

@@ -1,69 +1,13 @@
 import * as React from 'react';
-import styled, { AnyStyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import invariant from 'invariant';
 import { LeftIcon, RightIcon, BulletIcon } from './IconSvg';
 import { isNumber } from './utils/isType';
 import TabModal from './TabModal';
-import { TabList } from '.';
-
-const buttonWidth = 35;
-const getPadding = ({ showModalButton, showArrowButton }: TabListProps) => {
-    let paddingLeft = 0;
-    let paddingRight = 0;
-    if (showModalButton) {
-        paddingLeft += buttonWidth;
-    }
-    if (showArrowButton) {
-        paddingLeft += buttonWidth;
-        paddingRight += buttonWidth;
-        if (showModalButton) {
-            paddingLeft += 2;
-        }
-    }
-    if (paddingLeft > 0) {
-        paddingLeft += 3;
-    }
-    if (paddingRight > 0) {
-        paddingRight += 3;
-    }
-    return `0 ${paddingRight}px 0 ${paddingLeft}px`;
-};
-
-const TabListStyle = styled(TabList)`
-    background-color: white;
-    text-align: left;
-    position: relative;
-    white-space: nowrap;
-    overflow: hidden;
-    width: auto;
-    padding: ${(props) => getPadding(props)};
-`;
-
-const ListInner = styled.div`
-    overflow: hidden;
-`;
-
-const ListScroll = styled.ul`
-    padding-left: 0;
-    position: relative;
-    margin: 0;
-    list-style: none;
-    display: inline-block;
-    transition: transform 0.3s cubic-bezier(0.42, 0, 0.58, 1);
-`;
-
-const ActionButtonStyle = styled.div`
-    height: 100%;
-    width: ${buttonWidth}px;
-    text-align: center;
-    border: 1px solid #d9d9d9;
-    border-bottom: 0;
-    border-radius: 4px 4px 0 0;
-    background: #f9f9f9;
-    > svg {
-        padding-top: 11px;
-    }
-`;
+import { ActionButtonStyle, buttonWidth, ListInner, ListScroll, TabListStyle } from './styledElements';
+import { TabListElement, TabListElementProps } from './TabListElement';
+import Tab from './Tab';
+import Panel from './Panel';
 
 const makeScrollButton = (ActionButton: React.ElementType) => styled(ActionButton)`
     display: inline-block;
@@ -87,9 +31,10 @@ const makeFoldButton = (ActionButton: React.ElementType) => styled(ActionButton)
 
 export type TabListProps = {
     customStyle?: {
-        TabList: React.FC<Partial<TabListProps>>;
-        Tab: React.ElementRef<'div'>;
-        ActionButton: React.ReactElement;
+        TabList?: React.ElementType<TabListElementProps>;
+        Tab?: React.ElementType<Tab>;
+        Panel?: React.ElementType<Panel>;
+        ActionButton?: React.ElementType;
     };
     showArrowButton?: 'auto' | boolean;
     showModalButton?: number | boolean;
@@ -97,7 +42,6 @@ export type TabListProps = {
     handleTabSequence?: (event: any) => void;
     handleEdit?: (event: any) => void;
     ExtraButton?: JSX.Element;
-    hasExtraButton?: boolean;
     activeIndex?: number;
     children: React.ReactNode[];
 };
@@ -330,11 +274,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
         return (
             <div>
                 {ExtraButton ? ExtraButton : null}
-                <TabList
-                    hasExtraButton={!!ExtraButton}
-                    showModalButton={this.state.showModalButton}
-                    showArrowButton={this.state.showArrowButton}
-                >
+                <TabList showModalButton={this.state.showModalButton} showArrowButton={this.state.showArrowButton}>
                     {this.state.showModalButton ? (
                         <FoldButton
                             ref={(node: React.ReactElement) => (this.foldNode = node)}
@@ -365,5 +305,3 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
         );
     }
 }
-
-export { TabListStyle, ActionButtonStyle };

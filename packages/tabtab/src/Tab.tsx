@@ -1,11 +1,6 @@
-// @flow
 import * as React from 'react';
 import styled from 'styled-components';
 import CloseButton from './CloseButton';
-
-// const TabLi: React.FC<React.LiHTMLAttributes<HTMLLIElement> & TabProps> = (props: React.LiHTMLAttributes<HTMLLIElement>) => {
-//   return <li {...props}></li>
-// }
 
 const TabLi = React.forwardRef<HTMLLIElement, React.LiHTMLAttributes<HTMLLIElement> & Partial<TabProps>>(
     (props: React.LiHTMLAttributes<HTMLLIElement> & Partial<TabProps>, ref) => {

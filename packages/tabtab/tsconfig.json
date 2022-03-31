@@ -13,7 +13,7 @@
         "noEmitOnError": true,
         "declaration": true,
         "declarationDir": "dist",
-        "baseUrl": ".",
+        "baseUrl": "./",
         "paths": {
             "@react-tabtab-next/*": ["packages/*/src"],
             "*": ["node_modules", "packages"]

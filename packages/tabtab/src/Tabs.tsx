@@ -1,6 +1,7 @@
 import React from 'react';
 import { Panel, TabList } from '.';
 import Tab from './Tab';
+import { TabListElementProps } from './TabListElement';
 
 type TabsProps = {
     defaultIndex?: number;
@@ -12,10 +13,10 @@ type TabsProps = {
     onTabSequenceChange?: (event: any) => void;
     onTabEdit?: (event: any) => void;
     customStyle?: {
-        TabList?: React.ElementType<TabList>;
+        TabList?: React.ElementType<TabListElementProps>;
         Tab?: React.ElementType<Tab>;
         Panel?: React.ElementType<Panel>;
-        ActionButton?: JSX.Element;
+        ActionButton?: React.ElementType;
     };
 };
 

@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { TabList } from '.';
-declare const TabListStyle: import("styled-components").StyledComponent<typeof TabList, any, {}, never>;
-declare const ActionButtonStyle: import("styled-components").StyledComponent<"div", any, {}, never>;
+import { TabListElementProps } from './TabListElement';
+import Tab from './Tab';
+import Panel from './Panel';
 export declare type TabListProps = {
     customStyle?: {
-        TabList: React.FC<Partial<TabListProps>>;
-        Tab: React.ElementRef<'div'>;
-        ActionButton: React.ReactElement;
+        TabList?: React.ElementType<TabListElementProps>;
+        Tab?: React.ElementType<Tab>;
+        Panel?: React.ElementType<Panel>;
+        ActionButton?: React.ElementType;
     };
     showArrowButton?: 'auto' | boolean;
     showModalButton?: number | boolean;
@@ -14,7 +15,6 @@ export declare type TabListProps = {
     handleTabSequence?: (event: any) => void;
     handleEdit?: (event: any) => void;
     ExtraButton?: JSX.Element;
-    hasExtraButton?: boolean;
     activeIndex?: number;
     children: React.ReactNode[];
 };
@@ -49,4 +49,4 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
     renderArrowButton(ScrollButton: React.ElementType): JSX.Element;
     render(): JSX.Element;
 }
-export { TabListStyle, ActionButtonStyle };
+export {};
