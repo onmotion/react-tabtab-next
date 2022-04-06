@@ -8,6 +8,8 @@ function isDirectory(dir) {
     return fs.lstatSync(dir).isDirectory();
 }
 
+console.log(path.resolve(__dirname, '../../themes/dist'));
+
 function buildEntries() {
     return fs.readdirSync(EXAMPLES_DIR).reduce(function (entries, dir) {
         console.log(entries);
@@ -54,8 +56,11 @@ module.exports = {
             {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
-                // include: [path.resolve(__dirname, './src')],
                 use: { loader: 'ts-loader' },
+            },
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
             },
         ],
     },
@@ -63,7 +68,7 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.css'],
         // alias: {
-        //     'react-modal': path.resolve(__dirname, '../src'),
+        //     'react-tabtab-next-themes': path.resolve(__dirname, '../../themes/dist/index'),
         // },
     },
 };

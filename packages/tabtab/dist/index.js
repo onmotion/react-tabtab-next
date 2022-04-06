@@ -7,6 +7,7 @@ var React = require('react');
 var styled$1 = require('styled-components');
 var invariant = require('invariant');
 var reactSortableHoc = require('react-sortable-hoc');
+var ReactModal = require('react-modal');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -32,6 +33,7 @@ var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 var React__namespace = /*#__PURE__*/_interopNamespace(React);
 var styled__default = /*#__PURE__*/_interopDefaultLegacy(styled$1);
 var invariant__default = /*#__PURE__*/_interopDefaultLegacy(invariant);
+var ReactModal__default = /*#__PURE__*/_interopDefaultLegacy(ReactModal);
 
 var Tabs = /** @class */ (function (_super) {
     tslib.__extends(Tabs, _super);
@@ -145,11 +147,12 @@ var SortMethod = /** @class */ (function (_super) {
     return SortMethod;
 }(React__namespace.PureComponent));
 
+ReactModal__default["default"].setAppElement('#root');
 var DragTabContainer$1 = reactSortableHoc.SortableContainer(function (_a) {
     var children = _a.children;
-    return React__namespace.createElement("div", { style: { marginTop: '50px' } }, children);
+    return React__namespace.createElement("div", null, children);
 });
-/** @class */ ((function (_super) {
+var ModalTabListWrapper = /** @class */ (function (_super) {
     tslib.__extends(ModalTabListWrapper, _super);
     function ModalTabListWrapper() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -161,28 +164,20 @@ var DragTabContainer$1 = reactSortableHoc.SortableContainer(function (_a) {
             pressDelay: 100 }, this.props.children));
     };
     return ModalTabListWrapper;
-})(SortMethod));
+}(SortMethod));
+var Modal = styled__default["default"](ReactModal__default["default"])(templateObject_1$6 || (templateObject_1$6 = tslib.__makeTemplateObject(["\n    margin: auto;\n    background-color: #fff;\n    width: 200px;\n    padding: 20px;\n    margin-top: 40px;\n    border: 1px solid #00000022;\n"], ["\n    margin: auto;\n    background-color: #fff;\n    width: 200px;\n    padding: 20px;\n    margin-top: 40px;\n    border: 1px solid #00000022;\n"])));
 var TabModal = /** @class */ (function (_super) {
     tslib.__extends(TabModal, _super);
     function TabModal() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     TabModal.prototype.render = function () {
-        return React__namespace.createElement("div", null);
-        // return (
-        //     <Poppop open={true} onClose={this.props.closeModal} closeOnEsc={true} closeBtn={true}>
-        //         <ModalTabListWrapper
-        //             handleTabSequence={this.props.handleTabSequence}
-        //             handleTabChange={this.props.handleTabChange}
-        //             activeIndex={this.props.activeIndex}
-        //         >
-        //             {this.props.children}
-        //         </ModalTabListWrapper>
-        //     </Poppop>
-        // );
+        return (React__namespace.createElement(Modal, { isOpen: true, contentLabel: "Modal", onRequestClose: this.props.closeModal, className: "tabtab-modal" },
+            React__namespace.createElement(ModalTabListWrapper, { handleTabSequence: this.props.handleTabSequence, handleTabChange: this.props.handleTabChange, activeIndex: this.props.activeIndex }, this.props.children)));
     };
     return TabModal;
 }(React__namespace.Component));
+var templateObject_1$6;
 
 var TabListElement = React.memo(function (_a) {
     _a.showArrowButton; _a.showModalButton; var props = tslib.__rest(_a, ["showArrowButton", "showModalButton"]);
@@ -215,7 +210,7 @@ var getPadding = function (_a) {
 var TabListStyle = styled__default["default"](TabListElement)(templateObject_1$5 || (templateObject_1$5 = tslib.__makeTemplateObject(["\n    background-color: white;\n    text-align: left;\n    position: relative;\n    white-space: nowrap;\n    overflow: hidden;\n    width: auto;\n    padding: ", ";\n"], ["\n    background-color: white;\n    text-align: left;\n    position: relative;\n    white-space: nowrap;\n    overflow: hidden;\n    width: auto;\n    padding: ", ";\n"])), function (props) { return getPadding(props); });
 var ListInner = styled__default["default"].div(templateObject_2$2 || (templateObject_2$2 = tslib.__makeTemplateObject(["\n    overflow: hidden;\n"], ["\n    overflow: hidden;\n"])));
 var ListScroll = styled__default["default"].ul(templateObject_3 || (templateObject_3 = tslib.__makeTemplateObject(["\n    padding-left: 0;\n    position: relative;\n    margin: 0;\n    list-style: none;\n    display: inline-block;\n    transition: transform 0.3s cubic-bezier(0.42, 0, 0.58, 1);\n"], ["\n    padding-left: 0;\n    position: relative;\n    margin: 0;\n    list-style: none;\n    display: inline-block;\n    transition: transform 0.3s cubic-bezier(0.42, 0, 0.58, 1);\n"])));
-var ActionButtonStyle = styled__default["default"].div(templateObject_4 || (templateObject_4 = tslib.__makeTemplateObject(["\n    height: 100%;\n    width: ", "px;\n    text-align: center;\n    border: 1px solid #d9d9d9;\n    border-bottom: 0;\n    border-radius: 4px 4px 0 0;\n    background: #f9f9f9;\n    > svg {\n        padding-top: 11px;\n    }\n"], ["\n    height: 100%;\n    width: ", "px;\n    text-align: center;\n    border: 1px solid #d9d9d9;\n    border-bottom: 0;\n    border-radius: 4px 4px 0 0;\n    background: #f9f9f9;\n    > svg {\n        padding-top: 11px;\n    }\n"])), buttonWidth);
+var ActionButtonStyle = styled__default["default"].div(templateObject_4 || (templateObject_4 = tslib.__makeTemplateObject(["\n    height: 100%;\n    width: ", "px;\n    text-align: center;\n    border-radius: 4px 4px 0 0;\n    background: #f9f9f9;\n    color: #555;\n    :hover {\n        color: #000;\n    }\n    > svg {\n        padding-top: 11px;\n    }\n"], ["\n    height: 100%;\n    width: ", "px;\n    text-align: center;\n    border-radius: 4px 4px 0 0;\n    background: #f9f9f9;\n    color: #555;\n    :hover {\n        color: #000;\n    }\n    > svg {\n        padding-top: 11px;\n    }\n"])), buttonWidth);
 var templateObject_1$5, templateObject_2$2, templateObject_3, templateObject_4;
 
 var makeScrollButton = function (ActionButton) { return styled__default["default"](ActionButton)(templateObject_1$4 || (templateObject_1$4 = tslib.__makeTemplateObject(["\n    display: inline-block;\n    filter: none;\n    position: absolute;\n    ", ";\n    &:hover {\n        cursor: pointer;\n    }\n"], ["\n    display: inline-block;\n    filter: none;\n    position: absolute;\n    ", ";\n    &:hover {\n        cursor: pointer;\n    }\n"])), function (props) { return (props.left ? (props.showModalButton ? "left: ".concat(buttonWidth + 2, "px") : "left: 0") : 'right: 0'); }); };
@@ -434,10 +429,14 @@ var TabElement = React__namespace.forwardRef(function (_a, ref) {
     _a.active; _a.closable; var props = tslib.__rest(_a, ["active", "closable"]);
     return (React__namespace.createElement("li", tslib.__assign({ ref: ref }, props), props.children));
 });
-var TabStyle = styled__default["default"](TabElement)(templateObject_1$2 || (templateObject_1$2 = tslib.__makeTemplateObject(["\n    display: ", ";\n    ", "\n\n    user-select: none;\n    &:hover {\n        cursor: pointer;\n        color: black;\n    }\n"], ["\n    display: ", ";\n    ", "\n\n    user-select: none;\n    &:hover {\n        cursor: pointer;\n        color: black;\n    }\n"])), function (props) { return (props.vertical ? 'block' : 'inline-block'); }, function (props) {
+var TabStyle = styled__default["default"](TabElement)(templateObject_1$2 || (templateObject_1$2 = tslib.__makeTemplateObject(["\n    display: ", ";\n    color: #000000bb;\n    border-bottom: 2px solid transparent;\n    white-space: nowrap;\n    ", "\n\n    user-select: none;\n    &:hover,\n    &:active {\n        cursor: pointer;\n        color: black;\n    }\n    ", "\n"], ["\n    display: ", ";\n    color: #000000bb;\n    border-bottom: 2px solid transparent;\n    white-space: nowrap;\n    ", "\n\n    user-select: none;\n    &:hover,\n    &:active {\n        cursor: pointer;\n        color: black;\n    }\n    ", "\n"])), function (props) { return (props.vertical ? 'block' : 'inline-block'); }, function (props) {
     return props.vertical
         ? "\n      background-color: white;\n      color: black;\n      padding: 10px 10px;\n      z-index: 100000;\n    "
-        : function (props) { return (props.closable ? 'padding: 10px 10px 10px 15px;' : 'padding: 10px 15px;'); };
+        : function (props) { return (props.closable ? 'padding: 10px 10px 10px 15px;' : 'padding: 10px 15px 8px 15px;'); };
+}, function (props) {
+    return props.active
+        ? "\n      color: black;\n      border-bottom: 2px solid; \n    "
+        : null;
 });
 var TabText = styled__default["default"].span(templateObject_2 || (templateObject_2 = tslib.__makeTemplateObject(["\n    vertical-align: middle;\n"], ["\n    vertical-align: middle;\n"])));
 var Tab = /** @class */ (function (_super) {

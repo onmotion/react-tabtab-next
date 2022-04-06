@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { styled as themeStyled } from '@react-tabtab-next/tabtab';
+import { styled as themeStyled } from '../../../../src';
 
 let { TabList, ActionButton, Tab, Panel } = themeStyled;
 

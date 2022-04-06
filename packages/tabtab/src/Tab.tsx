@@ -15,6 +15,7 @@ const TabStyle = styled(TabElement)`
     display: ${(props) => (props.vertical ? 'block' : 'inline-block')};
     color: #000000bb;
     border-bottom: 2px solid transparent;
+    white-space: nowrap;
     ${(props) =>
         props.vertical
             ? `

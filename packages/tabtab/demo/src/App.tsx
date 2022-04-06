@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { makeData } from './data';
 import { Tabs, DragTab, Panel, DragTabList, PanelList, helpers } from '../../src/index';
+import { md } from './themes';
 
 export default function App() {
     const [activeTab, setActiveTab] = useState(0);
@@ -21,6 +22,7 @@ export default function App() {
     return (
         <div className="App">
             <Tabs
+                customStyle={md}
                 activeIndex={activeTab}
                 onTabChange={(i) => {
                     console.log(i);

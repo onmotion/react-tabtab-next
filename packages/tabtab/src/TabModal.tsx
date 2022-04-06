@@ -4,6 +4,8 @@ import SortMethod from './SortMethod';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
 
+ReactModal.setAppElement('#root');
+
 type Props = {
     closeModal: (event: any) => void;
     handleTabSequence: (event: any) => void;
