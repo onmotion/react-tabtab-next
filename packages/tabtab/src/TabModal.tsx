@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { SortableContainer } from 'react-sortable-hoc';
 import SortMethod from './SortMethod';
+import ReactModal from 'react-modal';
 
 type Props = {
     closeModal: (event: any) => void;
@@ -33,7 +34,7 @@ class ModalTabListWrapper extends SortMethod {
 
 export default class TabModal extends React.Component<Props> {
     render() {
-        return <div></div>;
+        return <ReactModal isOpen={true} contentLabel="Minimal Modal Example"></ReactModal>;
         // return (
         //     <Poppop open={true} onClose={this.props.closeModal} closeOnEsc={true} closeBtn={true}>
         //         <ModalTabListWrapper
