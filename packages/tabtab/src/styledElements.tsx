@@ -51,10 +51,12 @@ export const ActionButtonStyle = styled.div`
     height: 100%;
     width: ${buttonWidth}px;
     text-align: center;
-    border: 1px solid #d9d9d9;
-    border-bottom: 0;
     border-radius: 4px 4px 0 0;
     background: #f9f9f9;
+    color: #555;
+    :hover {
+        color: #000;
+    }
     > svg {
         padding-top: 11px;
     }

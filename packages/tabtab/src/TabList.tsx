@@ -271,6 +271,9 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
         const ScrollButton = makeScrollButton(ActionButton as React.ElementType);
         const FoldButton = makeFoldButton(ActionButton as React.ElementType);
         invariant(this.props.children, 'React-tabtab Error: You MUST pass at least one tab');
+
+        console.log('modalIsOpen', modalIsOpen);
+
         return (
             <div>
                 {ExtraButton ? ExtraButton : null}

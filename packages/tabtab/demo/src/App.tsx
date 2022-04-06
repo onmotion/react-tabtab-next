@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { makeData } from './data';
-import { Tabs, DragTab, Panel, DragTabList, PanelList, helpers } from '../../dist';
+import { Tabs, DragTab, Panel, DragTabList, PanelList, helpers } from '../../src/index';
 
 export default function App() {
     const [activeTab, setActiveTab] = useState(0);

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { SortableContainer } from 'react-sortable-hoc';
 import SortMethod from './SortMethod';
 import ReactModal from 'react-modal';
+import styled from 'styled-components';
 
 type Props = {
     closeModal: (event: any) => void;
@@ -12,7 +13,7 @@ type Props = {
 };
 
 const DragTabContainer = SortableContainer(({ children }: { children: React.ReactNode }) => {
-    return <div style={{ marginTop: '50px' }}>{children}</div>;
+    return <div>{children}</div>;
 });
 
 class ModalTabListWrapper extends SortMethod {
@@ -32,19 +33,26 @@ class ModalTabListWrapper extends SortMethod {
     }
 }
 
+const Modal = styled(ReactModal)`
+    margin: auto;
+    background-color: #fff;
+    width: 200px;
+    padding: 20px;
+    margin-top: 40px;
+    border: 1px solid #00000022;
+`;
 export default class TabModal extends React.Component<Props> {
     render() {
-        return <ReactModal isOpen={true} contentLabel="Minimal Modal Example"></ReactModal>;
-        // return (
-        //     <Poppop open={true} onClose={this.props.closeModal} closeOnEsc={true} closeBtn={true}>
-        //         <ModalTabListWrapper
-        //             handleTabSequence={this.props.handleTabSequence}
-        //             handleTabChange={this.props.handleTabChange}
-        //             activeIndex={this.props.activeIndex}
-        //         >
-        //             {this.props.children}
-        //         </ModalTabListWrapper>
-        //     </Poppop>
-        // );
+        return (
+            <Modal isOpen={true} contentLabel="Modal" onRequestClose={this.props.closeModal} className="tabtab-modal">
+                <ModalTabListWrapper
+                    handleTabSequence={this.props.handleTabSequence}
+                    handleTabChange={this.props.handleTabChange}
+                    activeIndex={this.props.activeIndex}
+                >
+                    {this.props.children}
+                </ModalTabListWrapper>
+            </Modal>
+        );
     }
 }

@@ -13,6 +13,8 @@ export const TabElement = React.forwardRef<HTMLLIElement, TabElementProps>(({ ac
 
 const TabStyle = styled(TabElement)`
     display: ${(props) => (props.vertical ? 'block' : 'inline-block')};
+    color: #000000bb;
+    border-bottom: 2px solid transparent;
     ${(props) =>
         props.vertical
             ? `
@@ -21,13 +23,21 @@ const TabStyle = styled(TabElement)`
       padding: 10px 10px;
       z-index: 100000;
     `
-            : (props) => (props.closable ? 'padding: 10px 10px 10px 15px;' : 'padding: 10px 15px;')}
+            : (props) => (props.closable ? 'padding: 10px 10px 10px 15px;' : 'padding: 10px 15px 8px 15px;')}
 
     user-select: none;
-    &:hover {
+    &:hover,
+    &:active {
         cursor: pointer;
         color: black;
     }
+    ${(props) =>
+        props.active
+            ? `
+      color: black;
+      border-bottom: 2px solid; 
+    `
+            : null}
 `;
 
 const TabText = styled.span`

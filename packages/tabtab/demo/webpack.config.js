@@ -48,20 +48,20 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
-                include: [path.resolve(__dirname, './src')],
+                //   include: [path.resolve(__dirname, './src')],
                 use: { loader: 'babel-loader' },
             },
             {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
-                include: [path.resolve(__dirname, './src')],
-                use: { loader: 'babel-loader' },
+                // include: [path.resolve(__dirname, './src')],
+                use: { loader: 'ts-loader' },
             },
         ],
     },
 
     resolve: {
-        extensions: ['.js', '.json', '.jsx', '.tsx', '.css'],
+        extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.css'],
         // alias: {
         //     'react-modal': path.resolve(__dirname, '../src'),
         // },
