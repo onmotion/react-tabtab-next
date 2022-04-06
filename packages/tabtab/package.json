@@ -1,13 +1,12 @@
 {
     "name": "@react-tabtab-next/tabtab",
-    "version": "3.0.6",
+    "version": "3.1.0",
     "description": "[TypeScript] A mobile support, draggable, editable and api based Tab for ReactJS",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
         "build": "rimraf dist && rollup -c ../../rollup.config.js",
-        "validate": "npm ls",
-        "demo": "npx webpack serve --config ./demo/webpack.config.js"
+        "validate": "npm ls"
     },
     "repository": {
         "type": "git",
@@ -52,22 +51,12 @@
         "styled-components": "^5.3.5"
     },
     "devDependencies": {
-        "@babel/preset-env": "^7.16.11",
-        "@babel/preset-react": "^7.16.7",
-        "@babel/preset-typescript": "^7.16.7",
         "@types/estree": "^0.0.51",
         "@types/invariant": "^2.2.35",
         "@types/react-modal": "^3.13.1",
         "@types/styled-components": "^5.1.24",
-        "babel-loader": "^8.2.4",
-        "css-loader": "^6.7.1",
-        "html-webpack-plugin": "^5.5.0",
         "rimraf": "^2.6.2",
-        "style-loader": "^3.3.1",
-        "ts-loader": "^9.2.8",
-        "tslib": "^2.3.1",
-        "webpack-cli": "^4.9.2",
-        "webpack-dev-server": "^4.8.0"
+        "tslib": "^2.3.1"
     },
     "peerDependencies": {
         "@types/react": ">=16.3.0",

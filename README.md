@@ -21,6 +21,14 @@
 
 ![demo gif](https://media.giphy.com/media/xUOxeRdRrSvSLiX528/giphy.gif)
 
+for build a local playground run
+
+```bash
+npm run demo
+```
+
+and go to http://127.0.0.1:9000
+
 ## Features
 
 -   **Mobile supported** — Touch support. Easy to use on mobile device
