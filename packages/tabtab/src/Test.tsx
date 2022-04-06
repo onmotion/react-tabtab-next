@@ -6,7 +6,7 @@ import { AsyncPanel, Panel, styled, TabList } from '.';
 import PanelList from './PanelList';
 import Tabs from './Tabs';
 
-const A: FC = () => {
+const Test: FC = () => {
     return (
         <Tabs customStyle={styled}>
             <TabList>

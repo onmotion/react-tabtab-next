@@ -8,9 +8,9 @@
 <img src="./docs/ts.svg" width="20px" >
 <img src="./docs/js.svg" width="20px" >
 
-## A mobile support, draggable, editable and api based Tab for ReactJS. <br/>
+## A mobile support, draggable, editable and api based Tab for ReactJS
 
-> _Support react >= `^16.3.0 || ^17.0.0`_
+> _Support react >= `16.3.0`_
 
 [![license](https://img.shields.io/github/license/onmotion/react-tabtab-next)](https://www.npmjs.com/package/@react-tabtab-next/tabtab)
 [![npm](https://img.shields.io/npm/v/@react-tabtab-next/tabtab.svg)](https://www.npmjs.com/package/@react-tabtab-next/tabtab)

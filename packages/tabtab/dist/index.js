@@ -6,7 +6,6 @@ var tslib = require('tslib');
 var React = require('react');
 var styled$1 = require('styled-components');
 var invariant = require('invariant');
-var Poppop = require('react-poppop');
 var reactSortableHoc = require('react-sortable-hoc');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
@@ -33,7 +32,6 @@ var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 var React__namespace = /*#__PURE__*/_interopNamespace(React);
 var styled__default = /*#__PURE__*/_interopDefaultLegacy(styled$1);
 var invariant__default = /*#__PURE__*/_interopDefaultLegacy(invariant);
-var Poppop__default = /*#__PURE__*/_interopDefaultLegacy(Poppop);
 
 var Tabs = /** @class */ (function (_super) {
     tslib.__extends(Tabs, _super);
@@ -151,7 +149,7 @@ var DragTabContainer$1 = reactSortableHoc.SortableContainer(function (_a) {
     var children = _a.children;
     return React__namespace.createElement("div", { style: { marginTop: '50px' } }, children);
 });
-var ModalTabListWrapper = /** @class */ (function (_super) {
+/** @class */ ((function (_super) {
     tslib.__extends(ModalTabListWrapper, _super);
     function ModalTabListWrapper() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -163,15 +161,25 @@ var ModalTabListWrapper = /** @class */ (function (_super) {
             pressDelay: 100 }, this.props.children));
     };
     return ModalTabListWrapper;
-}(SortMethod));
+})(SortMethod));
 var TabModal = /** @class */ (function (_super) {
     tslib.__extends(TabModal, _super);
     function TabModal() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     TabModal.prototype.render = function () {
-        return (React__namespace.createElement(Poppop__default["default"], { open: true, onClose: this.props.closeModal, closeOnEsc: true, closeBtn: true },
-            React__namespace.createElement(ModalTabListWrapper, { handleTabSequence: this.props.handleTabSequence, handleTabChange: this.props.handleTabChange, activeIndex: this.props.activeIndex }, this.props.children)));
+        return React__namespace.createElement("div", null);
+        // return (
+        //     <Poppop open={true} onClose={this.props.closeModal} closeOnEsc={true} closeBtn={true}>
+        //         <ModalTabListWrapper
+        //             handleTabSequence={this.props.handleTabSequence}
+        //             handleTabChange={this.props.handleTabChange}
+        //             activeIndex={this.props.activeIndex}
+        //         >
+        //             {this.props.children}
+        //         </ModalTabListWrapper>
+        //     </Poppop>
+        // );
     };
     return TabModal;
 }(React__namespace.Component));

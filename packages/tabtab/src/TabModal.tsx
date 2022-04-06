@@ -1,6 +1,4 @@
 import * as React from 'react';
-// @ts-expect-error has no typings
-import Poppop from 'react-poppop';
 import { SortableContainer } from 'react-sortable-hoc';
 import SortMethod from './SortMethod';
 
@@ -35,16 +33,17 @@ class ModalTabListWrapper extends SortMethod {
 
 export default class TabModal extends React.Component<Props> {
     render() {
-        return (
-            <Poppop open={true} onClose={this.props.closeModal} closeOnEsc={true} closeBtn={true}>
-                <ModalTabListWrapper
-                    handleTabSequence={this.props.handleTabSequence}
-                    handleTabChange={this.props.handleTabChange}
-                    activeIndex={this.props.activeIndex}
-                >
-                    {this.props.children}
-                </ModalTabListWrapper>
-            </Poppop>
-        );
+        return <div></div>;
+        // return (
+        //     <Poppop open={true} onClose={this.props.closeModal} closeOnEsc={true} closeBtn={true}>
+        //         <ModalTabListWrapper
+        //             handleTabSequence={this.props.handleTabSequence}
+        //             handleTabChange={this.props.handleTabChange}
+        //             activeIndex={this.props.activeIndex}
+        //         >
+        //             {this.props.children}
+        //         </ModalTabListWrapper>
+        //     </Poppop>
+        // );
     }
 }
