@@ -1,21 +1,14 @@
-<h1 align="center">
-  <img src="https://i.imgur.com/6o66rig.png" alt="">
-  <br/>
-  <br/>
-</h1>
-
-**(!) This is fork under original repo [react-tabtab](https://github.com/ctxhou/react-tabtab) but refactored using Typescript**
-<img src="./docs/ts.svg" width="20px" >
-<img src="./docs/js.svg" width="20px" >
-
-## A mobile support, draggable, editable and api based Tab for ReactJS
-
-> _Support react >= `16.3.0`_
+# react-tabtab-next
 
 [![license](https://img.shields.io/github/license/onmotion/react-tabtab-next)](https://www.npmjs.com/package/@react-tabtab-next/tabtab)
 [![npm](https://img.shields.io/npm/v/@react-tabtab-next/tabtab.svg)](https://www.npmjs.com/package/@react-tabtab-next/tabtab)
 [![npm](https://img.shields.io/npm/dm/@react-tabtab-next/tabtab.svg?maxAge=43200&downloads)](https://www.npmjs.com/package/@react-tabtab-next/tabtab)
-​
+
+## A mobile support, draggable, editable and api based Tab for ReactJS
+
+**(!) This is fork under original repo [react-tabtab](https://github.com/ctxhou/react-tabtab) but refactored using Typescript**
+<img src="./docs/ts.svg" width="20px" >
+<img src="./docs/js.svg" width="20px" >
 
 ### [Demo](https://ctxhou.github.io/react-tabtab/)
 
@@ -28,6 +21,8 @@ npm run demo
 ```
 
 and go to http://127.0.0.1:9000
+
+also Codesandbox [playground](https://codesandbox.io/s/react-tabtab-next-yk4moo)
 
 ## Features
 
