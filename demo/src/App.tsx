@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { makeData } from './data';
 import { Tabs, DragTab, Panel, DragTabList, PanelList, helpers } from '../../packages/tabtab/src';
 import { md, bootstrap, bulma } from '../../packages/themes/src';
@@ -19,18 +19,26 @@ export default function App() {
         });
     }, [tabs]);
 
+    const handleOnTabSequenceChange = useCallback(
+        ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
+            setTabs(helpers.simpleSwitch(tabs, oldIndex, newIndex));
+            setActiveTab(newIndex);
+        },
+        [tabs]
+    );
+
+    const handleOnTabChange = useCallback((i) => {
+        console.log(i);
+        setActiveTab(i);
+    }, []);
+
     return (
         <div className="App">
             <Tabs
                 customStyle={md}
                 activeIndex={activeTab}
-                onTabChange={(i) => {
-                    console.log(i);
-                    setActiveTab(i);
-                }}
-                onTabSequenceChange={({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
-                    setTabs(helpers.simpleSwitch(tabs, oldIndex, newIndex));
-                }}
+                onTabChange={handleOnTabChange}
+                onTabSequenceChange={handleOnTabSequenceChange}
             >
                 <DragTabList>{tabItems}</DragTabList>
                 <PanelList>{panelItems}</PanelList>
@@ -39,13 +47,8 @@ export default function App() {
             <Tabs
                 customStyle={bootstrap}
                 activeIndex={activeTab}
-                onTabChange={(i) => {
-                    console.log(i);
-                    setActiveTab(i);
-                }}
-                onTabSequenceChange={({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
-                    setTabs(helpers.simpleSwitch(tabs, oldIndex, newIndex));
-                }}
+                onTabChange={handleOnTabChange}
+                onTabSequenceChange={handleOnTabSequenceChange}
             >
                 <DragTabList>{tabItems}</DragTabList>
                 <PanelList>{panelItems}</PanelList>
@@ -54,13 +57,8 @@ export default function App() {
             <Tabs
                 customStyle={bulma}
                 activeIndex={activeTab}
-                onTabChange={(i) => {
-                    console.log(i);
-                    setActiveTab(i);
-                }}
-                onTabSequenceChange={({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
-                    setTabs(helpers.simpleSwitch(tabs, oldIndex, newIndex));
-                }}
+                onTabChange={handleOnTabChange}
+                onTabSequenceChange={handleOnTabSequenceChange}
             >
                 <DragTabList>{tabItems}</DragTabList>
                 <PanelList>{panelItems}</PanelList>

@@ -2,37 +2,13 @@ const fs = require('fs');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-var EXAMPLES_DIR = path.resolve(__dirname, './src');
-
-function isDirectory(dir) {
-    return fs.lstatSync(dir).isDirectory();
-}
-
-console.log(path.resolve(__dirname, '../../themes/dist'));
-
-function buildEntries() {
-    return fs.readdirSync(EXAMPLES_DIR).reduce(function (entries, dir) {
-        console.log(entries);
-        if (dir === 'build') return entries;
-
-        var isDraft = dir.charAt(0) === '_';
-
-        if (!isDraft && isDirectory(path.join(EXAMPLES_DIR, dir)))
-            entries[dir] = path.join(EXAMPLES_DIR, dir, 'index.jsx');
-
-        return entries;
-    }, {});
-}
-
 module.exports = {
     entry: path.resolve(__dirname, './src/index.jsx'),
     devServer: {
         //  static: './demo/__build__',
-        //  compress: true,
+        compress: false,
         port: 9000,
-        // historyApiFallback: {
-        //     index: 'index.html',
-        // },
+        open: true,
     },
     mode: 'development',
     output: {
