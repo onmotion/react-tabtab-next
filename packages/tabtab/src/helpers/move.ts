@@ -1,4 +1,3 @@
-// arrayMove method is import from 'react-sortable-hoc' to unify api interface
-import { arrayMove } from 'react-sortable-hoc';
+import { arrayMove } from '@dnd-kit/sortable';
 
 export default arrayMove;

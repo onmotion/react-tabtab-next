@@ -1,25 +1,52 @@
-import React from 'react';
-import SortMethod, { SortMathodComponentProps } from './SortMethod';
-import { SortableContainer } from 'react-sortable-hoc';
-import TabList, { TabListProps } from './TabList';
+import React, { FC, memo, useMemo, useState } from 'react';
+import {
+    DndContext,
+    closestCenter,
+    KeyboardSensor,
+    PointerSensor,
+    useSensor,
+    useSensors,
+    MouseSensor,
+} from '@dnd-kit/core';
+import {
+    arrayMove,
+    SortableContext,
+    sortableKeyboardCoordinates,
+    verticalListSortingStrategy,
+    horizontalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import DragTab from './DragTab';
+import { TabList } from '.';
 
-const DragTabContainer = SortableContainer(({ ...props }: TabListProps) => {
-    return <TabList {...props}></TabList>;
+interface IDragTabListProps {}
+
+const DragTabList: FC<IDragTabListProps> = memo((props) => {
+    const items = useMemo(() => React.Children.map(props.children, (_, i) => i.toString()), [props.children]);
+
+    const mouseSensor = useSensor(MouseSensor, {
+        // Require the mouse to move by 10 pixels before activating
+        activationConstraint: {
+            distance: 10,
+        },
+    });
+
+    const sensors = useSensors(mouseSensor);
+
+    return (
+        <div style={{ display: 'flex' }}>
+            <DndContext sensors={sensors}>
+                <SortableContext items={items} strategy={horizontalListSortingStrategy}>
+                    <TabList {...props}>
+                        {React.Children.map(props.children, (child, i) => (
+                            <DragTab id={i.toString()} key={i} index={i} {...props}>
+                                {child}
+                            </DragTab>
+                        ))}
+                    </TabList>
+                </SortableContext>
+            </DndContext>
+        </div>
+    );
 });
 
-export default class DragTabListComponent extends SortMethod {
-    render() {
-        const { ...props } = this.props;
-        return (
-            <DragTabContainer
-                onSortEnd={this.onSortEnd}
-                axis="x"
-                lockAxis="x"
-                // if no pressDelay, close button cannot be triggered,
-                // because it would always treat click as dnd action
-                pressDelay={100}
-                {...props}
-            ></DragTabContainer>
-        );
-    }
-}
+export default DragTabList;

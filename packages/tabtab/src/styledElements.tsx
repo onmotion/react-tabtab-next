@@ -45,6 +45,7 @@ export const ListScroll = styled.ul`
     list-style: none;
     display: inline-block;
     transition: transform 0.3s cubic-bezier(0.42, 0, 0.58, 1);
+    display: flex;
 `;
 
 export const ActionButtonStyle = styled.div`

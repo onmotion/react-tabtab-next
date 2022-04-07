@@ -46,9 +46,10 @@
         "invariant": "^2.2.2",
         "react-icons": "^4.3.1",
         "react-modal": "^3.14.4",
-        "react-sortable-hoc": "^2.0.0",
         "react-transition-group": "^4.4.2",
-        "styled-components": "^5.3.5"
+        "styled-components": "^5.3.5",
+        "@dnd-kit/sortable": "^6.0.1",
+        "@dnd-kit/utilities": "^3.1.0"
     },
     "devDependencies": {
         "@types/estree": "^0.0.51",
@@ -59,9 +60,9 @@
         "tslib": "^2.3.1"
     },
     "peerDependencies": {
-        "@types/react": ">=16.3.0",
-        "react": ">=16.3.0",
-        "react-dom": ">=16.3.0"
+        "@types/react": ">=16.8.0",
+        "react": ">=16.8.0",
+        "react-dom": ">=16.8.0"
     },
     "peerDependenciesMeta": {
         "@types/react": {

@@ -12,7 +12,9 @@ var styled__default = /*#__PURE__*/_interopDefaultLegacy(styled);
 
 var TabList$2 = tabtab.styled.TabList, ActionButton$2 = tabtab.styled.ActionButton, Tab$2 = tabtab.styled.Tab, Panel$2 = tabtab.styled.Panel;
 TabList$2 = styled__default["default"](TabList$2)(templateObject_1$2 || (templateObject_1$2 = tslib.__makeTemplateObject(["\n    background-color: #fff;\n    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.15);\n    border: 0;\n"], ["\n    background-color: #fff;\n    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.15);\n    border: 0;\n"])));
-Tab$2 = styled__default["default"](Tab$2)(templateObject_2$2 || (templateObject_2$2 = tslib.__makeTemplateObject(["\n    color: rgba(238, 110, 115, 0.7);\n    // transition: color 0.28s ease;\n    border: 0;\n    ", "\n    &:hover {\n        background-color: transparent;\n        color: #ee6e73;\n        border-bottom: 2px solid #f6b2b5;\n    }\n"], ["\n    color: rgba(238, 110, 115, 0.7);\n    // transition: color 0.28s ease;\n    border: 0;\n    ", "\n    &:hover {\n        background-color: transparent;\n        color: #ee6e73;\n        border-bottom: 2px solid #f6b2b5;\n    }\n"])), function (props) {
+Tab$2 = styled__default["default"](Tab$2)(templateObject_2$2 || (templateObject_2$2 = tslib.__makeTemplateObject(["\n    & span {\n        transition: color 0.18s;\n        color: rgba(238, 110, 115, 0.7);\n        ", "\n    }\n\n    ", "\n    &:hover {\n        background-color: transparent;\n        & span {\n            color: #ee6e73;\n        }\n\n        border-bottom: 2px solid #f6b2b5;\n    }\n"], ["\n    & span {\n        transition: color 0.18s;\n        color: rgba(238, 110, 115, 0.7);\n        ", "\n    }\n\n    ", "\n    &:hover {\n        background-color: transparent;\n        & span {\n            color: #ee6e73;\n        }\n\n        border-bottom: 2px solid #f6b2b5;\n    }\n"])), function (props) {
+    return props.active ? "color: #ee6e73;" : null;
+}, function (props) {
     return props.active && !props.vertical
         ? "\n      border-bottom: 2px solid #f6b2b5;\n    "
         : null;
@@ -47,10 +49,10 @@ var templateObject_1$1, templateObject_2$1, templateObject_3, templateObject_4;
 var TabList = tabtab.styled.TabList, Tab = tabtab.styled.Tab;
 var ActionButton = tabtab.styled.ActionButton, Panel = tabtab.styled.Panel;
 TabList = styled__default["default"](TabList)(templateObject_1 || (templateObject_1 = tslib.__makeTemplateObject(["\n    border-bottom: 1px solid #eee;\n"], ["\n    border-bottom: 1px solid #eee;\n"])));
-Tab = styled__default["default"](Tab)(templateObject_2 || (templateObject_2 = tslib.__makeTemplateObject(["\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem;\n    color: ", ";\n    border: 1px solid transparent;\n    ", "\n    ", "\n  ", "\n"], ["\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem;\n    color: ", ";\n    border: 1px solid transparent;\n    ", "\n    ", "\n  ", "\n"])), function (props) { return (props.active ? 'black' : '#007bff'); }, function (props) {
+Tab = styled__default["default"](Tab)(templateObject_2 || (templateObject_2 = tslib.__makeTemplateObject(["\n    & span {\n        transition: color 0.18s;\n        color: ", ";\n    }\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem;\n\n    border: 1px solid transparent;\n    &:hover {\n        & span {\n            color: #000;\n        }\n    }\n    ", "\n    ", "\n  ", "\n"], ["\n    & span {\n        transition: color 0.18s;\n        color: ", ";\n    }\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem;\n\n    border: 1px solid transparent;\n    &:hover {\n        & span {\n            color: #000;\n        }\n    }\n    ", "\n    ", "\n  ", "\n"])), function (props) { return (props.active ? 'black' : '#007bff'); }, function (props) {
     return props.vertical
         ? "\n      border-top: 1px solid transparent;\n      border-bottom: 1px solid #efefef;\n      border-left: 1px solid #efefef;\n      border-right: 1px solid #efefef;\n      border-radius: 0;\n      &:first-child {\n        border-top: 1px solid #efefef;        \n      }\n    "
-        : "\n      &:hover {\n        border-color: #ddd #ddd #fff;\n      }\n  ";
+        : "\n     \n  ";
 }, function (props) {
     return props.active && props.vertical
         ? "\n      background-color: #eee;\n    "

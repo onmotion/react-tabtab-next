@@ -6,11 +6,15 @@ import { Tab, TabList } from '@react-tabtab-next/tabtab';
 
 export default function App() {
     const [activeTab, setActiveTab] = useState(0);
-    const [tabs, setTabs] = useState(makeData(10, 'DragTab'));
+    const [tabs, setTabs] = useState(makeData(10, 'Some Tab'));
 
     const draggableTabItems = useMemo(() => {
         return tabs.map((tab, index) => {
-            return <DragTab key={index}>{tab.title}</DragTab>;
+            return (
+                <DragTab id={index.toString()} key={index}>
+                    {tab.title}
+                </DragTab>
+            );
         });
     }, [tabs]);
 
@@ -43,18 +47,18 @@ export default function App() {
         <div className="App">
             <p className="title">Material draggable</p>
             <Tabs
-                customStyle={md}
+                //  customStyle={md}
                 activeIndex={activeTab}
                 onTabChange={handleOnTabChange}
                 onTabSequenceChange={handleOnTabSequenceChange}
             >
-                <DragTabList>{draggableTabItems}</DragTabList>
+                <DragTabList>{staticTabItems}</DragTabList>
                 <PanelList>{panelItems}</PanelList>
             </Tabs>
             <br />
             <p className="title">Bootstrap</p>
             <Tabs
-                customStyle={bootstrap}
+                //  customStyle={bootstrap}
                 activeIndex={activeTab}
                 onTabChange={handleOnTabChange}
                 onTabSequenceChange={handleOnTabSequenceChange}
@@ -63,7 +67,7 @@ export default function App() {
                 <PanelList>{panelItems}</PanelList>
             </Tabs>
             <br />
-            <p className="title">Bulma draggable</p>
+            {/* <p className="title">Bulma draggable</p>
             <Tabs
                 customStyle={bulma}
                 activeIndex={activeTab}
@@ -72,7 +76,7 @@ export default function App() {
             >
                 <DragTabList>{draggableTabItems}</DragTabList>
                 <PanelList>{panelItems}</PanelList>
-            </Tabs>
+            </Tabs> */}
         </div>
     );
 }

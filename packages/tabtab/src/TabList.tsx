@@ -273,7 +273,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
         invariant(this.props.children, 'React-tabtab Error: You MUST pass at least one tab');
 
         return (
-            <div>
+            <>
                 {ExtraButton ? ExtraButton : null}
                 <TabList showModalButton={this.state.showModalButton} showArrowButton={this.state.showArrowButton}>
                     {this.state.showModalButton ? (
@@ -302,7 +302,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
                         {this.renderTabs({ vertical: true }, true)}
                     </TabModal>
                 ) : null}
-            </div>
+            </>
         );
     }
 }

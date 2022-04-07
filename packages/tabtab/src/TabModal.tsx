@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SortableContainer } from 'react-sortable-hoc';
+
 import SortMethod from './SortMethod';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
@@ -14,24 +14,9 @@ type Props = {
     children: React.ReactNode[];
 };
 
-const DragTabContainer = SortableContainer(({ children }: { children: React.ReactNode }) => {
-    return <div>{children}</div>;
-});
-
 class ModalTabListWrapper extends SortMethod {
     render() {
-        return (
-            <DragTabContainer
-                onSortEnd={this.onSortEnd}
-                axis="y"
-                lockAxis="y"
-                // if no pressDelay, close button cannot be triggered,
-                // because it would always treat click as dnd action
-                pressDelay={100}
-            >
-                {this.props.children}
-            </DragTabContainer>
-        );
+        return <></>;
     }
 }
 

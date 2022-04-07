@@ -1,2 +1,2 @@
-import { arrayMove } from 'react-sortable-hoc';
+import { arrayMove } from '@dnd-kit/sortable';
 export default arrayMove;
