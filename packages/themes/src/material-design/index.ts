@@ -11,9 +11,14 @@ TabList = styled(TabList)`
 `;
 
 Tab = styled(Tab)`
-    color: rgba(238, 110, 115, 0.7);
-    // transition: color 0.28s ease;
-    border: 0;
+    & span {
+        transition: color 0.18s;
+        color: rgba(238, 110, 115, 0.7);
+        ${(props) => {
+            return props.active ? `color: #ee6e73;` : null;
+        }}
+    }
+
     ${(props) =>
         props.active && !props.vertical
             ? `
@@ -22,7 +27,10 @@ Tab = styled(Tab)`
             : null}
     &:hover {
         background-color: transparent;
-        color: #ee6e73;
+        & span {
+            color: #ee6e73;
+        }
+
         border-bottom: 2px solid #f6b2b5;
     }
 `;
