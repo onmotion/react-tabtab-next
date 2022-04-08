@@ -5,13 +5,18 @@ import { LeftIcon, RightIcon, BulletIcon } from './IconSvg';
 import { isNumber } from './utils/isType';
 import TabModal from './TabModal';
 import { ActionButtonStyle, buttonWidth, ListInner, ListScroll, TabListStyle } from './styledElements';
-import { TabListElement, TabListElementProps } from './TabListElement';
-import Tab, { TabElementProps } from './Tab';
-import Panel, { PanelProps } from './Panel';
+import { TabListElementProps } from './TabListElement';
+import { TabElementProps } from './Tab';
+import { PanelProps } from './Panel';
+import { SortableContext, SortableContextProps } from '@dnd-kit/sortable';
+import { DndContext, DndContextProps } from '@dnd-kit/core';
 
 const makeScrollButton = (ActionButton: React.ElementType) => styled(ActionButton)`
     display: inline-block;
     filter: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     ${(props) => (props.left ? (props.showModalButton ? `left: ${buttonWidth + 2}px` : `left: 0`) : 'right: 0')};
     &:hover {
@@ -22,6 +27,9 @@ const makeScrollButton = (ActionButton: React.ElementType) => styled(ActionButto
 const makeFoldButton = (ActionButton: React.ElementType) => styled(ActionButton)`
     display: inline-block;
     filter: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     left: 0;
     &:hover {
@@ -40,10 +48,12 @@ export type TabListProps = {
     showModalButton?: number | boolean;
     handleTabChange?: (event: any) => void;
     handleTabSequence?: (event: any) => void;
-    handleEdit?: (event: any) => void;
+    handleTabClose?: (index: number) => void;
     ExtraButton?: JSX.Element;
     activeIndex?: number;
     children: React.ReactNode[];
+    sortableContextProps?: Omit<SortableContextProps, 'children'>;
+    dndContextProps?: DndContextProps;
 };
 
 type State = {
@@ -66,6 +76,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
         this.handleScroll = this.handleScroll.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
         this.renderTabs = this.renderTabs.bind(this);
+        this.renderModal = this.renderModal.bind(this);
         this.renderArrowButton = this.renderArrowButton.bind(this);
         this.isShowModalButton = this.isShowModalButton.bind(this);
         this.isShowArrowButton = this.isShowArrowButton.bind(this);
@@ -113,13 +124,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
     getTabNode(
         tab: HTMLDivElement & { __INTERNAL_NODE?: any; __DRAG_TAB_INTERNAL_NODE?: any }
     ): React.ElementRef<'div'> {
-        if (tab.__INTERNAL_NODE) {
-            // normal tab
-            return tab.__INTERNAL_NODE;
-        } else if (tab.__DRAG_TAB_INTERNAL_NODE) {
-            // drag tab
-            return tab.__DRAG_TAB_INTERNAL_NODE.node;
-        }
+        return tab.__INTERNAL_NODE;
     }
 
     unifyScrollMax(width: number) {
@@ -152,7 +157,6 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
         this.listScroll.style.transform = `translate3d(-${this.scrollPosition}px, 0, 0)`;
     }
 
-    // $FlowFixMe
     scrollToIndex(index: number, rectSide: 'left' | 'right') {
         const tabOffset = this.getTabNode(this.tabRefs[index]).getBoundingClientRect();
         const containerOffset = this.listContainer.getBoundingClientRect();
@@ -173,7 +177,6 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
     toggleModal(open: boolean) {
         this.setState({ modalIsOpen: open }, () => {
             if (!open) {
-                // $FlowFixMe
                 this.scrollToIndex(this.props.activeIndex, 'right');
             }
         });
@@ -190,6 +193,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
 
     isShowArrowButton() {
         let { showArrowButton } = this.props;
+
         if (showArrowButton === 'auto') {
             let tabWidth = 0;
             const containerWidth = this.listContainer.offsetWidth;
@@ -203,15 +207,14 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
                 }
             }
         }
-        // $FlowFixMe: flow will show 'auto' is not bool, but with this logic, showArrowButton will never be 'auto'
         this.setState({ showArrowButton });
     }
 
     renderTabs(options: any = {}, isModal?: boolean) {
-        const { children, activeIndex, handleTabChange, handleEdit, customStyle } = this.props;
+        const { children, activeIndex, handleTabChange, handleTabClose, customStyle } = this.props;
         const props = {
             handleTabChange,
-            handleEdit,
+            handleTabClose,
             CustomTabStyle: customStyle.Tab,
         };
         if (!isModal) {
@@ -263,8 +266,35 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
         return null;
     }
 
+    renderModal() {
+        const { activeIndex, handleTabChange, handleTabSequence } = this.props;
+        return this.props.sortableContextProps ? (
+            <DndContext {...this.props.dndContextProps}>
+                <SortableContext {...this.props.sortableContextProps}>
+                    <TabModal
+                        closeModal={this.toggleModal.bind(this, false)}
+                        handleTabSequence={handleTabSequence}
+                        handleTabChange={handleTabChange}
+                        activeIndex={activeIndex}
+                    >
+                        {this.renderTabs({ vertical: true }, true)}
+                    </TabModal>
+                </SortableContext>
+            </DndContext>
+        ) : (
+            <TabModal
+                closeModal={this.toggleModal.bind(this, false)}
+                handleTabSequence={handleTabSequence}
+                handleTabChange={handleTabChange}
+                activeIndex={activeIndex}
+            >
+                {this.renderTabs({ vertical: true }, true)}
+            </TabModal>
+        );
+    }
+
     render() {
-        const { customStyle, activeIndex, handleTabChange, handleTabSequence, ExtraButton } = this.props;
+        const { customStyle, ExtraButton } = this.props;
         const { modalIsOpen } = this.state;
         const TabList = customStyle.TabList || TabListStyle;
         const ActionButton = customStyle.ActionButton || ActionButtonStyle;
@@ -273,8 +303,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
         invariant(this.props.children, 'React-tabtab Error: You MUST pass at least one tab');
 
         return (
-            <div>
-                {ExtraButton ? ExtraButton : null}
+            <div style={{ display: 'flex' }}>
                 <TabList showModalButton={this.state.showModalButton} showArrowButton={this.state.showArrowButton}>
                     {this.state.showModalButton ? (
                         <FoldButton
@@ -292,16 +321,8 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
                         </ListScroll>
                     </ListInner>
                 </TabList>
-                {modalIsOpen ? (
-                    <TabModal
-                        closeModal={this.toggleModal.bind(this, false)}
-                        handleTabSequence={handleTabSequence}
-                        handleTabChange={handleTabChange}
-                        activeIndex={activeIndex}
-                    >
-                        {this.renderTabs({ vertical: true }, true)}
-                    </TabModal>
-                ) : null}
+                {ExtraButton ? ExtraButton : null}
+                {modalIsOpen && this.renderModal()}
             </div>
         );
     }

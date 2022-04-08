@@ -370,8 +370,8 @@ More code examples are avalable [here](https://github.com/ctxhou/react-tabtab/bl
       </td>
     </tr>
     <tr>
-      <td>onTabEdit</td>
-      <td><code>() => {type: [delete], index}</code></td>
+      <td>onTabClose</td>
+      <td><code>(index) => {}</code></td>
       <td>null</td>
       <td>
         When user click <b>close button</b> , this api will return the clicked close button index.
@@ -572,8 +572,6 @@ Tab = styled(Tab)`
     border: 0;
     background: transparent;
     ${(props) => {
-        console.log(props);
-
         return props.active && !props.vertical
             ? `
       border-bottom: 2px solid #ce93d8;

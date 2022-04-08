@@ -5,11 +5,13 @@ import CloseButton from './CloseButton';
 export type TabElementProps = React.ComponentPropsWithoutRef<'li'> & TabProps;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const TabElement = React.forwardRef<HTMLLIElement, TabElementProps>(({ active, closable, ...props }, ref) => (
-    <li ref={ref} {...props}>
-        {props.children}
-    </li>
-));
+export const TabElement = React.memo(
+    React.forwardRef<HTMLLIElement, TabElementProps>(({ active, closable, vertical, ...props }, ref) => (
+        <li ref={ref} {...props}>
+            {props.children}
+        </li>
+    ))
+);
 
 const TabStyle = styled(TabElement)`
     display: ${(props) => (props.vertical ? 'block' : 'inline-block')};
@@ -22,9 +24,9 @@ const TabStyle = styled(TabElement)`
       background-color: white;
       color: black;
       padding: 10px 10px;
-      z-index: 100000;
+      z-index: 1;
     `
-            : (props) => (props.closable ? 'padding: 10px 10px 10px 15px;' : 'padding: 10px 15px 8px 15px;')}
+            : (props) => (props.closable ? 'padding: 10px 10px 8px 15px;' : 'padding: 10px 15px 8px 15px;')}
 
     user-select: none;
     &:hover,
@@ -48,7 +50,7 @@ const TabText = styled.span`
 export type TabProps = {
     CustomTabStyle?: React.FC<Partial<TabProps>>;
     handleTabChange?: (event: any) => void;
-    handleEdit?: (event: any) => void;
+    handleTabClose?: (event: any) => void;
     index?: number;
     active?: boolean;
     closable?: boolean;
@@ -72,17 +74,18 @@ export default class Tab extends React.PureComponent<TabProps> {
 
     clickDelete(event: React.SyntheticEvent<HTMLButtonElement>) {
         event.stopPropagation(); // prevent trigger clickTab event.
-        const { handleEdit, index } = this.props;
-        handleEdit({ type: 'delete', index });
+        const { handleTabClose, index } = this.props;
+        handleTabClose(index);
     }
 
     render() {
         const { CustomTabStyle, active, closable, vertical, index } = this.props;
         const TabComponent = CustomTabStyle || TabStyle;
+
         return (
             <TabComponent
                 ref={(node) => (this.__INTERNAL_NODE = node)}
-                onClick={this.clickTab}
+                onMouseDown={this.clickTab}
                 active={active}
                 vertical={vertical}
                 closable={closable}
@@ -92,7 +95,7 @@ export default class Tab extends React.PureComponent<TabProps> {
                 aria-selected={active}
             >
                 <TabText>{this.props.children}</TabText>
-                {closable ? <CloseButton handleDelete={this.clickDelete} /> : null}
+                {closable ? <CloseButton handleTabClose={this.clickDelete} /> : null}
             </TabComponent>
         );
     }

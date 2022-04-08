@@ -3,15 +3,23 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.button`
-    float: right;
-    border: 1px solid #eee;
-    border-radius: 2px;
+    flex-shrink: 0;
+    align-self: center;
+    height: 100%;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    background: transparent;
+    border: none;
+    margin-top: 0;
     padding: 3px;
-    margin-top: 10px;
     margin-left: 2px;
     display: inline-block;
     color: #777;
     vertical-align: middle;
+    user-select: none;
     ${(props) =>
         props.disabled
             ? `

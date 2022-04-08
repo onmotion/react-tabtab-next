@@ -5,7 +5,7 @@ let { TabList, Tab } = themeStyled;
 const { ActionButton, Panel } = themeStyled;
 
 TabList = styled(TabList)`
-    border-bottom: 1px solid #eee;
+    box-shadow: inset 0 -1px 0px 0px #00000022;
 `;
 
 Tab = styled(Tab)`

@@ -2,6 +2,8 @@ import * as React from 'react';
 import { TabListElementProps } from './TabListElement';
 import { TabElementProps } from './Tab';
 import { PanelProps } from './Panel';
+import { SortableContextProps } from '@dnd-kit/sortable';
+import { DndContextProps } from '@dnd-kit/core';
 export declare type TabListProps = {
     customStyle?: {
         TabList?: React.ElementType<TabListElementProps>;
@@ -13,10 +15,12 @@ export declare type TabListProps = {
     showModalButton?: number | boolean;
     handleTabChange?: (event: any) => void;
     handleTabSequence?: (event: any) => void;
-    handleEdit?: (event: any) => void;
+    handleTabClose?: (index: number) => void;
     ExtraButton?: JSX.Element;
     activeIndex?: number;
     children: React.ReactNode[];
+    sortableContextProps?: Omit<SortableContextProps, 'children'>;
+    dndContextProps?: DndContextProps;
 };
 declare type State = {
     modalIsOpen: boolean;
@@ -47,6 +51,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
     isShowArrowButton(): void;
     renderTabs(options?: any, isModal?: boolean): React.ReactElement<any, string | React.JSXElementConstructor<any>>[];
     renderArrowButton(ScrollButton: React.ElementType): JSX.Element;
+    renderModal(): JSX.Element;
     render(): JSX.Element;
 }
 export {};

@@ -4,34 +4,52 @@ import { styled as themeStyled } from '@react-tabtab-next/tabtab';
 
 let { TabList, ActionButton, Tab, Panel } = themeStyled;
 
+const primaryColor = '#f73378';
+
 TabList = styled(TabList)`
     background-color: #fff;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0 -1px 0px 0px #00000022;
     border: 0;
 `;
 
 Tab = styled(Tab)`
     & span {
+        font-size: 0.9em;
         transition: color 0.18s;
-        color: rgba(238, 110, 115, 0.7);
+        text-transform: uppercase;
+        color: ${primaryColor};
         ${(props) => {
-            return props.active ? `color: #ee6e73;` : null;
+            return props.active ? `color: ${primaryColor};` : null;
         }}
     }
 
     ${(props) =>
-        props.active && !props.vertical
+        props.active
             ? `
-      border-bottom: 2px solid #f6b2b5;
+      border-bottom: 2px solid ${primaryColor};
     `
             : null}
     &:hover {
         background-color: transparent;
         & span {
-            color: #ee6e73;
+            color: ${primaryColor};
         }
 
-        border-bottom: 2px solid #f6b2b5;
+        border-bottom: 2px solid ${primaryColor};
+    }
+
+    /* Ripple effect */
+
+    background-position: center;
+    transition: background 0.8s;
+
+    &:hover {
+        background: #fff radial-gradient(circle, transparent 1%, #fff 1%) center/15000%;
+    }
+    &:active {
+        background-color: ${primaryColor + '22'};
+        background-size: 100%;
+        transition: background 0s;
     }
 `;
 
@@ -44,11 +62,7 @@ ActionButton = styled(ActionButton)`
 `;
 
 Panel = styled(Panel)`
-    border-left: 1px solid rgba(0, 0, 0, 0.12);
-    border-right: 1px solid rgba(0, 0, 0, 0.12);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     padding: 30px 30px;
-    border-radius: 2px;
 `;
 
 export default {

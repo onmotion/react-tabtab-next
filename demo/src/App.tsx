@@ -1,21 +1,30 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { makeData } from './data';
-import { Tabs, DragTab, Panel, DragTabList, PanelList, helpers } from '../../packages/tabtab/src';
+import { Tabs, Panel, DragTabList, PanelList, helpers, Tab, TabList, ExtraButton } from '../../packages/tabtab/src';
 import { md, bootstrap, bulma } from '../../packages/themes/src';
-import { Tab, TabList } from '@react-tabtab-next/tabtab';
 
 export default function App() {
     const [activeTab, setActiveTab] = useState(0);
-    const [tabs, setTabs] = useState(makeData(10, 'DragTab'));
+    const [tabs, setTabs] = useState(makeData(25, 'Some Tab'));
 
-    const draggableTabItems = useMemo(() => {
+    const closableTabItems = useMemo(() => {
         return tabs.map((tab, index) => {
-            return <DragTab key={index}>{tab.title}</DragTab>;
+            return (
+                <Tab closable key={index}>
+                    {tab.title}
+                </Tab>
+            );
         });
     }, [tabs]);
 
-    const staticTabItems = useMemo(() => {
+    const tabItems = useMemo(() => {
         return tabs.map((tab, index) => {
+            return <Tab key={index}>{tab.title}</Tab>;
+        });
+    }, [tabs]);
+
+    const shortTabItems = useMemo(() => {
+        return makeData(3, 'Tab').map((tab, index) => {
             return <Tab key={index}>{tab.title}</Tab>;
         });
     }, [tabs]);
@@ -26,16 +35,14 @@ export default function App() {
         });
     }, [tabs]);
 
-    const handleOnTabSequenceChange = useCallback(
-        ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
-            setTabs(helpers.simpleSwitch(tabs, oldIndex, newIndex));
-            setActiveTab(newIndex);
-        },
-        [tabs]
-    );
+    const handleOnTabSequenceChange = useCallback(({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
+        console.log({ oldIndex, newIndex });
+        setTabs((tabs) => helpers.simpleSwitch(tabs, oldIndex, newIndex));
+        setActiveTab(newIndex);
+    }, []);
 
     const handleOnTabChange = useCallback((i) => {
-        console.log(i);
+        console.log('select tab', i);
         setActiveTab(i);
     }, []);
 
@@ -47,30 +54,43 @@ export default function App() {
                 activeIndex={activeTab}
                 onTabChange={handleOnTabChange}
                 onTabSequenceChange={handleOnTabSequenceChange}
+                ExtraButton={
+                    <ExtraButton
+                        onClick={(e) => {
+                            console.log(e);
+                        }}
+                    >
+                        +
+                    </ExtraButton>
+                }
             >
-                <DragTabList>{draggableTabItems}</DragTabList>
+                <DragTabList>{tabItems}</DragTabList>
                 <PanelList>{panelItems}</PanelList>
             </Tabs>
-            <br />
-            <p className="title">Bootstrap</p>
+
+            <p className="title">Bootstrap closable</p>
             <Tabs
+                onTabClose={(i) => {
+                    console.log('close', i);
+                }}
+                showModalButton={false}
                 customStyle={bootstrap}
                 activeIndex={activeTab}
                 onTabChange={handleOnTabChange}
                 onTabSequenceChange={handleOnTabSequenceChange}
             >
-                <TabList>{staticTabItems}</TabList>
+                <TabList>{closableTabItems}</TabList>
                 <PanelList>{panelItems}</PanelList>
             </Tabs>
-            <br />
+
             <p className="title">Bulma draggable</p>
             <Tabs
                 customStyle={bulma}
-                activeIndex={activeTab}
+                activeIndex={activeTab > shortTabItems.length - 1 ? shortTabItems.length - 1 : activeTab}
                 onTabChange={handleOnTabChange}
                 onTabSequenceChange={handleOnTabSequenceChange}
             >
-                <DragTabList>{draggableTabItems}</DragTabList>
+                <DragTabList>{shortTabItems}</DragTabList>
                 <PanelList>{panelItems}</PanelList>
             </Tabs>
         </div>

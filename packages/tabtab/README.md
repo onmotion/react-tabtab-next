@@ -10,7 +10,7 @@
 
 ## A mobile support, draggable, editable and api based Tab for ReactJS
 
-> _Support react >= `16.3.0`_
+> _Support react >= `16.8.0`_
 
 [![license](https://img.shields.io/github/license/onmotion/react-tabtab-next)](https://www.npmjs.com/package/@react-tabtab-next/tabtab)
 [![npm](https://img.shields.io/npm/v/@react-tabtab-next/tabtab.svg)](https://www.npmjs.com/package/@react-tabtab-next/tabtab)
@@ -367,7 +367,7 @@ More code examples are avalable [here](https://github.com/ctxhou/react-tabtab/bl
       </td>
     </tr>
     <tr>
-      <td>onTabEdit</td>
+      <td>onTabClose</td>
       <td><code>() => {type: [delete], index}</code></td>
       <td>null</td>
       <td>

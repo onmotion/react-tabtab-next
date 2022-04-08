@@ -1,25 +1,37 @@
 // @flow
-import * as React from 'react';
-import { SortableElement, SortableElementProps } from 'react-sortable-hoc';
-import Tab, { TabProps } from './Tab';
+import React, { FC, forwardRef, memo, MutableRefObject } from 'react';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import Tab from './Tab';
 
-const DragTabElement = SortableElement(({ ...props }: Partial<TabProps>) => {
-    return <Tab {...props} index={Number(props.tabIndex)}></Tab>;
-});
-
-class DragTab extends React.PureComponent {
-    __DRAG_TAB_INTERNAL_NODE: React.Component<Partial<TabProps> & SortableElementProps, any, any>;
-
-    render() {
-        const { ...props } = this.props;
-        return (
-            <DragTabElement
-                index={0}
-                ref={(node) => (this.__DRAG_TAB_INTERNAL_NODE = node)}
-                {...props}
-            ></DragTabElement>
-        );
-    }
+interface Props {
+    id: string;
+    activeIndex?: number;
+    index?: number;
 }
+const DragTab: FC<Props> = memo(
+    forwardRef<HTMLElement, Props>(({ children, id, index, activeIndex, ...rest }, ref) => {
+        const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: id });
+
+        const style = {
+            transform: CSS.Transform.toString(transform),
+            transition,
+            // cursor: 'default',
+        };
+
+        return (
+            <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+                {React.cloneElement(children as React.ReactElement, {
+                    ...rest,
+                    key: id,
+                    active: index === activeIndex,
+                    index,
+                    tabIndex: id,
+                    ref: ref,
+                })}
+            </div>
+        );
+    })
+);
 
 export default DragTab;
