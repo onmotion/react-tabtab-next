@@ -367,7 +367,7 @@ More code examples are avalable [here](https://github.com/ctxhou/react-tabtab/bl
       </td>
     </tr>
     <tr>
-      <td>onTabEdit</td>
+      <td>onTabClose</td>
       <td><code>() => {type: [delete], index}</code></td>
       <td>null</td>
       <td>

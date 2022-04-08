@@ -5,7 +5,7 @@ declare const TabStyle: import("styled-components").StyledComponent<React.MemoEx
 export declare type TabProps = {
     CustomTabStyle?: React.FC<Partial<TabProps>>;
     handleTabChange?: (event: any) => void;
-    handleEdit?: (event: any) => void;
+    handleTabClose?: (event: any) => void;
     index?: number;
     active?: boolean;
     closable?: boolean;

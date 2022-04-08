@@ -50,7 +50,7 @@ const TabText = styled.span`
 export type TabProps = {
     CustomTabStyle?: React.FC<Partial<TabProps>>;
     handleTabChange?: (event: any) => void;
-    handleEdit?: (event: any) => void;
+    handleTabClose?: (event: any) => void;
     index?: number;
     active?: boolean;
     closable?: boolean;
@@ -74,8 +74,8 @@ export default class Tab extends React.PureComponent<TabProps> {
 
     clickDelete(event: React.SyntheticEvent<HTMLButtonElement>) {
         event.stopPropagation(); // prevent trigger clickTab event.
-        const { handleEdit, index } = this.props;
-        handleEdit({ type: 'delete', index });
+        const { handleTabClose, index } = this.props;
+        handleTabClose(index);
     }
 
     render() {
@@ -95,7 +95,7 @@ export default class Tab extends React.PureComponent<TabProps> {
                 aria-selected={active}
             >
                 <TabText>{this.props.children}</TabText>
-                {closable ? <CloseButton handleDelete={this.clickDelete} /> : null}
+                {closable ? <CloseButton handleTabClose={this.clickDelete} /> : null}
             </TabComponent>
         );
     }

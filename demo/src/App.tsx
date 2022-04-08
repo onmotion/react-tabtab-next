@@ -38,6 +38,9 @@ export default function App() {
         <div className="App">
             <p className="title">Material draggable</p>
             <Tabs
+                onTabClose={(i) => {
+                    console.log('close', i);
+                }}
                 customStyle={md}
                 activeIndex={activeTab}
                 onTabChange={handleOnTabChange}

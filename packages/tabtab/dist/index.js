@@ -43,7 +43,7 @@ var Tabs = /** @class */ (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.handleTabChange = _this.handleTabChange.bind(_this);
         _this.handleTabSequence = _this.handleTabSequence.bind(_this);
-        _this.handleEdit = _this.handleEdit.bind(_this);
+        _this.handleTabClose = _this.handleTabClose.bind(_this);
         _this.state = {
             activeIndex: _this.getActiveIndex(props),
         };
@@ -78,17 +78,16 @@ var Tabs = /** @class */ (function (_super) {
             onTabSequenceChange({ oldIndex: oldIndex, newIndex: newIndex });
         }
     };
-    Tabs.prototype.handleEdit = function (_a) {
-        var type = _a.type, index = _a.index;
-        var onTabEdit = this.props.onTabEdit;
-        if (onTabEdit) {
-            onTabEdit({ type: type, index: index });
+    Tabs.prototype.handleTabClose = function (index) {
+        var onTabClose = this.props.onTabClose;
+        if (onTabClose) {
+            onTabClose(index);
         }
     };
     Tabs.prototype.render = function () {
         var _a = this.props, children = _a.children, extraProps = tslib.__rest(_a, ["children"]);
         var activeIndex = this.state.activeIndex;
-        var props = tslib.__assign({ handleTabChange: this.handleTabChange, handleTabSequence: this.handleTabSequence, handleEdit: this.handleEdit, activeIndex: activeIndex }, extraProps);
+        var props = tslib.__assign({ handleTabChange: this.handleTabChange, handleTabSequence: this.handleTabSequence, handleTabClose: this.handleTabClose, activeIndex: activeIndex }, extraProps);
         return (React__default["default"].createElement("div", null, React__default["default"].Children.map(children, function (child) {
             return React__default["default"].cloneElement(child, props);
         })));
@@ -313,10 +312,10 @@ var TabListComponent = /** @class */ (function (_super) {
     TabListComponent.prototype.renderTabs = function (options, isModal) {
         var _this = this;
         if (options === void 0) { options = {}; }
-        var _a = this.props, children = _a.children, activeIndex = _a.activeIndex, handleTabChange = _a.handleTabChange, handleEdit = _a.handleEdit, customStyle = _a.customStyle;
+        var _a = this.props, children = _a.children, activeIndex = _a.activeIndex, handleTabChange = _a.handleTabChange, handleTabClose = _a.handleTabClose, customStyle = _a.customStyle;
         var props = {
             handleTabChange: handleTabChange,
-            handleEdit: handleEdit,
+            handleTabClose: handleTabClose,
             CustomTabStyle: customStyle.Tab,
         };
         if (!isModal) {
@@ -369,14 +368,14 @@ var TabListComponent = /** @class */ (function (_super) {
 }(React__namespace.PureComponent));
 var templateObject_1$4, templateObject_2$1;
 
-var CloseWrapper = styled__default["default"].button(templateObject_1$3 || (templateObject_1$3 = tslib.__makeTemplateObject(["\n  display: inline-block;\n  color: #777;\n  margin-left: 5px;\n  padding: 0;\n  vertical-align: middle;\n  border: 0;\n  padding: 2px;\n  outline: 0;\n  &:hover {\n    color: black;\n    background-color: #eee;\n    cursor: pointer;\n    border-radius: 50%;\n  }\n  > svg {\n    vertical-align: middle;\n  }\n"], ["\n  display: inline-block;\n  color: #777;\n  margin-left: 5px;\n  padding: 0;\n  vertical-align: middle;\n  border: 0;\n  padding: 2px;\n  outline: 0;\n  &:hover {\n    color: black;\n    background-color: #eee;\n    cursor: pointer;\n    border-radius: 50%;\n  }\n  > svg {\n    vertical-align: middle;\n  }\n"])));
+var CloseWrapper = styled__default["default"].button(templateObject_1$3 || (templateObject_1$3 = tslib.__makeTemplateObject(["\n    display: inline-block;\n    color: #777;\n    margin-left: 5px;\n    padding: 0;\n    vertical-align: middle;\n    background-color: transparent;\n    border: 0;\n    padding: 2px;\n    outline: 0;\n    &:hover {\n        color: black;\n        background-color: #eee;\n        cursor: pointer;\n        border-radius: 50%;\n    }\n    > svg {\n        vertical-align: middle;\n    }\n"], ["\n    display: inline-block;\n    color: #777;\n    margin-left: 5px;\n    padding: 0;\n    vertical-align: middle;\n    background-color: transparent;\n    border: 0;\n    padding: 2px;\n    outline: 0;\n    &:hover {\n        color: black;\n        background-color: #eee;\n        cursor: pointer;\n        border-radius: 50%;\n    }\n    > svg {\n        vertical-align: middle;\n    }\n"])));
 var CloseButton = /** @class */ (function (_super) {
     tslib.__extends(CloseButton, _super);
     function CloseButton() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     CloseButton.prototype.render = function () {
-        return (React__namespace.createElement(CloseWrapper, { onClick: this.props.handleDelete },
+        return (React__namespace.createElement(CloseWrapper, { onClick: this.props.handleTabClose },
             React__namespace.createElement(CloseIcon, null)));
     };
     return CloseButton;
@@ -412,8 +411,8 @@ var Tab = /** @class */ (function (_super) {
     };
     Tab.prototype.clickDelete = function (event) {
         event.stopPropagation(); // prevent trigger clickTab event.
-        var _a = this.props, handleEdit = _a.handleEdit, index = _a.index;
-        handleEdit({ type: 'delete', index: index });
+        var _a = this.props, handleTabClose = _a.handleTabClose, index = _a.index;
+        handleTabClose(index);
     };
     Tab.prototype.render = function () {
         var _this = this;
@@ -421,7 +420,7 @@ var Tab = /** @class */ (function (_super) {
         var TabComponent = CustomTabStyle || TabStyle;
         return (React__namespace.createElement(TabComponent, { ref: function (node) { return (_this.__INTERNAL_NODE = node); }, onMouseDown: this.clickTab, active: active, vertical: vertical, closable: closable, role: "tab", id: "react-tabtab-tab-".concat(index), "aria-controls": "react-tabtab-panel-".concat(index), "aria-selected": active },
             React__namespace.createElement(TabText, null, this.props.children),
-            closable ? React__namespace.createElement(CloseButton, { handleDelete: this.clickDelete }) : null));
+            closable ? React__namespace.createElement(CloseButton, { handleTabClose: this.clickDelete }) : null));
     };
     return Tab;
 }(React__namespace.PureComponent));

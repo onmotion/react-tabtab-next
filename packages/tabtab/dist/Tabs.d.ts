@@ -8,12 +8,12 @@ export declare type TabsProps = {
     showModalButton?: number | boolean;
     showArrowButton?: 'auto' | boolean;
     ExtraButton?: React.ReactNode;
-    onTabChange?: (event: any) => void;
+    onTabChange?: (index: number) => void;
     onTabSequenceChange?: (e: {
         oldIndex: number;
         newIndex: number;
     }) => void;
-    onTabEdit?: (event: any) => void;
+    onTabClose?: (index: number) => void;
     customStyle?: {
         TabList?: React.ElementType<TabListElementProps>;
         Tab?: React.ElementType<TabElementProps>;
@@ -34,10 +34,7 @@ export default class Tabs extends React.PureComponent<TabsProps, State> {
         oldIndex: number;
         newIndex: number;
     }): void;
-    handleEdit({ type, index }: {
-        type: string;
-        index: number;
-    }): void;
+    handleTabClose(index: number): void;
     render(): JSX.Element;
 }
 export {};

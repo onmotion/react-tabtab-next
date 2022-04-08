@@ -40,7 +40,7 @@ export type TabListProps = {
     showModalButton?: number | boolean;
     handleTabChange?: (event: any) => void;
     handleTabSequence?: (event: any) => void;
-    handleEdit?: (event: any) => void;
+    handleTabClose?: (index: number) => void;
     ExtraButton?: JSX.Element;
     activeIndex?: number;
     children: React.ReactNode[];
@@ -208,10 +208,10 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
     }
 
     renderTabs(options: any = {}, isModal?: boolean) {
-        const { children, activeIndex, handleTabChange, handleEdit, customStyle } = this.props;
+        const { children, activeIndex, handleTabChange, handleTabClose, customStyle } = this.props;
         const props = {
             handleTabChange,
-            handleEdit,
+            handleTabClose,
             CustomTabStyle: customStyle.Tab,
         };
         if (!isModal) {

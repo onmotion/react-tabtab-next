@@ -13,7 +13,7 @@ export declare type TabListProps = {
     showModalButton?: number | boolean;
     handleTabChange?: (event: any) => void;
     handleTabSequence?: (event: any) => void;
-    handleEdit?: (event: any) => void;
+    handleTabClose?: (index: number) => void;
     ExtraButton?: JSX.Element;
     activeIndex?: number;
     children: React.ReactNode[];

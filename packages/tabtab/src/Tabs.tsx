@@ -10,9 +10,9 @@ export type TabsProps = {
     showModalButton?: number | boolean;
     showArrowButton?: 'auto' | boolean;
     ExtraButton?: React.ReactNode;
-    onTabChange?: (event: any) => void;
+    onTabChange?: (index: number) => void;
     onTabSequenceChange?: (e: { oldIndex: number; newIndex: number }) => void;
-    onTabEdit?: (event: any) => void;
+    onTabClose?: (index: number) => void;
     customStyle?: {
         TabList?: React.ElementType<TabListElementProps>;
         Tab?: React.ElementType<TabElementProps>;
@@ -30,7 +30,7 @@ export default class Tabs extends React.PureComponent<TabsProps, State> {
         super(props);
         this.handleTabChange = this.handleTabChange.bind(this);
         this.handleTabSequence = this.handleTabSequence.bind(this);
-        this.handleEdit = this.handleEdit.bind(this);
+        this.handleTabClose = this.handleTabClose.bind(this);
         this.state = {
             activeIndex: this.getActiveIndex(props),
         };
@@ -78,10 +78,10 @@ export default class Tabs extends React.PureComponent<TabsProps, State> {
         }
     }
 
-    handleEdit({ type, index }: { type: string; index: number }) {
-        const { onTabEdit } = this.props;
-        if (onTabEdit) {
-            onTabEdit({ type, index });
+    handleTabClose(index: number) {
+        const { onTabClose } = this.props;
+        if (onTabClose) {
+            onTabClose(index);
         }
     }
 
@@ -91,7 +91,7 @@ export default class Tabs extends React.PureComponent<TabsProps, State> {
         const props = {
             handleTabChange: this.handleTabChange,
             handleTabSequence: this.handleTabSequence,
-            handleEdit: this.handleEdit,
+            handleTabClose: this.handleTabClose,
             activeIndex,
             ...extraProps,
         };
