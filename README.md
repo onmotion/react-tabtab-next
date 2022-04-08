@@ -85,28 +85,23 @@ All the actions are api based. It means there is `no state` in the component. De
 ### Minimal setup
 
 ```js
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Tabs, TabList, Tab, PanelList, Panel } from '@react-tabtab-next/tabtab';
+import React from 'react';
+import { Tabs, Panel, Tab, TabList, PanelList } from '@react-tabtab-next/tabtab';
 
-class Basic extends Component {
-    render() {
-        return (
-            <Tabs>
-                <TabList>
-                    <Tab>Tab1</Tab>
-                    <Tab>Tab2</Tab>
-                </TabList>
-                <PanelList>
-                    <Panel>Content1</Panel>
-                    <Panel>Content2</Panel>
-                </PanelList>
-            </Tabs>
-        );
-    }
-}
-
-ReactDOM.render(<Basic />, document.getElementById('root'));
+export const Example = () => {
+    return (
+        <Tabs>
+            <TabList>
+                <Tab>Tab1</Tab>
+                <Tab>Tab2</Tab>
+            </TabList>
+            <PanelList>
+                <Panel>Content1</Panel>
+                <Panel>Content2</Panel>
+            </PanelList>
+        </Tabs>
+    );
+};
 ```
 
 It's simple to use. Zero configuration!
@@ -115,7 +110,7 @@ It's simple to use. Zero configuration!
 
 ```js
 import React, { Component } from 'react';
-import { Tabs, DragTabList, PanelList, Panel, helpers } from '@react-tabtab-next/tabtab';
+import { Tabs, DragTabList, PanelList, Panel, Tab, helpers } from '@react-tabtab-next/tabtab';
 
 const makeData = (number, titlePrefix = 'Tab') => {
     const data = [];
@@ -155,7 +150,7 @@ export default class Drag extends Component {
         const tabsTemplate = [];
         const panelTemplate = [];
         tabs.forEach((tab, index) => {
-            tabsTemplate.push(<DragTab key={index}>{tab.title}</DragTab>);
+            tabsTemplate.push(<Tab key={index}>{tab.title}</Tab>);
             panelTemplate.push(<Panel key={index}>{tab.content}</Panel>);
         });
         return (
@@ -179,7 +174,7 @@ Based on above example, the different to implement `normal tab` or `drag tab` is
 
 And all the actions are controllable. You can customize your switch action. But if you don't want to write customized switch logic, you can directly use `import {simpleSwitch} from 'react-tabtab/lib/helpers/move'` this built-in function.
 
-**normal tab**
+### normal tab
 
 ```js
 <Tabs>
@@ -194,7 +189,7 @@ And all the actions are controllable. You can customize your switch action. But 
 </Tabs>
 ```
 
-**Sortable tabs**
+### Sortable tabs (+ ExtraButton)
 
 ```js
 <Tabs
@@ -229,46 +224,35 @@ In some case, if the data is large or we want to save the bandwidth, lazy loadin
 Moreover, you can mix lazy load panel with normal panel!
 
 ```js
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Tabs, TabList, Tab, PanelList, AsyncPanel, Panel } from '@react-tabtab-next/tabtab';
+import React from 'react';
+import { Tabs, Panel, Tab, TabList, PanelList, AsyncPanel } from '@react-tabtab-next/tabtab';
 
-function loadContentFunc(callback) {
-    setTimeout(() => {
-        callback(null, 'some content');
-    }, 1000);
-}
+const AsyncTabsExmple = () => {
+    const loadContentFunc = (callback) => {
+        setTimeout(() => {
+            callback(null, 'some content');
+        }, 1000);
+    };
+    return (
+        <Tabs>
+            <TabList>
+                <Tab>Tab1</Tab>
+                <Tab>Tab2</Tab>
+            </TabList>
+            <PanelList>
+                <Panel>Content1</Panel>
+                <AsyncPanel
+                    loadContent={loadContentFunc}
+                    render={(data) => <div>{JSON.stringify(data)}</div>}
+                    renderLoading={() => <div>Loading...</div>}
+                    cache={true}
+                />
+            </PanelList>
+        </Tabs>
+    );
+};
 
-// You also can provide promise as return function:
-// function loadContentFunc() {
-//   return fetch('/products')
-//     .then(resp => resp.json())
-//     .then(data => data);
-// }
-
-class AsyncTab extends Component {
-    render() {
-        return (
-            <Tabs>
-                <TabList>
-                    <Tab>Tab1</Tab>
-                    <Tab>Tab2</Tab>
-                </TabList>
-                <PanelList>
-                    <Panel>Content1</Panel>
-                    <AsyncPanel
-                        loadContent={loadContentFunc}
-                        render={(data) => <div>{JSON.stringify(data)}</div>}
-                        renderLoading={() => <div>Loading...</div>}
-                        cache={true}
-                    />
-                </PanelList>
-            </Tabs>
-        );
-    }
-}
-
-ReactDOM.render(<AsyncTab />, document.getElementById('root'));
+export default AsyncTabsExmple;
 ```
 
 To implement lazy loading, use `AsyncPanel` to wrap your panel content. Remember to provide `loadContent`, `render`, `renderLoading` these 3 props.
@@ -532,7 +516,7 @@ And now your tab is material design style!
 
 If current theme doesn't meet your demand, follow this three steps and create a new one.
 
-**First step: import current style**
+-   First step: import current style
 
 ```js
 import styled from 'styled-components';
@@ -541,7 +525,7 @@ import { styled as styledTabTab } from '@react-tabtab-next/tabtab';
 let { TabListStyle, ActionButtonStyle, TabStyle, PanelStyle } = styledTabTab;
 ```
 
-**Second: extend style and export it**
+-   Second: extend style and export it
 
 ```js
 import styled from 'styled-components';
@@ -598,7 +582,7 @@ Panel = styled(Panel)``;
 export { TabList, ActionButton, Tab, Panel };
 ```
 
-**Last: import your style and use it!**
+-   Last: import your style and use it!
 
 When you finish the new `@react-tabtab-next/theme` style, feel free to add it to `theme/` folder and send PR!
 
