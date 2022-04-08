@@ -37,7 +37,7 @@ export default function App() {
         return makeData(3, 'Tab').map((tab, index) => {
             return <Tab key={index}>{tab.title}</Tab>;
         });
-    }, [tabs]);
+    }, []);
 
     const panelItems = useMemo(() => {
         return tabs.map((tab, index) => {
