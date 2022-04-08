@@ -21,6 +21,9 @@ const Modal = styled(ReactModal)`
     padding: 20px;
     margin-top: 40px;
     border: 1px solid #00000022;
+    overflow: auto;
+    max-height: calc(100vh - 120px);
+    outline: none;
 `;
 export default class TabModal extends React.Component<Props> {
     render() {

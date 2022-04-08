@@ -6,6 +6,7 @@ import styled from 'styled-components';
 const CloseWrapper = styled.button`
     display: inline-block;
     color: #777;
+    line-height: 0;
     margin-left: 5px;
     padding: 0;
     vertical-align: middle;

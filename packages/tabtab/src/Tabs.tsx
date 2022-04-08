@@ -97,7 +97,7 @@ export default class Tabs extends React.PureComponent<TabsProps, State> {
         };
 
         return (
-            <div>
+            <div className="tabtab-container">
                 {React.Children.map(children, (child) => {
                     return React.cloneElement(child as React.ReactElement, props);
                 })}

@@ -30,7 +30,7 @@ export const TabListStyle = styled(TabListElement)`
     position: relative;
     white-space: nowrap;
     overflow: hidden;
-    width: auto;
+    width: 100%;
     padding: ${(props) => getPadding(props)};
 `;
 
@@ -52,13 +52,9 @@ export const ActionButtonStyle = styled.div`
     height: 100%;
     width: ${buttonWidth}px;
     text-align: center;
-    border-radius: 4px 4px 0 0;
     background: #f9f9f9;
     color: #555;
     :hover {
         color: #000;
-    }
-    > svg {
-        padding-top: 11px;
     }
 `;

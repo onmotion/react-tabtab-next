@@ -26,7 +26,7 @@ const TabStyle = styled(TabElement)`
       padding: 10px 10px;
       z-index: 1;
     `
-            : (props) => (props.closable ? 'padding: 10px 10px 10px 15px;' : 'padding: 10px 15px 8px 15px;')}
+            : (props) => (props.closable ? 'padding: 10px 10px 8px 15px;' : 'padding: 10px 15px 8px 15px;')}
 
     user-select: none;
     &:hover,

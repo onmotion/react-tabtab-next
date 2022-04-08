@@ -1,19 +1,31 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { makeData } from './data';
-import { Tabs, Panel, DragTabList, PanelList, helpers, Tab, TabList } from '../../packages/tabtab/src';
+import { Tabs, Panel, DragTabList, PanelList, helpers, Tab, TabList, ExtraButton } from '../../packages/tabtab/src';
 import { md, bootstrap, bulma } from '../../packages/themes/src';
 
 export default function App() {
     const [activeTab, setActiveTab] = useState(0);
-    const [tabs, setTabs] = useState(makeData(73, 'Some Tab'));
+    const [tabs, setTabs] = useState(makeData(25, 'Some Tab'));
 
-    const staticTabItems = useMemo(() => {
+    const closableTabItems = useMemo(() => {
         return tabs.map((tab, index) => {
             return (
                 <Tab closable key={index}>
                     {tab.title}
                 </Tab>
             );
+        });
+    }, [tabs]);
+
+    const tabItems = useMemo(() => {
+        return tabs.map((tab, index) => {
+            return <Tab key={index}>{tab.title}</Tab>;
+        });
+    }, [tabs]);
+
+    const shortTabItems = useMemo(() => {
+        return makeData(3, 'Tab').map((tab, index) => {
+            return <Tab key={index}>{tab.title}</Tab>;
         });
     }, [tabs]);
 
@@ -30,7 +42,7 @@ export default function App() {
     }, []);
 
     const handleOnTabChange = useCallback((i) => {
-        console.log(i);
+        console.log('select tab', i);
         setActiveTab(i);
     }, []);
 
@@ -38,39 +50,49 @@ export default function App() {
         <div className="App">
             <p className="title">Material draggable</p>
             <Tabs
-                onTabClose={(i) => {
-                    console.log('close', i);
-                }}
                 customStyle={md}
                 activeIndex={activeTab}
                 onTabChange={handleOnTabChange}
                 onTabSequenceChange={handleOnTabSequenceChange}
+                ExtraButton={
+                    <ExtraButton
+                        onClick={(e) => {
+                            console.log(e);
+                        }}
+                    >
+                        +
+                    </ExtraButton>
+                }
             >
-                <DragTabList>{staticTabItems}</DragTabList>
+                <DragTabList>{tabItems}</DragTabList>
                 <PanelList>{panelItems}</PanelList>
             </Tabs>
-            <br />
-            <p className="title">Bootstrap</p>
+
+            <p className="title">Bootstrap closable</p>
             <Tabs
+                onTabClose={(i) => {
+                    console.log('close', i);
+                }}
+                showModalButton={false}
                 customStyle={bootstrap}
                 activeIndex={activeTab}
                 onTabChange={handleOnTabChange}
                 onTabSequenceChange={handleOnTabSequenceChange}
             >
-                <TabList>{staticTabItems}</TabList>
+                <TabList>{closableTabItems}</TabList>
                 <PanelList>{panelItems}</PanelList>
             </Tabs>
-            <br />
-            {/* <p className="title">Bulma draggable</p>
+
+            <p className="title">Bulma draggable</p>
             <Tabs
                 customStyle={bulma}
-                activeIndex={activeTab}
+                activeIndex={activeTab > shortTabItems.length - 1 ? shortTabItems.length - 1 : activeTab}
                 onTabChange={handleOnTabChange}
                 onTabSequenceChange={handleOnTabSequenceChange}
             >
-                <DragTabList>{draggableTabItems}</DragTabList>
+                <DragTabList>{shortTabItems}</DragTabList>
                 <PanelList>{panelItems}</PanelList>
-            </Tabs> */}
+            </Tabs>
         </div>
     );
 }

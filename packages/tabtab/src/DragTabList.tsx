@@ -41,7 +41,7 @@ const DragTabList: FC<IDragTabListProps & Partial<TabProps>> = memo(({ children,
     );
 
     return (
-        <div style={{}}>
+        <>
             <DndContext sensors={sensors} onDragEnd={handleOnDragEnd}>
                 <SortableContext items={items}>
                     <TabList
@@ -57,7 +57,7 @@ const DragTabList: FC<IDragTabListProps & Partial<TabProps>> = memo(({ children,
                     </TabList>
                 </SortableContext>
             </DndContext>
-        </div>
+        </>
     );
 });
 

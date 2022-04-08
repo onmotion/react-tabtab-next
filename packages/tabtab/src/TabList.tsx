@@ -14,6 +14,9 @@ import { DndContext, DndContextProps } from '@dnd-kit/core';
 const makeScrollButton = (ActionButton: React.ElementType) => styled(ActionButton)`
     display: inline-block;
     filter: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     ${(props) => (props.left ? (props.showModalButton ? `left: ${buttonWidth + 2}px` : `left: 0`) : 'right: 0')};
     &:hover {
@@ -24,6 +27,9 @@ const makeScrollButton = (ActionButton: React.ElementType) => styled(ActionButto
 const makeFoldButton = (ActionButton: React.ElementType) => styled(ActionButton)`
     display: inline-block;
     filter: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     left: 0;
     &:hover {
@@ -118,13 +124,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
     getTabNode(
         tab: HTMLDivElement & { __INTERNAL_NODE?: any; __DRAG_TAB_INTERNAL_NODE?: any }
     ): React.ElementRef<'div'> {
-        if (tab.__INTERNAL_NODE) {
-            // normal tab
-            return tab.__INTERNAL_NODE;
-        } else if (tab.__DRAG_TAB_INTERNAL_NODE) {
-            // drag tab
-            return tab.__DRAG_TAB_INTERNAL_NODE.node;
-        }
+        return tab.__INTERNAL_NODE;
     }
 
     unifyScrollMax(width: number) {
@@ -193,6 +193,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
 
     isShowArrowButton() {
         let { showArrowButton } = this.props;
+
         if (showArrowButton === 'auto') {
             let tabWidth = 0;
             const containerWidth = this.listContainer.offsetWidth;
@@ -206,7 +207,6 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
                 }
             }
         }
-        // $FlowFixMe: flow will show 'auto' is not bool, but with this logic, showArrowButton will never be 'auto'
         this.setState({ showArrowButton });
     }
 
@@ -303,8 +303,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
         invariant(this.props.children, 'React-tabtab Error: You MUST pass at least one tab');
 
         return (
-            <>
-                {ExtraButton ? ExtraButton : null}
+            <div style={{ display: 'flex' }}>
                 <TabList showModalButton={this.state.showModalButton} showArrowButton={this.state.showArrowButton}>
                     {this.state.showModalButton ? (
                         <FoldButton
@@ -322,8 +321,9 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
                         </ListScroll>
                     </ListInner>
                 </TabList>
+                {ExtraButton ? ExtraButton : null}
                 {modalIsOpen && this.renderModal()}
-            </>
+            </div>
         );
     }
 }

@@ -88,7 +88,7 @@ var Tabs = /** @class */ (function (_super) {
         var _a = this.props, children = _a.children, extraProps = tslib.__rest(_a, ["children"]);
         var activeIndex = this.state.activeIndex;
         var props = tslib.__assign({ handleTabChange: this.handleTabChange, handleTabSequence: this.handleTabSequence, handleTabClose: this.handleTabClose, activeIndex: activeIndex }, extraProps);
-        return (React__default["default"].createElement("div", null, React__default["default"].Children.map(children, function (child) {
+        return (React__default["default"].createElement("div", { className: "tabtab-container" }, React__default["default"].Children.map(children, function (child) {
             return React__default["default"].cloneElement(child, props);
         })));
     };
@@ -165,10 +165,10 @@ var getPadding = function (_a) {
     }
     return "0 ".concat(paddingRight, "px 0 ").concat(paddingLeft, "px");
 };
-var TabListStyle = styled__default["default"](TabListElement)(templateObject_1$5 || (templateObject_1$5 = tslib.__makeTemplateObject(["\n    background-color: white;\n    text-align: left;\n    position: relative;\n    white-space: nowrap;\n    overflow: hidden;\n    width: auto;\n    padding: ", ";\n"], ["\n    background-color: white;\n    text-align: left;\n    position: relative;\n    white-space: nowrap;\n    overflow: hidden;\n    width: auto;\n    padding: ", ";\n"])), function (props) { return getPadding(props); });
+var TabListStyle = styled__default["default"](TabListElement)(templateObject_1$5 || (templateObject_1$5 = tslib.__makeTemplateObject(["\n    background-color: white;\n    text-align: left;\n    position: relative;\n    white-space: nowrap;\n    overflow: hidden;\n    width: 100%;\n    padding: ", ";\n"], ["\n    background-color: white;\n    text-align: left;\n    position: relative;\n    white-space: nowrap;\n    overflow: hidden;\n    width: 100%;\n    padding: ", ";\n"])), function (props) { return getPadding(props); });
 var ListInner = styled__default["default"].div(templateObject_2$2 || (templateObject_2$2 = tslib.__makeTemplateObject(["\n    overflow: hidden;\n"], ["\n    overflow: hidden;\n"])));
 var ListScroll = styled__default["default"].ul(templateObject_3 || (templateObject_3 = tslib.__makeTemplateObject(["\n    padding-left: 0;\n    position: relative;\n    margin: 0;\n    list-style: none;\n    display: inline-block;\n    transition: transform 0.3s cubic-bezier(0.42, 0, 0.58, 1);\n    display: flex;\n"], ["\n    padding-left: 0;\n    position: relative;\n    margin: 0;\n    list-style: none;\n    display: inline-block;\n    transition: transform 0.3s cubic-bezier(0.42, 0, 0.58, 1);\n    display: flex;\n"])));
-var ActionButtonStyle = styled__default["default"].div(templateObject_4 || (templateObject_4 = tslib.__makeTemplateObject(["\n    height: 100%;\n    width: ", "px;\n    text-align: center;\n    border-radius: 4px 4px 0 0;\n    background: #f9f9f9;\n    color: #555;\n    :hover {\n        color: #000;\n    }\n    > svg {\n        padding-top: 11px;\n    }\n"], ["\n    height: 100%;\n    width: ", "px;\n    text-align: center;\n    border-radius: 4px 4px 0 0;\n    background: #f9f9f9;\n    color: #555;\n    :hover {\n        color: #000;\n    }\n    > svg {\n        padding-top: 11px;\n    }\n"])), buttonWidth);
+var ActionButtonStyle = styled__default["default"].div(templateObject_4 || (templateObject_4 = tslib.__makeTemplateObject(["\n    height: 100%;\n    width: ", "px;\n    text-align: center;\n    background: #f9f9f9;\n    color: #555;\n    :hover {\n        color: #000;\n    }\n"], ["\n    height: 100%;\n    width: ", "px;\n    text-align: center;\n    background: #f9f9f9;\n    color: #555;\n    :hover {\n        color: #000;\n    }\n"])), buttonWidth);
 var templateObject_1$5, templateObject_2$2, templateObject_3, templateObject_4;
 
 const hiddenStyles = {
@@ -2731,8 +2731,8 @@ const DndContext = /*#__PURE__*/React.memo(function DndContext({
   }
 });
 
-var makeScrollButton = function (ActionButton) { return styled__default["default"](ActionButton)(templateObject_1$4 || (templateObject_1$4 = tslib.__makeTemplateObject(["\n    display: inline-block;\n    filter: none;\n    position: absolute;\n    ", ";\n    &:hover {\n        cursor: pointer;\n    }\n"], ["\n    display: inline-block;\n    filter: none;\n    position: absolute;\n    ", ";\n    &:hover {\n        cursor: pointer;\n    }\n"])), function (props) { return (props.left ? (props.showModalButton ? "left: ".concat(buttonWidth + 2, "px") : "left: 0") : 'right: 0'); }); };
-var makeFoldButton = function (ActionButton) { return styled__default["default"](ActionButton)(templateObject_2$1 || (templateObject_2$1 = tslib.__makeTemplateObject(["\n    display: inline-block;\n    filter: none;\n    position: absolute;\n    left: 0;\n    &:hover {\n        cursor: pointer;\n    }\n"], ["\n    display: inline-block;\n    filter: none;\n    position: absolute;\n    left: 0;\n    &:hover {\n        cursor: pointer;\n    }\n"]))); };
+var makeScrollButton = function (ActionButton) { return styled__default["default"](ActionButton)(templateObject_1$4 || (templateObject_1$4 = tslib.__makeTemplateObject(["\n    display: inline-block;\n    filter: none;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    position: absolute;\n    ", ";\n    &:hover {\n        cursor: pointer;\n    }\n"], ["\n    display: inline-block;\n    filter: none;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    position: absolute;\n    ", ";\n    &:hover {\n        cursor: pointer;\n    }\n"])), function (props) { return (props.left ? (props.showModalButton ? "left: ".concat(buttonWidth + 2, "px") : "left: 0") : 'right: 0'); }); };
+var makeFoldButton = function (ActionButton) { return styled__default["default"](ActionButton)(templateObject_2$1 || (templateObject_2$1 = tslib.__makeTemplateObject(["\n    display: inline-block;\n    filter: none;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    position: absolute;\n    left: 0;\n    &:hover {\n        cursor: pointer;\n    }\n"], ["\n    display: inline-block;\n    filter: none;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    position: absolute;\n    left: 0;\n    &:hover {\n        cursor: pointer;\n    }\n"]))); };
 var TabListComponent = /** @class */ (function (_super) {
     tslib.__extends(TabListComponent, _super);
     function TabListComponent(props) {
@@ -2782,14 +2782,7 @@ var TabListComponent = /** @class */ (function (_super) {
         }
     };
     TabListComponent.prototype.getTabNode = function (tab) {
-        if (tab.__INTERNAL_NODE) {
-            // normal tab
-            return tab.__INTERNAL_NODE;
-        }
-        else if (tab.__DRAG_TAB_INTERNAL_NODE) {
-            // drag tab
-            return tab.__DRAG_TAB_INTERNAL_NODE.node;
-        }
+        return tab.__INTERNAL_NODE;
     };
     TabListComponent.prototype.unifyScrollMax = function (width) {
         return (width / 3) * 2;
@@ -2836,7 +2829,6 @@ var TabListComponent = /** @class */ (function (_super) {
     };
     TabListComponent.prototype.toggleModal = function (open) {
         var _this = this;
-        console.log('toggleModal');
         this.setState({ modalIsOpen: open }, function () {
             if (!open) {
                 _this.scrollToIndex(_this.props.activeIndex, 'right');
@@ -2856,6 +2848,7 @@ var TabListComponent = /** @class */ (function (_super) {
         if (showArrowButton === 'auto') {
             var tabWidth = 0;
             var containerWidth = this.listContainer.offsetWidth;
+            console.log('containerWidth', containerWidth);
             showArrowButton = false;
             for (var index = 0; index < this.tabRefs.length; index++) {
                 var tab = this.getTabNode(this.tabRefs[index]);
@@ -2866,6 +2859,7 @@ var TabListComponent = /** @class */ (function (_super) {
                 }
             }
         }
+        console.log('showArrowButton', showArrowButton);
         // $FlowFixMe: flow will show 'auto' is not bool, but with this logic, showArrowButton will never be 'auto'
         this.setState({ showArrowButton: showArrowButton });
     };
@@ -2907,7 +2901,6 @@ var TabListComponent = /** @class */ (function (_super) {
     };
     TabListComponent.prototype.renderModal = function () {
         var _a = this.props, activeIndex = _a.activeIndex, handleTabChange = _a.handleTabChange, handleTabSequence = _a.handleTabSequence;
-        console.log('renderModal');
         return this.props.sortableContextProps ? (React__namespace.createElement(DndContext, tslib.__assign({}, this.props.dndContextProps),
             React__namespace.createElement(sortable.SortableContext, tslib.__assign({}, this.props.sortableContextProps),
                 React__namespace.createElement(TabModal, { closeModal: this.toggleModal.bind(this, false), handleTabSequence: handleTabSequence, handleTabChange: handleTabChange, activeIndex: activeIndex }, this.renderTabs({ vertical: true }, true))))) : (React__namespace.createElement(TabModal, { closeModal: this.toggleModal.bind(this, false), handleTabSequence: handleTabSequence, handleTabChange: handleTabChange, activeIndex: activeIndex }, this.renderTabs({ vertical: true }, true)));
@@ -2921,24 +2914,21 @@ var TabListComponent = /** @class */ (function (_super) {
         var ScrollButton = makeScrollButton(ActionButton);
         var FoldButton = makeFoldButton(ActionButton);
         invariant__default["default"](this.props.children, 'React-tabtab Error: You MUST pass at least one tab');
-        return (React__namespace.createElement(React__namespace.Fragment, null,
-            ExtraButton ? ExtraButton : null,
-            React__namespace.createElement("button", { onClick: function () {
-                    console.log('test');
-                } }, "test"),
+        return (React__namespace.createElement("div", { style: { display: 'flex' } },
             React__namespace.createElement(TabList, { showModalButton: this.state.showModalButton, showArrowButton: this.state.showArrowButton },
                 this.state.showModalButton ? (React__namespace.createElement(FoldButton, { ref: function (node) { return (_this.foldNode = node); }, onClick: this.toggleModal.bind(this, true), showArrowButton: this.state.showArrowButton },
                     React__namespace.createElement(BulletIcon, null))) : null,
                 this.renderArrowButton(ScrollButton),
                 React__namespace.createElement(ListInner, { ref: function (node) { return (_this.listContainer = node); } },
                     React__namespace.createElement(ListScroll, { ref: function (node) { return (_this.listScroll = node); }, role: "tablist" }, this.renderTabs()))),
+            ExtraButton ? ExtraButton : null,
             modalIsOpen && this.renderModal()));
     };
     return TabListComponent;
 }(React__namespace.PureComponent));
 var templateObject_1$4, templateObject_2$1;
 
-var CloseWrapper = styled__default["default"].button(templateObject_1$3 || (templateObject_1$3 = tslib.__makeTemplateObject(["\n    display: inline-block;\n    color: #777;\n    margin-left: 5px;\n    padding: 0;\n    vertical-align: middle;\n    background-color: transparent;\n    border: 0;\n    padding: 2px;\n    outline: 0;\n    &:hover {\n        color: black;\n        background-color: #eee;\n        cursor: pointer;\n        border-radius: 50%;\n    }\n    > svg {\n        vertical-align: middle;\n    }\n"], ["\n    display: inline-block;\n    color: #777;\n    margin-left: 5px;\n    padding: 0;\n    vertical-align: middle;\n    background-color: transparent;\n    border: 0;\n    padding: 2px;\n    outline: 0;\n    &:hover {\n        color: black;\n        background-color: #eee;\n        cursor: pointer;\n        border-radius: 50%;\n    }\n    > svg {\n        vertical-align: middle;\n    }\n"])));
+var CloseWrapper = styled__default["default"].button(templateObject_1$3 || (templateObject_1$3 = tslib.__makeTemplateObject(["\n    display: inline-block;\n    color: #777;\n    line-height: 0;\n    margin-left: 5px;\n    padding: 0;\n    vertical-align: middle;\n    background-color: transparent;\n    border: 0;\n    padding: 2px;\n    outline: 0;\n    &:hover {\n        color: black;\n        background-color: #eee;\n        cursor: pointer;\n        border-radius: 50%;\n    }\n    > svg {\n        vertical-align: middle;\n    }\n"], ["\n    display: inline-block;\n    color: #777;\n    line-height: 0;\n    margin-left: 5px;\n    padding: 0;\n    vertical-align: middle;\n    background-color: transparent;\n    border: 0;\n    padding: 2px;\n    outline: 0;\n    &:hover {\n        color: black;\n        background-color: #eee;\n        cursor: pointer;\n        border-radius: 50%;\n    }\n    > svg {\n        vertical-align: middle;\n    }\n"])));
 var CloseButton = /** @class */ (function (_super) {
     tslib.__extends(CloseButton, _super);
     function CloseButton() {
@@ -2960,7 +2950,7 @@ var TabElement = React__namespace.memo(React__namespace.forwardRef(function (_a,
 var TabStyle = styled__default["default"](TabElement)(templateObject_1$2 || (templateObject_1$2 = tslib.__makeTemplateObject(["\n    display: ", ";\n    color: #000000bb;\n    border-bottom: 2px solid transparent;\n    white-space: nowrap;\n    ", "\n\n    user-select: none;\n    &:hover,\n    &:active {\n        cursor: pointer;\n        color: black;\n    }\n    ", "\n"], ["\n    display: ", ";\n    color: #000000bb;\n    border-bottom: 2px solid transparent;\n    white-space: nowrap;\n    ", "\n\n    user-select: none;\n    &:hover,\n    &:active {\n        cursor: pointer;\n        color: black;\n    }\n    ", "\n"])), function (props) { return (props.vertical ? 'block' : 'inline-block'); }, function (props) {
     return props.vertical
         ? "\n      background-color: white;\n      color: black;\n      padding: 10px 10px;\n      z-index: 1;\n    "
-        : function (props) { return (props.closable ? 'padding: 10px 10px 10px 15px;' : 'padding: 10px 15px 8px 15px;'); };
+        : function (props) { return (props.closable ? 'padding: 10px 10px 8px 15px;' : 'padding: 10px 15px 8px 15px;'); };
 }, function (props) {
     return props.active
         ? "\n      color: black;\n      border-bottom: 2px solid; \n    "
@@ -3029,7 +3019,7 @@ var DragTabList = React.memo(function (_a) {
             props.onTabSequenceChange({ newIndex: Number(over.id), oldIndex: Number(active.id) });
         }
     }, [props.onTabSequenceChange]);
-    return (React__default["default"].createElement("div", { style: {} },
+    return (React__default["default"].createElement(React__default["default"].Fragment, null,
         React__default["default"].createElement(DndContext, { sensors: sensors, onDragEnd: handleOnDragEnd },
             React__default["default"].createElement(sortable.SortableContext, { items: items },
                 React__default["default"].createElement(TabListComponent, tslib.__assign({}, props, { sortableContextProps: { items: items }, dndContextProps: { onDragEnd: handleOnDragEnd } }), React__default["default"].Children.map(children, function (child, i) { return (React__default["default"].createElement(DragTab, tslib.__assign({ id: i.toString(), key: i, index: i }, props), child)); }))))));
@@ -3140,7 +3130,7 @@ var AsyncPanelComponent = /** @class */ (function (_super) {
     return AsyncPanelComponent;
 }(React__namespace.PureComponent));
 
-var Wrapper = styled__default["default"].button(templateObject_1 || (templateObject_1 = tslib.__makeTemplateObject(["\n    float: right;\n    border: 1px solid #eee;\n    border-radius: 2px;\n    padding: 3px;\n    margin-top: 10px;\n    margin-left: 2px;\n    display: inline-block;\n    color: #777;\n    vertical-align: middle;\n    ", "\n    &:hover {\n        color: black;\n        cursor: pointer;\n    }\n    &:disabled,\n    &[disabled] {\n        border: 1px solid grey;\n        background-color: #e7e7e7;\n        cursor: not-allowed;\n    }\n"], ["\n    float: right;\n    border: 1px solid #eee;\n    border-radius: 2px;\n    padding: 3px;\n    margin-top: 10px;\n    margin-left: 2px;\n    display: inline-block;\n    color: #777;\n    vertical-align: middle;\n    ", "\n    &:hover {\n        color: black;\n        cursor: pointer;\n    }\n    &:disabled,\n    &[disabled] {\n        border: 1px solid grey;\n        background-color: #e7e7e7;\n        cursor: not-allowed;\n    }\n"])), function (props) {
+var Wrapper = styled__default["default"].button(templateObject_1 || (templateObject_1 = tslib.__makeTemplateObject(["\n    flex-shrink: 0;\n    align-self: center;\n    height: 100%;\n    width: 30px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    font-size: 1.2em;\n    background: transparent;\n    border: none;\n    margin-top: 0;\n    padding: 3px;\n    margin-left: 2px;\n    display: inline-block;\n    color: #777;\n    vertical-align: middle;\n    user-select: none;\n    ", "\n    &:hover {\n        color: black;\n        cursor: pointer;\n    }\n    &:disabled,\n    &[disabled] {\n        border: 1px solid grey;\n        background-color: #e7e7e7;\n        cursor: not-allowed;\n    }\n"], ["\n    flex-shrink: 0;\n    align-self: center;\n    height: 100%;\n    width: 30px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    font-size: 1.2em;\n    background: transparent;\n    border: none;\n    margin-top: 0;\n    padding: 3px;\n    margin-left: 2px;\n    display: inline-block;\n    color: #777;\n    vertical-align: middle;\n    user-select: none;\n    ", "\n    &:hover {\n        color: black;\n        cursor: pointer;\n    }\n    &:disabled,\n    &[disabled] {\n        border: 1px solid grey;\n        background-color: #e7e7e7;\n        cursor: not-allowed;\n    }\n"])), function (props) {
     return props.disabled
         ? "\n    pointer-events: none;\n    color: #AAA;\n    background: #F5F5F5;\n  "
         : null;
