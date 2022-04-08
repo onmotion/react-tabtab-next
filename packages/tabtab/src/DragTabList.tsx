@@ -34,7 +34,6 @@ const DragTabList: FC<IDragTabListProps & Partial<TabProps>> = memo(({ children,
             }
 
             if (active.id !== over.id) {
-                //arrayMove(children as [], Number(active.id), Number(over.id));
                 props.onTabSequenceChange({ newIndex: Number(over.id), oldIndex: Number(active.id) });
             }
         },
@@ -45,7 +44,11 @@ const DragTabList: FC<IDragTabListProps & Partial<TabProps>> = memo(({ children,
         <div style={{}}>
             <DndContext sensors={sensors} onDragEnd={handleOnDragEnd}>
                 <SortableContext items={items}>
-                    <TabList {...props}>
+                    <TabList
+                        {...props}
+                        sortableContextProps={{ items }}
+                        dndContextProps={{ onDragEnd: handleOnDragEnd }}
+                    >
                         {React.Children.map(children, (child, i) => (
                             <DragTab id={i.toString()} key={i} index={i} {...props}>
                                 {child}

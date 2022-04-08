@@ -27,13 +27,6 @@ export default class TabModal extends React.Component<Props> {
         return (
             <Modal isOpen={true} contentLabel="Modal" onRequestClose={this.props.closeModal} className="tabtab-modal">
                 {this.props.children}
-                {/* <ModalTabListWrapper
-                    handleTabSequence={this.props.handleTabSequence}
-                    handleTabChange={this.props.handleTabChange}
-                    activeIndex={this.props.activeIndex}
-                >
-                    
-                </ModalTabListWrapper> */}
             </Modal>
         );
     }

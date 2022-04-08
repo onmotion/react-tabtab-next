@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { makeData } from './data';
-import { Tabs, DragTab, Panel, DragTabList, PanelList, helpers, Tab } from '../../packages/tabtab/src';
+import { Tabs, Panel, DragTabList, PanelList, helpers, Tab, TabList } from '../../packages/tabtab/src';
 import { md, bootstrap, bulma } from '../../packages/themes/src';
 
 export default function App() {
@@ -51,15 +51,15 @@ export default function App() {
             </Tabs>
             <br />
             <p className="title">Bootstrap</p>
-            {/* <Tabs
-                //  customStyle={bootstrap}
+            <Tabs
+                customStyle={bootstrap}
                 activeIndex={activeTab}
                 onTabChange={handleOnTabChange}
                 onTabSequenceChange={handleOnTabSequenceChange}
             >
-                <DragTabList>{staticTabItems}</DragTabList>
+                <TabList>{staticTabItems}</TabList>
                 <PanelList>{panelItems}</PanelList>
-            </Tabs> */}
+            </Tabs>
             <br />
             {/* <p className="title">Bulma draggable</p>
             <Tabs
