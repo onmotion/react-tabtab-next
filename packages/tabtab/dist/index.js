@@ -124,42 +124,7 @@ function isNumber(number) {
     return !isNaN(parseInt(number, 10));
 }
 
-var SortMethod = /** @class */ (function (_super) {
-    tslib.__extends(SortMethod, _super);
-    function SortMethod(props) {
-        var _this = _super.call(this, props) || this;
-        _this.onSortEnd = _this.onSortEnd.bind(_this);
-        return _this;
-    }
-    SortMethod.prototype.onSortEnd = function (_a) {
-        var oldIndex = _a.oldIndex, newIndex = _a.newIndex;
-        var _b = this.props, activeIndex = _b.activeIndex, handleTabChange = _b.handleTabChange, handleTabSequence = _b.handleTabSequence;
-        if (activeIndex === undefined) {
-            return;
-        }
-        if (oldIndex === newIndex) {
-            if (activeIndex !== oldIndex) {
-                handleTabChange && handleTabChange(oldIndex);
-            }
-        }
-        else {
-            handleTabSequence && handleTabSequence({ oldIndex: oldIndex, newIndex: newIndex });
-        }
-    };
-    return SortMethod;
-}(React__namespace.PureComponent));
-
 ReactModal__default["default"].setAppElement('#root');
-var ModalTabListWrapper = /** @class */ (function (_super) {
-    tslib.__extends(ModalTabListWrapper, _super);
-    function ModalTabListWrapper() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    ModalTabListWrapper.prototype.render = function () {
-        return React__namespace.createElement(React__namespace.Fragment, null);
-    };
-    return ModalTabListWrapper;
-}(SortMethod));
 var Modal = styled__default["default"](ReactModal__default["default"])(templateObject_1$6 || (templateObject_1$6 = tslib.__makeTemplateObject(["\n    margin: auto;\n    background-color: #fff;\n    width: 200px;\n    padding: 20px;\n    margin-top: 40px;\n    border: 1px solid #00000022;\n"], ["\n    margin: auto;\n    background-color: #fff;\n    width: 200px;\n    padding: 20px;\n    margin-top: 40px;\n    border: 1px solid #00000022;\n"])));
 var TabModal = /** @class */ (function (_super) {
     tslib.__extends(TabModal, _super);
@@ -167,8 +132,7 @@ var TabModal = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     TabModal.prototype.render = function () {
-        return (React__namespace.createElement(Modal, { isOpen: true, contentLabel: "Modal", onRequestClose: this.props.closeModal, className: "tabtab-modal" },
-            React__namespace.createElement(ModalTabListWrapper, { handleTabSequence: this.props.handleTabSequence, handleTabChange: this.props.handleTabChange, activeIndex: this.props.activeIndex }, this.props.children)));
+        return (React__namespace.createElement(Modal, { isOpen: true, contentLabel: "Modal", onRequestClose: this.props.closeModal, className: "tabtab-modal" }, this.props.children));
     };
     return TabModal;
 }(React__namespace.Component));
@@ -204,7 +168,7 @@ var getPadding = function (_a) {
 };
 var TabListStyle = styled__default["default"](TabListElement)(templateObject_1$5 || (templateObject_1$5 = tslib.__makeTemplateObject(["\n    background-color: white;\n    text-align: left;\n    position: relative;\n    white-space: nowrap;\n    overflow: hidden;\n    width: auto;\n    padding: ", ";\n"], ["\n    background-color: white;\n    text-align: left;\n    position: relative;\n    white-space: nowrap;\n    overflow: hidden;\n    width: auto;\n    padding: ", ";\n"])), function (props) { return getPadding(props); });
 var ListInner = styled__default["default"].div(templateObject_2$2 || (templateObject_2$2 = tslib.__makeTemplateObject(["\n    overflow: hidden;\n"], ["\n    overflow: hidden;\n"])));
-var ListScroll = styled__default["default"].ul(templateObject_3 || (templateObject_3 = tslib.__makeTemplateObject(["\n    padding-left: 0;\n    position: relative;\n    margin: 0;\n    list-style: none;\n    display: inline-block;\n    transition: transform 0.3s cubic-bezier(0.42, 0, 0.58, 1);\n"], ["\n    padding-left: 0;\n    position: relative;\n    margin: 0;\n    list-style: none;\n    display: inline-block;\n    transition: transform 0.3s cubic-bezier(0.42, 0, 0.58, 1);\n"])));
+var ListScroll = styled__default["default"].ul(templateObject_3 || (templateObject_3 = tslib.__makeTemplateObject(["\n    padding-left: 0;\n    position: relative;\n    margin: 0;\n    list-style: none;\n    display: inline-block;\n    transition: transform 0.3s cubic-bezier(0.42, 0, 0.58, 1);\n    display: flex;\n"], ["\n    padding-left: 0;\n    position: relative;\n    margin: 0;\n    list-style: none;\n    display: inline-block;\n    transition: transform 0.3s cubic-bezier(0.42, 0, 0.58, 1);\n    display: flex;\n"])));
 var ActionButtonStyle = styled__default["default"].div(templateObject_4 || (templateObject_4 = tslib.__makeTemplateObject(["\n    height: 100%;\n    width: ", "px;\n    text-align: center;\n    border-radius: 4px 4px 0 0;\n    background: #f9f9f9;\n    color: #555;\n    :hover {\n        color: #000;\n    }\n    > svg {\n        padding-top: 11px;\n    }\n"], ["\n    height: 100%;\n    width: ", "px;\n    text-align: center;\n    border-radius: 4px 4px 0 0;\n    background: #f9f9f9;\n    color: #555;\n    :hover {\n        color: #000;\n    }\n    > svg {\n        padding-top: 11px;\n    }\n"])), buttonWidth);
 var templateObject_1$5, templateObject_2$2, templateObject_3, templateObject_4;
 
@@ -391,7 +355,7 @@ var TabListComponent = /** @class */ (function (_super) {
         var ScrollButton = makeScrollButton(ActionButton);
         var FoldButton = makeFoldButton(ActionButton);
         invariant__default["default"](this.props.children, 'React-tabtab Error: You MUST pass at least one tab');
-        return (React__namespace.createElement("div", null,
+        return (React__namespace.createElement(React__namespace.Fragment, null,
             ExtraButton ? ExtraButton : null,
             React__namespace.createElement(TabList, { showModalButton: this.state.showModalButton, showArrowButton: this.state.showArrowButton },
                 this.state.showModalButton ? (React__namespace.createElement(FoldButton, { ref: function (node) { return (_this.foldNode = node); }, onClick: this.toggleModal.bind(this, true), showArrowButton: this.state.showArrowButton },
@@ -420,13 +384,13 @@ var CloseButton = /** @class */ (function (_super) {
 var templateObject_1$3;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-var TabElement = React__namespace.forwardRef(function (_a, ref) {
-    _a.active; _a.closable; var props = tslib.__rest(_a, ["active", "closable"]);
+var TabElement = React__namespace.memo(React__namespace.forwardRef(function (_a, ref) {
+    _a.active; _a.closable; _a.vertical; var props = tslib.__rest(_a, ["active", "closable", "vertical"]);
     return (React__namespace.createElement("li", tslib.__assign({ ref: ref }, props), props.children));
-});
+}));
 var TabStyle = styled__default["default"](TabElement)(templateObject_1$2 || (templateObject_1$2 = tslib.__makeTemplateObject(["\n    display: ", ";\n    color: #000000bb;\n    border-bottom: 2px solid transparent;\n    white-space: nowrap;\n    ", "\n\n    user-select: none;\n    &:hover,\n    &:active {\n        cursor: pointer;\n        color: black;\n    }\n    ", "\n"], ["\n    display: ", ";\n    color: #000000bb;\n    border-bottom: 2px solid transparent;\n    white-space: nowrap;\n    ", "\n\n    user-select: none;\n    &:hover,\n    &:active {\n        cursor: pointer;\n        color: black;\n    }\n    ", "\n"])), function (props) { return (props.vertical ? 'block' : 'inline-block'); }, function (props) {
     return props.vertical
-        ? "\n      background-color: white;\n      color: black;\n      padding: 10px 10px;\n      z-index: 100000;\n    "
+        ? "\n      background-color: white;\n      color: black;\n      padding: 10px 10px;\n      z-index: 1;\n    "
         : function (props) { return (props.closable ? 'padding: 10px 10px 10px 15px;' : 'padding: 10px 15px 8px 15px;'); };
 }, function (props) {
     return props.active
@@ -455,7 +419,7 @@ var Tab = /** @class */ (function (_super) {
         var _this = this;
         var _a = this.props, CustomTabStyle = _a.CustomTabStyle, active = _a.active, closable = _a.closable, vertical = _a.vertical, index = _a.index;
         var TabComponent = CustomTabStyle || TabStyle;
-        return (React__namespace.createElement(TabComponent, { ref: function (node) { return (_this.__INTERNAL_NODE = node); }, onClick: this.clickTab, active: active, vertical: vertical, closable: closable, role: "tab", id: "react-tabtab-tab-".concat(index), "aria-controls": "react-tabtab-panel-".concat(index), "aria-selected": active },
+        return (React__namespace.createElement(TabComponent, { ref: function (node) { return (_this.__INTERNAL_NODE = node); }, onMouseDown: this.clickTab, active: active, vertical: vertical, closable: closable, role: "tab", id: "react-tabtab-tab-".concat(index), "aria-controls": "react-tabtab-panel-".concat(index), "aria-selected": active },
             React__namespace.createElement(TabText, null, this.props.children),
             closable ? React__namespace.createElement(CloseButton, { handleDelete: this.clickDelete }) : null));
     };
@@ -867,28 +831,6 @@ const defaultCoordinates = /*#__PURE__*/Object.freeze({
   x: 0,
   y: 0
 });
-
-/**
- * Returns the distance between two points
- */
-function distanceBetween(p1, p2) {
-  return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
-}
-
-/**
- * Sort collisions from smallest to greatest value
- */
-function sortCollisionsAsc({
-  data: {
-    value: a
-  }
-}, {
-  data: {
-    value: b
-  }
-}) {
-  return a - b;
-}
 /**
  * Sort collisions from greatest to smallest value
  */
@@ -912,52 +854,6 @@ function getFirstCollision(collisions, property) {
   const [firstCollision] = collisions;
   return property ? firstCollision[property] : firstCollision;
 }
-
-/**
- * Returns the coordinates of the center of a given ClientRect
- */
-
-function centerOfRectangle(rect, left = rect.left, top = rect.top) {
-  return {
-    x: left + rect.width * 0.5,
-    y: top + rect.height * 0.5
-  };
-}
-/**
- * Returns the closest rectangles from an array of rectangles to the center of a given
- * rectangle.
- */
-
-
-const closestCenter = ({
-  collisionRect,
-  droppableContainers
-}) => {
-  const centerRect = centerOfRectangle(collisionRect, collisionRect.left, collisionRect.top);
-  const collisions = [];
-
-  for (const droppableContainer of droppableContainers) {
-    const {
-      id,
-      rect: {
-        current: rect
-      }
-    } = droppableContainer;
-
-    if (rect) {
-      const distBetween = distanceBetween(centerOfRectangle(rect), centerRect);
-      collisions.push({
-        id,
-        data: {
-          droppableContainer,
-          value: distBetween
-        }
-      });
-    }
-  }
-
-  return collisions.sort(sortCollisionsAsc);
-};
 
 /**
  * Returns the intersecting rectangle area between two rectangles
@@ -3091,22 +2987,44 @@ const DndContext = /*#__PURE__*/React.memo(function DndContext({
   }
 });
 
-var DragTabList = React.memo(function (props) {
-    var _a = React.useState(['1', '2', '3']), items = _a[0]; _a[1];
-    var sensors = useSensors(useSensor(PointerSensor), useSensor(KeyboardSensor, {
-        coordinateGetter: sortable.sortableKeyboardCoordinates,
-    }));
-    return (React__default["default"].createElement(DndContext, { sensors: sensors, collisionDetection: closestCenter, onDragEnd: undefined },
-        React__default["default"].createElement(sortable.SortableContext, { items: items, strategy: sortable.verticalListSortingStrategy }, props.children)));
-});
-
-var DragTab = React__namespace.memo(function (props) {
-    var _a = sortable.useSortable({ id: props.id }), attributes = _a.attributes, listeners = _a.listeners, setNodeRef = _a.setNodeRef, transform = _a.transform, transition = _a.transition;
+var DragTab = React.memo(React.forwardRef(function (_a, ref) {
+    var children = _a.children, id = _a.id, index = _a.index, activeIndex = _a.activeIndex, rest = tslib.__rest(_a, ["children", "id", "index", "activeIndex"]);
+    var _b = sortable.useSortable({ id: id }), attributes = _b.attributes, listeners = _b.listeners, setNodeRef = _b.setNodeRef, transform = _b.transform, transition = _b.transition;
     var style = {
         transform: utilities.CSS.Transform.toString(transform),
         transition: transition,
+        // cursor: 'default',
     };
-    return (React__namespace.createElement("div", tslib.__assign({ ref: setNodeRef, style: style }, attributes, listeners), "teest"));
+    return (React__default["default"].createElement("div", tslib.__assign({ ref: setNodeRef, style: style }, attributes, listeners), React__default["default"].cloneElement(children, tslib.__assign(tslib.__assign({}, rest), { key: id, active: index === activeIndex, index: index, tabIndex: id, ref: ref }))));
+}));
+
+var DragTabList = React.memo(function (_a) {
+    var children = _a.children, props = tslib.__rest(_a, ["children"]);
+    var _b = React.useState([]), items = _b[0], setItems = _b[1];
+    React.useEffect(function () {
+        setItems(React__default["default"].Children.map(children, function (_, i) { return i.toString(); }));
+    }, [children]);
+    var mouseSensor = useSensor(MouseSensor, {
+        // Require the mouse to move by 10 pixels before activating
+        activationConstraint: {
+            distance: 10,
+        },
+    });
+    var sensors = useSensors(mouseSensor);
+    var handleOnDragEnd = React.useCallback(function (event) {
+        var active = event.active, over = event.over;
+        if (!props.onTabSequenceChange || !(over === null || over === void 0 ? void 0 : over.id)) {
+            return;
+        }
+        if (active.id !== over.id) {
+            //arrayMove(children as [], Number(active.id), Number(over.id));
+            props.onTabSequenceChange({ newIndex: Number(over.id), oldIndex: Number(active.id) });
+        }
+    }, [props.onTabSequenceChange]);
+    return (React__default["default"].createElement("div", { style: {} },
+        React__default["default"].createElement(DndContext, { sensors: sensors, onDragEnd: handleOnDragEnd },
+            React__default["default"].createElement(sortable.SortableContext, { items: items },
+                React__default["default"].createElement(TabListComponent, tslib.__assign({}, props), React__default["default"].Children.map(children, function (child, i) { return (React__default["default"].createElement(DragTab, tslib.__assign({ id: i.toString(), key: i, index: i }, props), child)); }))))));
 });
 
 var PanelList = /** @class */ (function (_super) {

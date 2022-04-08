@@ -2,14 +2,17 @@ import React from 'react';
 import { PanelProps } from './Panel';
 import { TabElementProps } from './Tab';
 import { TabListElementProps } from './TabListElement';
-declare type TabsProps = {
+export declare type TabsProps = {
     defaultIndex?: number;
     activeIndex?: number | null;
     showModalButton?: number | boolean;
     showArrowButton?: 'auto' | boolean;
     ExtraButton?: React.ReactNode;
     onTabChange?: (event: any) => void;
-    onTabSequenceChange?: (event: any) => void;
+    onTabSequenceChange?: (e: {
+        oldIndex: number;
+        newIndex: number;
+    }) => void;
     onTabEdit?: (event: any) => void;
     customStyle?: {
         TabList?: React.ElementType<TabListElementProps>;

@@ -5,11 +5,13 @@ import CloseButton from './CloseButton';
 export type TabElementProps = React.ComponentPropsWithoutRef<'li'> & TabProps;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const TabElement = React.forwardRef<HTMLLIElement, TabElementProps>(({ active, closable, ...props }, ref) => (
-    <li ref={ref} {...props}>
-        {props.children}
-    </li>
-));
+export const TabElement = React.memo(
+    React.forwardRef<HTMLLIElement, TabElementProps>(({ active, closable, vertical, ...props }, ref) => (
+        <li ref={ref} {...props}>
+            {props.children}
+        </li>
+    ))
+);
 
 const TabStyle = styled(TabElement)`
     display: ${(props) => (props.vertical ? 'block' : 'inline-block')};
@@ -22,7 +24,7 @@ const TabStyle = styled(TabElement)`
       background-color: white;
       color: black;
       padding: 10px 10px;
-      z-index: 100000;
+      z-index: 1;
     `
             : (props) => (props.closable ? 'padding: 10px 10px 10px 15px;' : 'padding: 10px 15px 8px 15px;')}
 
@@ -79,10 +81,11 @@ export default class Tab extends React.PureComponent<TabProps> {
     render() {
         const { CustomTabStyle, active, closable, vertical, index } = this.props;
         const TabComponent = CustomTabStyle || TabStyle;
+
         return (
             <TabComponent
                 ref={(node) => (this.__INTERNAL_NODE = node)}
-                onClick={this.clickTab}
+                onMouseDown={this.clickTab}
                 active={active}
                 vertical={vertical}
                 closable={closable}

@@ -1,26 +1,19 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { makeData } from './data';
-import { Tabs, DragTab, Panel, DragTabList, PanelList, helpers } from '../../packages/tabtab/src';
+import { Tabs, DragTab, Panel, DragTabList, PanelList, helpers, Tab } from '../../packages/tabtab/src';
 import { md, bootstrap, bulma } from '../../packages/themes/src';
-import { Tab, TabList } from '@react-tabtab-next/tabtab';
 
 export default function App() {
     const [activeTab, setActiveTab] = useState(0);
-    const [tabs, setTabs] = useState(makeData(10, 'Some Tab'));
-
-    const draggableTabItems = useMemo(() => {
-        return tabs.map((tab, index) => {
-            return (
-                <DragTab id={index.toString()} key={index}>
-                    {tab.title}
-                </DragTab>
-            );
-        });
-    }, [tabs]);
+    const [tabs, setTabs] = useState(makeData(73, 'Some Tab'));
 
     const staticTabItems = useMemo(() => {
         return tabs.map((tab, index) => {
-            return <Tab key={index}>{tab.title}</Tab>;
+            return (
+                <Tab closable key={index}>
+                    {tab.title}
+                </Tab>
+            );
         });
     }, [tabs]);
 
@@ -30,13 +23,11 @@ export default function App() {
         });
     }, [tabs]);
 
-    const handleOnTabSequenceChange = useCallback(
-        ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
-            setTabs(helpers.simpleSwitch(tabs, oldIndex, newIndex));
-            setActiveTab(newIndex);
-        },
-        [tabs]
-    );
+    const handleOnTabSequenceChange = useCallback(({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
+        console.log({ oldIndex, newIndex });
+        setTabs((tabs) => helpers.simpleSwitch(tabs, oldIndex, newIndex));
+        setActiveTab(newIndex);
+    }, []);
 
     const handleOnTabChange = useCallback((i) => {
         console.log(i);
@@ -47,7 +38,7 @@ export default function App() {
         <div className="App">
             <p className="title">Material draggable</p>
             <Tabs
-                //  customStyle={md}
+                customStyle={md}
                 activeIndex={activeTab}
                 onTabChange={handleOnTabChange}
                 onTabSequenceChange={handleOnTabSequenceChange}
@@ -57,15 +48,15 @@ export default function App() {
             </Tabs>
             <br />
             <p className="title">Bootstrap</p>
-            <Tabs
+            {/* <Tabs
                 //  customStyle={bootstrap}
                 activeIndex={activeTab}
                 onTabChange={handleOnTabChange}
                 onTabSequenceChange={handleOnTabSequenceChange}
             >
-                <TabList>{staticTabItems}</TabList>
+                <DragTabList>{staticTabItems}</DragTabList>
                 <PanelList>{panelItems}</PanelList>
-            </Tabs>
+            </Tabs> */}
             <br />
             {/* <p className="title">Bulma draggable</p>
             <Tabs

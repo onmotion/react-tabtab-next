@@ -14,12 +14,6 @@ type Props = {
     children: React.ReactNode[];
 };
 
-class ModalTabListWrapper extends SortMethod {
-    render() {
-        return <></>;
-    }
-}
-
 const Modal = styled(ReactModal)`
     margin: auto;
     background-color: #fff;
@@ -32,13 +26,14 @@ export default class TabModal extends React.Component<Props> {
     render() {
         return (
             <Modal isOpen={true} contentLabel="Modal" onRequestClose={this.props.closeModal} className="tabtab-modal">
-                <ModalTabListWrapper
+                {this.props.children}
+                {/* <ModalTabListWrapper
                     handleTabSequence={this.props.handleTabSequence}
                     handleTabChange={this.props.handleTabChange}
                     activeIndex={this.props.activeIndex}
                 >
-                    {this.props.children}
-                </ModalTabListWrapper>
+                    
+                </ModalTabListWrapper> */}
             </Modal>
         );
     }

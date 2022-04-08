@@ -1,5 +1,8 @@
-import * as React from 'react';
-declare const _default: React.MemoExoticComponent<(props: {
+import { FC } from 'react';
+interface Props {
     id: string;
-}) => JSX.Element>;
-export default _default;
+    activeIndex?: number;
+    index?: number;
+}
+declare const DragTab: FC<Props>;
+export default DragTab;
