@@ -1,6 +1,6 @@
 {
     "name": "@react-tabtab-next/tabtab",
-    "version": "3.2.0",
+    "version": "3.2.1",
     "description": "[TypeScript] A mobile support, draggable, editable and api based Tab for ReactJS",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -42,13 +42,14 @@
     },
     "homepage": "https://github.com/onmotion/react-tabtab-next#readme",
     "dependencies": {
+        "@dnd-kit/core": "^5.0.3",
+        "@dnd-kit/sortable": "^6.0.1",
+        "@dnd-kit/utilities": "^3.1.0",
         "classnames": "^2.2.5",
         "invariant": "^2.2.2",
         "react-modal": "^3.14.4",
         "react-transition-group": "^4.4.2",
-        "styled-components": "^5.3.5",
-        "@dnd-kit/sortable": "^6.0.1",
-        "@dnd-kit/utilities": "^3.1.0"
+        "styled-components": "^5.3.5"
     },
     "devDependencies": {
         "@types/estree": "^0.0.51",

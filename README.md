@@ -38,8 +38,6 @@ also here Codesandbox [playground](https://codesandbox.io/s/react-tabtab-next-yk
 
 ## Table of Contents
 
-<!-- toc -->
-
 -   [Installation](#installation)
 -   [Usage](#usage)
     -   [Minimal setup](#minimal-setup)
