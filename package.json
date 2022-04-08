@@ -13,7 +13,8 @@
         "test:watch": "NODE_ENV=test npm test -- --watch",
         "prepublish": "npm run build",
         "validate": "npm ls",
-        "demo": "npx webpack serve --config ./demo/webpack.config.js"
+        "demo": "npx webpack serve --config ./demo/webpack.config.js",
+        "demo:build": "npx webpack build --config ./demo/webpack.config.js"
     },
     "repository": {
         "type": "git",

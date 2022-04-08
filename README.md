@@ -6,13 +6,15 @@
 
 ## A mobile support, draggable, editable and api based Tab for ReactJS
 
-**(!) This is fork under original repo [react-tabtab](https://github.com/ctxhou/react-tabtab) but refactored using Typescript**
+**(!) This lib based on [react-tabtab](https://github.com/ctxhou/react-tabtab) but refactored using Typescript and replacing some deprecated libs**
 <img src="./docs/ts.svg" width="20px" >
 <img src="./docs/js.svg" width="20px" >
 
-### [Demo](https://ctxhou.github.io/react-tabtab/)
+### [Demo Playground](https://codesandbox.io/s/react-tabtab-next-yk4moo)
 
-![demo gif](https://media.giphy.com/media/xUOxeRdRrSvSLiX528/giphy.gif)
+<p style="text-align: center;" align="center">
+    <img src="./docs/demo.gif" width="100%" >
+</p>
 
 for build a local playground run
 
@@ -22,7 +24,7 @@ npm run demo
 
 and go to http://127.0.0.1:9000
 
-also Codesandbox [playground](https://codesandbox.io/s/react-tabtab-next-yk4moo)
+also here Codesandbox [playground](https://codesandbox.io/s/react-tabtab-next-yk4moo)
 
 ## Features
 
@@ -43,19 +45,16 @@ also Codesandbox [playground](https://codesandbox.io/s/react-tabtab-next-yk4moo)
     -   [Minimal setup](#minimal-setup)
     -   [Draggable tab](#draggable-tab)
     -   [Async Panel](#async-panel)
-    -   [Another Example](#another-example)
+    -   [Another Examples](#another-examples)
 -   [Components / Api](#components--api)
     -   [&lt;Tabs /&gt;](#lttabs-gt)
     -   [&lt;TabList /&gt;](#lttablist-gt)
     -   [&lt;Tab /&gt;](#lttab-gt)
     -   [&lt;DragTabList /&gt;](#ltdragtablist-gt)
-    -   [&lt;DragTab/ &gt;](#ltdragtab-gt)
     -   [&lt;PanelList/ &gt;](#ltpanellist-gt)
     -   [&lt;Panel /&gt;](#ltpanel-gt)
     -   [&lt;AsyncPanel /&gt;](#ltasyncpanel-gt)
 -   [Customize style](#customize-style)
-    -   [Use current style](#use-current-style)
-    -   [Make your own style](#make-your-own-style)
 -   [Development](#development)
 -   [License](#license)
 
@@ -73,16 +72,11 @@ Then, import the module by module bundler like `webpack`, `browserify`
 
 ```js
 // es6
-import { Tabs, DragTabList, DragTab, PanelList, Panel, ExtraButton } from '@react-tabtab-next/tabtab';
+import { Tabs, DragTabList, PanelList, Panel, ExtraButton } from '@react-tabtab-next/tabtab';
 
 // not using es6
 var Tabtab = require('react-tabtab');
 var Tabs = Tabtab.Tabs;
-var DragTabList = Tabtab.DragTabList;
-var DragTab = Tabtab.DragTab;
-var PanelList = Tabtab.PanelList;
-var Panel = Tabtab.Panel;
-var ExtraButton = Tabtab.ExtraButton;
 ```
 
 ## Usage
@@ -123,7 +117,7 @@ It's simple to use. Zero configuration!
 
 ```js
 import React, { Component } from 'react';
-import { Tabs, DragTabList, DragTab, PanelList, Panel, helpers } from '@react-tabtab-next/tabtab';
+import { Tabs, DragTabList, PanelList, Panel, helpers } from '@react-tabtab-next/tabtab';
 
 const makeData = (number, titlePrefix = 'Tab') => {
     const data = [];
@@ -141,7 +135,7 @@ export default class Drag extends Component {
         super(props);
         this.handleTabChange = this.handleTabChange.bind(this);
         this.handleTabSequenceChange = this.handleTabSequenceChange.bind(this);
-        const tabs = makeData(3, 'DragTab');
+        const tabs = makeData(10, 'Some Tab');
         this.state = {
             activeIndex: 0,
             tabs,
@@ -193,22 +187,40 @@ And all the actions are controllable. You can customize your switch action. But 
 <Tabs>
     <TabList>
         <Tab>Tab1</Tab>
+        <Tab>Tab2</Tab>
     </TabList>
     <PanelList>
         <Panel>Content1</Panel>
+        <Panel>Content2</Panel>
     </PanelList>
 </Tabs>
 ```
 
-**drag tab**
+**Sortable tabs**
 
 ```js
-<Tabs>
+<Tabs
+    // customStyle={md}
+    // activeIndex={activeTab}
+    // onTabChange={handleOnTabChange}
+    // onTabSequenceChange={handleOnTabSequenceChange}
+    ExtraButton={
+        <ExtraButton
+            onClick={(e) => {
+                console.log(e);
+            }}
+        >
+            +
+        </ExtraButton>
+    }
+>
     <DragTabList>
-        <DragTab>DragTab1</DragTab>
+        <Tab>Tab1</Tab>
+        <Tab>Tab2</Tab>
     </DragTabList>
     <PanelList>
         <Panel>Content1</Panel>
+        <Panel>Content2</Panel>
     </PanelList>
 </Tabs>
 ```
@@ -225,8 +237,8 @@ import { Tabs, TabList, Tab, PanelList, AsyncPanel, Panel } from '@react-tabtab-
 
 function loadContentFunc(callback) {
     setTimeout(() => {
-        callback(null, [{ product: 'json' }, { product: 'joseph' }]);
-    }, 100);
+        callback(null, 'some content');
+    }, 1000);
 }
 
 // You also can provide promise as return function:
@@ -273,20 +285,9 @@ When data is loading, the panel content will show `renderLoading` component.
 
 After finishing loading data, the panel content will show `render` component and react-tabtab will pass the `loadContent` result as first parameter. So you can customize the component of panel content.
 
-Live example: [Link](https://ctxhou.github.io/react-tabtab/#async)
+### Another Examples
 
-### Another Example
-
-Except drag and drop tab, `react-tabtab` also support other usable application, like:
-
--   Add and close button: [Example](https://ctxhou.github.io/react-tabtab/#add-close)
--   Modal view at mobile support: [Example](https://ctxhou.github.io/react-tabtab/#modal)
--   Auto detect number of tab and make it scrollable
--   **All the action is controllable**:[Example](https://ctxhou.github.io/react-tabtab/#complicated)
-
-All of these features are api based, so you can customize each action on demand.
-
-More code examples are avalable [here](https://github.com/ctxhou/react-tabtab/blob/master/docs/components/).
+More code examples are avalable [here](https://github.com/onmotion/react-tabtab-next/blob/master/demo/src/App.tsx).
 
 ## Components / Api
 
@@ -303,12 +304,6 @@ More code examples are avalable [here](https://github.com/ctxhou/react-tabtab/bl
       <th></th>
     </tr>
     <tr>
-      <td>defaultIndex</td>
-      <td><code>number</code></td>
-      <td>null</td>
-      <td>set the <b>initial</b> active key</td>
-    </tr>
-    <tr>
       <td>activeIndex</td>
       <td><code>number</code></td>
       <td>null</td>
@@ -317,8 +312,8 @@ More code examples are avalable [here](https://github.com/ctxhou/react-tabtab/bl
     <tr>
       <td>defaultIndex</td>
       <td><code>number</code></td>
-      <td>null</td>
-      <td>set the <b>initial</b> active key</td>
+      <td>0</td>
+      <td>default selected index if active index is not provided</td>
     </tr>
     <tr>
       <td>showModalButton</td>
@@ -352,7 +347,7 @@ More code examples are avalable [here](https://github.com/ctxhou/react-tabtab/bl
     </tr>
     <tr>
       <td>onTabChange</td>
-      <td><code>() => tabIndex</code></td>
+      <td><code>(tabIndex) => {}</code></td>
       <td>null</td>
       <td>
         return tabIndex is clicked<br/>
@@ -361,12 +356,12 @@ More code examples are avalable [here](https://github.com/ctxhou/react-tabtab/bl
     </tr>
     <tr>
       <td>onTabSequenceChange</td>
-      <td><code>() => {oldIndex, newIndex}</code></td>
+      <td><code>(oldIndex, newIndex) => {}</code></td>
       <td>null</td>
       <td>
         return changed oldIndex and newIndex value<br/>
         With this api, you can do switch tab very easily.
-        <b>Note:<b/>This api is only called by <code>&lt;DragTab/&gt;</code>
+        <b>Note:<b/>This api is only called by <code>&lt;DragTabList/&gt;</code>
       </td>
     </tr>
     <tr>
@@ -388,7 +383,7 @@ More code examples are avalable [here](https://github.com/ctxhou/react-tabtab/bl
   ActionButton: React.Element
 }</code></pre>
       </td>
-      <td>Bootstrap theme</td>
+      <td> theme</td>
       <td>
         customized tab style component
       </td>
@@ -397,6 +392,10 @@ More code examples are avalable [here](https://github.com/ctxhou/react-tabtab/bl
 </table>
 
 ### &lt;TabList /&gt;
+
+Use to wrap `<Tab/>`.
+
+### &lt;DragTabList /&gt;
 
 Use to wrap `<Tab/>`.
 
@@ -429,14 +428,6 @@ Normal Tab. Show the children component on tab.
     map tab
 </Tab>
 ```
-
-### &lt;DragTabList /&gt;
-
-Use to wrap `<DragTab/>`.
-
-### &lt;DragTab/ &gt;
-
-A draggable tab. Api is the same with `<Tab/>`
 
 ### &lt;PanelList/ &gt;
 
@@ -496,7 +487,7 @@ Lazy loading panel content.
 
 ## Customize style
 
-`react-tabtab` is based on `styled-components`. Therefore, it's super easy to customize the tab style.
+`react-tabtab-next` is based on `styled-components`. Therefore, it's super easy to customize the tab style.
 
 Just extend the default component style and pass it to `customStyle` props.
 
@@ -507,6 +498,8 @@ Install tabtab themes
 ```sh
 npm install @react-tabtab-next/themes --save
 ```
+
+Available themes: `md`, `bootstrap`, `bulma`
 
 For example, if you want to use `material-design`, import the style and pass to `customStyle` props.
 
@@ -609,9 +602,23 @@ export { TabList, ActionButton, Tab, Panel };
 
 **Last: import your style and use it!**
 
-When you finish the new `react-tabtab` style, feel free to add it to `theme/` folder and send PR!
+When you finish the new `@react-tabtab-next/theme` style, feel free to add it to `theme/` folder and send PR!
 
 ## Development
+
+```bash
+npm i
+npm run demo
+```
+
+or
+
+```bash
+yarn install
+yarn demo
+```
+
+Build the bundle
 
 ```bash
 npm i
@@ -619,4 +626,4 @@ npm i
 
 ## License
 
-MIT [@ctxhou](github.com/ctxhou)
+MIT

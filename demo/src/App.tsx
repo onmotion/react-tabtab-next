@@ -1,6 +1,16 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { makeData } from './data';
-import { Tabs, Panel, DragTabList, PanelList, helpers, Tab, TabList, ExtraButton } from '../../packages/tabtab/src';
+import {
+    Tabs,
+    Panel,
+    DragTabList,
+    PanelList,
+    helpers,
+    Tab,
+    TabList,
+    ExtraButton,
+    AsyncPanel,
+} from '../../packages/tabtab/src';
 import { md, bootstrap, bulma } from '../../packages/themes/src';
 
 export default function App() {
@@ -45,6 +55,12 @@ export default function App() {
         console.log('select tab', i);
         setActiveTab(i);
     }, []);
+
+    function loadContentFunc(callback: (err: any, data: any) => void) {
+        setTimeout(() => {
+            callback(null, 'some async content');
+        }, 1000);
+    }
 
     return (
         <div className="App">
@@ -92,6 +108,22 @@ export default function App() {
             >
                 <DragTabList>{shortTabItems}</DragTabList>
                 <PanelList>{panelItems}</PanelList>
+            </Tabs>
+            <p className="title">Async data loading</p>
+            <Tabs defaultIndex={0}>
+                <TabList>
+                    <Tab>Tab1</Tab>
+                    <Tab>Tab2</Tab>
+                </TabList>
+                <PanelList>
+                    <Panel>Static content</Panel>
+                    <AsyncPanel
+                        loadContent={loadContentFunc}
+                        render={(data) => <div>{JSON.stringify(data)}</div>}
+                        renderLoading={() => <div>Loading...</div>}
+                        cache={false}
+                    />
+                </PanelList>
             </Tabs>
         </div>
     );
