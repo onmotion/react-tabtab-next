@@ -402,7 +402,8 @@ var Tab = /** @class */ (function (_super) {
         _this.clickDelete = _this.clickDelete.bind(_this);
         return _this;
     }
-    Tab.prototype.clickTab = function () {
+    Tab.prototype.clickTab = function (e) {
+        e.stopPropagation();
         var _a = this.props, handleTabChange = _a.handleTabChange, index = _a.index;
         handleTabChange(index);
     };
@@ -415,7 +416,7 @@ var Tab = /** @class */ (function (_super) {
         var _this = this;
         var _a = this.props, CustomTabStyle = _a.CustomTabStyle, active = _a.active, closable = _a.closable, vertical = _a.vertical, index = _a.index;
         var TabComponent = CustomTabStyle || TabStyle;
-        return (React__namespace.createElement(TabComponent, { ref: function (node) { return (_this.__INTERNAL_NODE = node); }, onMouseDown: this.clickTab, active: active, vertical: vertical, closable: closable, role: "tab", id: "react-tabtab-tab-".concat(index), "aria-controls": "react-tabtab-panel-".concat(index), "aria-selected": active },
+        return (React__namespace.createElement(TabComponent, { ref: function (node) { return (_this.__INTERNAL_NODE = node); }, onClick: this.clickTab, active: active, vertical: vertical, closable: closable, role: "tab", id: "react-tabtab-tab-".concat(index), "aria-controls": "react-tabtab-panel-".concat(index), "aria-selected": active },
             React__namespace.createElement(TabText, null, this.props.children),
             closable ? React__namespace.createElement(CloseButton, { handleTabClose: this.clickDelete }) : null));
     };

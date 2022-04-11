@@ -15,7 +15,7 @@ export declare type TabProps = {
 export default class Tab extends React.PureComponent<TabProps> {
     __INTERNAL_NODE: React.ElementRef<any>;
     constructor(props: TabProps);
-    clickTab(): void;
+    clickTab(e: React.MouseEvent<HTMLLIElement, MouseEvent>): void;
     clickDelete(event: React.SyntheticEvent<HTMLButtonElement>): void;
     render(): JSX.Element;
 }

@@ -67,7 +67,8 @@ export default class Tab extends React.PureComponent<TabProps> {
         this.clickDelete = this.clickDelete.bind(this);
     }
 
-    clickTab() {
+    clickTab(e: React.MouseEvent<HTMLLIElement, MouseEvent>) {
+        e.stopPropagation();
         const { handleTabChange, index } = this.props;
         handleTabChange(index);
     }
@@ -85,7 +86,7 @@ export default class Tab extends React.PureComponent<TabProps> {
         return (
             <TabComponent
                 ref={(node) => (this.__INTERNAL_NODE = node)}
-                onMouseDown={this.clickTab}
+                onClick={this.clickTab}
                 active={active}
                 vertical={vertical}
                 closable={closable}
