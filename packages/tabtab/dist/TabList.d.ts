@@ -36,11 +36,11 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
     tabRefs: React.ElementRef<'div'>[];
     scrollPosition: number;
     constructor(props: TabListProps);
+    chackActiveIndexRange(): boolean;
     componentDidMount(): void;
     componentDidUpdate(prevProps: TabListProps, prevState: State): void;
     getTabNode(tab: HTMLDivElement & {
         __INTERNAL_NODE?: any;
-        __DRAG_TAB_INTERNAL_NODE?: any;
     }): React.ElementRef<'div'>;
     unifyScrollMax(width: number): number;
     handleScroll(direction: 'right' | 'left'): void;

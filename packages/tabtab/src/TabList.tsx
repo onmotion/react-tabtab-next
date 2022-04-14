@@ -18,6 +18,7 @@ const makeScrollButton = (ActionButton: React.ElementType) => styled(ActionButto
     justify-content: center;
     align-items: center;
     position: absolute;
+    user-select: none;
     ${(props) => (props.left ? (props.showModalButton ? `left: ${buttonWidth + 2}px` : `left: 0`) : 'right: 0')};
     &:hover {
         cursor: pointer;
@@ -31,6 +32,7 @@ const makeFoldButton = (ActionButton: React.ElementType) => styled(ActionButton)
     justify-content: center;
     align-items: center;
     position: absolute;
+    user-select: none;
     left: 0;
     &:hover {
         cursor: pointer;
@@ -77,7 +79,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
         this.toggleModal = this.toggleModal.bind(this);
         this.renderTabs = this.renderTabs.bind(this);
         this.renderModal = this.renderModal.bind(this);
-        this.renderArrowButton = this.renderArrowButton.bind(this);
+        this.renderArrowButtons = this.renderArrowButtons.bind(this);
         this.isShowModalButton = this.isShowModalButton.bind(this);
         this.isShowArrowButton = this.isShowArrowButton.bind(this);
         this.chackActiveIndexRange = this.chackActiveIndexRange.bind(this);
@@ -250,7 +252,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
         );
     }
 
-    renderArrowButton(ScrollButton: React.ElementType) {
+    renderArrowButtons(ScrollButton: React.ElementType) {
         const { showArrowButton } = this.state;
         if (showArrowButton) {
             return (
@@ -262,6 +264,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
                         }}
                         ref={(node: React.ReactElement) => (this.leftArrowNode = node)}
                         showModalButton={this.state.showModalButton}
+                        className={'tabtab-arrow-button_left'}
                     >
                         <LeftIcon />
                     </ScrollButton>
@@ -270,6 +273,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
                             this.handleScroll('right');
                         }}
                         ref={(node: React.ReactElement) => (this.rightArrowNode = node)}
+                        className={'tabtab-arrow-button_right'}
                     >
                         <RightIcon />
                     </ScrollButton>
@@ -316,7 +320,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
                             <BulletIcon />
                         </FoldButton>
                     ) : null}
-                    {this.renderArrowButton(ScrollButton)}
+                    {this.renderArrowButtons(ScrollButton)}
                     <ListInner ref={(node) => (this.listContainer = node)} className="tabtab-list-container">
                         <ListScroll ref={(node) => (this.listScroll = node)} role="tablist">
                             {this.renderTabs()}

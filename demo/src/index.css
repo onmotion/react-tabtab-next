@@ -1,5 +1,11 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  color: #28323d;
+}
+.container {
+        max-width: 800px;
+        margin: auto;
 }
 
 .title {

@@ -184,6 +184,7 @@ var TabListComponent = /** @class */ (function (_super) {
         _this.renderArrowButton = _this.renderArrowButton.bind(_this);
         _this.isShowModalButton = _this.isShowModalButton.bind(_this);
         _this.isShowArrowButton = _this.isShowArrowButton.bind(_this);
+        _this.chackActiveIndexRange = _this.chackActiveIndexRange.bind(_this);
         _this.scrollPosition = 0;
         _this.tabRefs = [];
         _this.state = {
@@ -193,7 +194,16 @@ var TabListComponent = /** @class */ (function (_super) {
         };
         return _this;
     }
+    TabListComponent.prototype.chackActiveIndexRange = function () {
+        if (this.props.activeIndex >= this.props.children.length) {
+            console.error('activeIndex is out of range 0-' + (this.props.children.length - 1));
+            return false;
+        }
+        return true;
+    };
     TabListComponent.prototype.componentDidMount = function () {
+        if (!this.chackActiveIndexRange())
+            return;
         this.isShowArrowButton();
         this.isShowModalButton();
         if (this.props.activeIndex > 0)
@@ -206,6 +216,8 @@ var TabListComponent = /** @class */ (function (_super) {
         }
         if (prevProps.activeIndex !== this.props.activeIndex) {
             //if we scroll to the last tab, alignment is set to the right side of the tab
+            if (!this.chackActiveIndexRange())
+                return;
             var rectSide = this.props.activeIndex === this.props.children.length - 1 ? 'right' : 'left';
             this.scrollToIndex(this.props.activeIndex, rectSide);
         }
@@ -231,15 +243,15 @@ var TabListComponent = /** @class */ (function (_super) {
         var leftMove = 0;
         var containerOffset = this.listContainer.getBoundingClientRect();
         var containerWidth = this.listContainer.offsetWidth;
-        var tabFirstOffset = this.getTabNode(this.tabRefs[0]).getBoundingClientRect();
-        var tabLastOffset = this.getTabNode(this.tabRefs[this.tabRefs.length - 1]).getBoundingClientRect();
         if (direction === 'right') {
+            var tabLastOffset = this.getTabNode(this.tabRefs[this.tabRefs.length - 1]).getBoundingClientRect();
             leftMove = tabLastOffset.right - containerOffset.right;
             if (leftMove > containerWidth) {
                 leftMove = this.unifyScrollMax(containerWidth);
             }
         }
         else if (direction === 'left') {
+            var tabFirstOffset = this.getTabNode(this.tabRefs[0]).getBoundingClientRect();
             leftMove = tabFirstOffset.left - containerOffset.left;
             if (-leftMove > containerWidth) {
                 leftMove = -this.unifyScrollMax(containerWidth);
@@ -257,7 +269,7 @@ var TabListComponent = /** @class */ (function (_super) {
         // Cancel scrolling if the tab is visible
         if (tabOffset.right < containerOffset.right && tabOffset.left > containerOffset.left)
             return;
-        var leftMove = tabOffset[rectSide] - containerOffset[rectSide];
+        var leftMove = tabOffset['right'] + (rectSide === 'left' ? tabOffset['width'] : 0) - containerOffset['right'];
         this.scrollPosition += leftMove;
         if (this.scrollPosition < 0) {
             this.scrollPosition = 0;
@@ -337,14 +349,13 @@ var TabListComponent = /** @class */ (function (_super) {
         return null;
     };
     TabListComponent.prototype.renderModal = function () {
-        var _a = this.props, activeIndex = _a.activeIndex, handleTabChange = _a.handleTabChange, handleTabSequence = _a.handleTabSequence;
         return this.props.sortableContextProps ? (React__namespace.createElement(core.DndContext, tslib.__assign({}, this.props.dndContextProps),
             React__namespace.createElement(sortable.SortableContext, tslib.__assign({}, this.props.sortableContextProps),
-                React__namespace.createElement(TabModal, { closeModal: this.toggleModal.bind(this, false), handleTabSequence: handleTabSequence, handleTabChange: handleTabChange, activeIndex: activeIndex }, this.renderTabs({ vertical: true }, true))))) : (React__namespace.createElement(TabModal, { closeModal: this.toggleModal.bind(this, false), handleTabSequence: handleTabSequence, handleTabChange: handleTabChange, activeIndex: activeIndex }, this.renderTabs({ vertical: true }, true)));
+                React__namespace.createElement(TabModal, { closeModal: this.toggleModal.bind(this, false) }, this.renderTabs({ vertical: true }, true))))) : (React__namespace.createElement(TabModal, { closeModal: this.toggleModal.bind(this, false) }, this.renderTabs({ vertical: true }, true)));
     };
     TabListComponent.prototype.render = function () {
         var _this = this;
-        var _a = this.props, customStyle = _a.customStyle, ExtraButton = _a.ExtraButton;
+        var _a = this.props, customStyle = _a.customStyle, ExtraButton = _a.ExtraButton; _a.activeIndex;
         var modalIsOpen = this.state.modalIsOpen;
         var TabList = customStyle.TabList || TabListStyle;
         var ActionButton = customStyle.ActionButton || ActionButtonStyle;
@@ -356,7 +367,7 @@ var TabListComponent = /** @class */ (function (_super) {
                 this.state.showModalButton ? (React__namespace.createElement(FoldButton, { ref: function (node) { return (_this.foldNode = node); }, onClick: this.toggleModal.bind(this, true), showArrowButton: this.state.showArrowButton },
                     React__namespace.createElement(BulletIcon, null))) : null,
                 this.renderArrowButton(ScrollButton),
-                React__namespace.createElement(ListInner, { ref: function (node) { return (_this.listContainer = node); } },
+                React__namespace.createElement(ListInner, { ref: function (node) { return (_this.listContainer = node); }, className: "tabtab-list-container" },
                     React__namespace.createElement(ListScroll, { ref: function (node) { return (_this.listScroll = node); }, role: "tablist" }, this.renderTabs()))),
             ExtraButton ? ExtraButton : null,
             modalIsOpen && this.renderModal()));
@@ -460,7 +471,7 @@ var DragTabList = React.memo(function (_a) {
     return (React__default["default"].createElement(React__default["default"].Fragment, null,
         React__default["default"].createElement(core.DndContext, { sensors: sensors, onDragEnd: handleOnDragEnd },
             React__default["default"].createElement(sortable.SortableContext, { items: items },
-                React__default["default"].createElement(TabListComponent, tslib.__assign({}, props, { sortableContextProps: { items: items }, dndContextProps: { onDragEnd: handleOnDragEnd } }), React__default["default"].Children.map(children, function (child, i) { return (React__default["default"].createElement(DragTab, tslib.__assign({ id: i.toString(), key: i, index: i }, props), child)); }))))));
+                React__default["default"].createElement(TabListComponent, tslib.__assign({}, props, { sortableContextProps: { items: items }, dndContextProps: { onDragEnd: handleOnDragEnd, sensors: sensors } }), React__default["default"].Children.map(children, function (child, i) { return (React__default["default"].createElement(DragTab, tslib.__assign({ id: i.toString(), key: i, index: i }, props), child)); }))))));
 });
 
 var PanelList = /** @class */ (function (_super) {
@@ -486,7 +497,7 @@ var PanelList = /** @class */ (function (_super) {
     return PanelList;
 }(React__namespace.PureComponent));
 
-var PanelStyle = styled__default["default"].div(templateObject_1$1 || (templateObject_1$1 = tslib.__makeTemplateObject(["\n    background-color: white;\n    text-align: left;\n    padding: 20px 15px;\n    ", "\n"], ["\n    background-color: white;\n    text-align: left;\n    padding: 20px 15px;\n    ", "\n"])), function (props) { return (!props.active ? "display: none;" : null); });
+var PanelStyle = styled__default["default"].div(templateObject_1$1 || (templateObject_1$1 = tslib.__makeTemplateObject(["\n    text-align: left;\n    padding: 20px 15px;\n    ", "\n"], ["\n    text-align: left;\n    padding: 20px 15px;\n    ", "\n"])), function (props) { return (!props.active ? "display: none;" : null); });
 var PanelComponent = /** @class */ (function (_super) {
     tslib.__extends(PanelComponent, _super);
     function PanelComponent() {

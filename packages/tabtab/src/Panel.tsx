@@ -3,10 +3,9 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 const PanelStyle = styled.div<{ active: boolean }>`
-    background-color: white;
     text-align: left;
     padding: 20px 15px;
-    ${props => (!props.active ? `display: none;` : null)}
+    ${(props) => (!props.active ? `display: none;` : null)}
 `;
 
 export type PanelProps = {
