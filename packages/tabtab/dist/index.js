@@ -405,7 +405,7 @@ var TabElement = React__namespace.memo(React__namespace.forwardRef(function (_a,
     _a.active; _a.closable; _a.vertical; var props = tslib.__rest(_a, ["active", "closable", "vertical"]);
     return (React__namespace.createElement("li", tslib.__assign({ ref: ref }, props), props.children));
 }));
-var TabStyle = styled__default["default"](TabElement)(templateObject_1$2 || (templateObject_1$2 = tslib.__makeTemplateObject(["\n    display: ", ";\n    touch-action: none;\n    color: #000000bb;\n    border-bottom: 2px solid transparent;\n    white-space: nowrap;\n    ", "\n\n    user-select: none;\n    &:hover,\n    &:active {\n        cursor: pointer;\n        color: black;\n    }\n    ", "\n"], ["\n    display: ", ";\n    touch-action: none;\n    color: #000000bb;\n    border-bottom: 2px solid transparent;\n    white-space: nowrap;\n    ", "\n\n    user-select: none;\n    &:hover,\n    &:active {\n        cursor: pointer;\n        color: black;\n    }\n    ", "\n"])), function (props) { return (props.vertical ? 'block' : 'inline-block'); }, function (props) {
+var TabStyle = styled__default["default"](TabElement)(templateObject_1$2 || (templateObject_1$2 = tslib.__makeTemplateObject(["\n    display: ", ";\n    touch-action: auto;\n    color: #000000bb;\n    border-bottom: 2px solid transparent;\n    white-space: nowrap;\n    ", "\n\n    user-select: none;\n    &:hover,\n    &:active {\n        cursor: pointer;\n        color: black;\n    }\n    ", "\n"], ["\n    display: ", ";\n    touch-action: auto;\n    color: #000000bb;\n    border-bottom: 2px solid transparent;\n    white-space: nowrap;\n    ", "\n\n    user-select: none;\n    &:hover,\n    &:active {\n        cursor: pointer;\n        color: black;\n    }\n    ", "\n"])), function (props) { return (props.vertical ? 'block' : 'inline-block'); }, function (props) {
     return props.vertical
         ? "\n      background-color: white;\n      color: black;\n      padding: 10px 10px;\n      z-index: 1;\n    "
         : function (props) { return (props.closable ? 'padding: 10px 10px 8px 15px;' : 'padding: 10px 15px 8px 15px;'); };
@@ -437,7 +437,7 @@ var Tab = /** @class */ (function (_super) {
         var _this = this;
         var _a = this.props, CustomTabStyle = _a.CustomTabStyle, active = _a.active, closable = _a.closable, vertical = _a.vertical, index = _a.index;
         var TabComponent = CustomTabStyle || TabStyle;
-        return (React__namespace.createElement(TabComponent, { ref: function (node) { return (_this.__INTERNAL_NODE = node); }, style: { touchAction: 'none' }, onClick: this.clickTab, active: active, vertical: vertical, closable: closable, role: "tab", id: "react-tabtab-tab-".concat(index), "aria-controls": "react-tabtab-panel-".concat(index), "aria-selected": active },
+        return (React__namespace.createElement(TabComponent, { ref: function (node) { return (_this.__INTERNAL_NODE = node); }, style: { touchAction: 'auto' }, onClick: this.clickTab, active: active, vertical: vertical, closable: closable, role: "tab", id: "react-tabtab-tab-".concat(index), "aria-controls": "react-tabtab-panel-".concat(index), "aria-selected": active },
             React__namespace.createElement(TabText, null, this.props.children),
             closable ? React__namespace.createElement(CloseButton, { handleTabClose: this.clickDelete }) : null));
     };
@@ -468,7 +468,13 @@ var DragTabList = React.memo(function (_a) {
             distance: 10,
         },
     });
-    var sensors = core.useSensors(mouseSensor, core.useSensor(core.TouchSensor));
+    var touchSensor = core.useSensor(core.TouchSensor, {
+        activationConstraint: {
+            delay: 200,
+            tolerance: 0,
+        },
+    });
+    var sensors = core.useSensors(mouseSensor, touchSensor);
     var handleOnDragEnd = React.useCallback(function (event) {
         var active = event.active, over = event.over;
         if (!props.onTabSequenceChange || !(over === null || over === void 0 ? void 0 : over.id)) {

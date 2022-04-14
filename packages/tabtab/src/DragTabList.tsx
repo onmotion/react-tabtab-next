@@ -23,8 +23,14 @@ const DragTabList: FC<IDragTabListProps & Partial<TabProps>> = memo(({ children,
             distance: 10,
         },
     });
+    const touchSensor = useSensor(TouchSensor, {
+        activationConstraint: {
+            delay: 200,
+            tolerance: 0,
+        },
+    });
 
-    const sensors = useSensors(mouseSensor, useSensor(TouchSensor));
+    const sensors = useSensors(mouseSensor, touchSensor);
 
     const handleOnDragEnd: DndContextProps['onDragEnd'] = useCallback(
         (event) => {
