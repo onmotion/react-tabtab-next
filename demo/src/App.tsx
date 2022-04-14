@@ -16,7 +16,7 @@ import { CustomThemeExample } from './Components/CustomThemeExample';
 
 export default function App() {
     const [activeTab, setActiveTab] = useState(0);
-    const [tabs, setTabs] = useState(makeData(25, 'Some Tab'));
+    const [tabs, setTabs] = useState(makeData(15, 'Some Tab'));
 
     const closableTabItems = useMemo(() => {
         return tabs.map((tab, index) => {

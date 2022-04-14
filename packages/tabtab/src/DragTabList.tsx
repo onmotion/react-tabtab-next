@@ -1,5 +1,5 @@
 import React, { FC, memo, useCallback, useEffect, useState } from 'react';
-import { DndContext, useSensor, useSensors, MouseSensor, DndContextProps } from '@dnd-kit/core';
+import { DndContext, useSensor, useSensors, MouseSensor, DndContextProps, TouchSensor } from '@dnd-kit/core';
 import { SortableContext } from '@dnd-kit/sortable';
 import DragTab from './DragTab';
 import { TabList } from '.';
@@ -24,7 +24,7 @@ const DragTabList: FC<IDragTabListProps & Partial<TabProps>> = memo(({ children,
         },
     });
 
-    const sensors = useSensors(mouseSensor);
+    const sensors = useSensors(mouseSensor, useSensor(TouchSensor));
 
     const handleOnDragEnd: DndContextProps['onDragEnd'] = useCallback(
         (event) => {

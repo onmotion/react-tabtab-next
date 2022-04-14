@@ -72,6 +72,8 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
     foldNode: React.ReactElement;
     tabRefs: React.ElementRef<'div'>[];
     scrollPosition: number;
+    FoldButton: React.ElementType;
+    ScrollButton: React.ElementType;
 
     constructor(props: TabListProps) {
         super(props);
@@ -104,6 +106,8 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
         if (!this.chackActiveIndexRange()) return;
         this.isShowArrowButton();
         this.isShowModalButton();
+        this.FoldButton = makeFoldButton(this.props.customStyle?.ActionButton || ActionButtonStyle);
+        this.ScrollButton = makeScrollButton(this.props.customStyle?.ActionButton || ActionButtonStyle);
         if (this.props.activeIndex > 0) this.scrollToIndex(this.props.activeIndex, 'left');
     }
 
@@ -131,6 +135,13 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
 
         if (prevProps.showArrowButton !== this.props.showArrowButton) {
             this.isShowArrowButton();
+        }
+        if (
+            this.props.customStyle?.ActionButton &&
+            prevProps.customStyle?.ActionButton !== this.props.customStyle?.ActionButton
+        ) {
+            this.FoldButton = makeFoldButton(this.props.customStyle?.ActionButton);
+            this.ScrollButton = makeScrollButton(this.props.customStyle?.ActionButton);
         }
     }
 
@@ -284,6 +295,8 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
     }
 
     renderModal() {
+        console.log('renderModal');
+
         return this.props.sortableContextProps ? (
             <DndContext {...this.props.dndContextProps}>
                 <SortableContext {...this.props.sortableContextProps}>
@@ -300,12 +313,15 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
     }
 
     render() {
-        const { customStyle, ExtraButton, activeIndex } = this.props;
+        console.log('render TabList');
+
+        const { customStyle, ExtraButton } = this.props;
         const { modalIsOpen } = this.state;
         const TabList = customStyle.TabList || TabListStyle;
-        const ActionButton = customStyle.ActionButton || ActionButtonStyle;
-        const ScrollButton = makeScrollButton(ActionButton as React.ElementType);
-        const FoldButton = makeFoldButton(ActionButton as React.ElementType);
+
+        const ScrollButton = this.ScrollButton;
+        const FoldButton = this.FoldButton;
+
         invariant(this.props.children, 'React-tabtab Error: You MUST pass at least one tab');
 
         return (
