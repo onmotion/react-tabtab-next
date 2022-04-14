@@ -66,19 +66,6 @@ export default function App() {
     return (
         <div className="App">
             <div className="container">
-                <div className="header">
-                    <h2>react-tabtab-next</h2>
-                    <a
-                        className="github-button"
-                        href="https://github.com/onmotion/react-tabtab-next"
-                        data-size="large"
-                        data-show-count="true"
-                        aria-label="Star onmotion/react-tabtab-next on GitHub"
-                    >
-                        Star
-                    </a>
-                </div>
-
                 <div className="example">
                     <p className="title">Material draggable</p>
                     <Tabs
