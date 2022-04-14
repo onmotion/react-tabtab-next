@@ -176,7 +176,9 @@ var makeFoldButton = function (ActionButton) { return styled__default["default"]
 var TabListComponent = /** @class */ (function (_super) {
     tslib.__extends(TabListComponent, _super);
     function TabListComponent(props) {
-        var _this = _super.call(this, props) || this;
+        var _this = this;
+        var _a, _b, _c;
+        _this = _super.call(this, props) || this;
         _this.handleScroll = _this.handleScroll.bind(_this);
         _this.toggleModal = _this.toggleModal.bind(_this);
         _this.renderTabs = _this.renderTabs.bind(_this);
@@ -187,6 +189,9 @@ var TabListComponent = /** @class */ (function (_super) {
         _this.chackActiveIndexRange = _this.chackActiveIndexRange.bind(_this);
         _this.scrollPosition = 0;
         _this.tabRefs = [];
+        _this.TabList = ((_a = _this.props.customStyle) === null || _a === void 0 ? void 0 : _a.TabList) || TabListStyle;
+        _this.FoldButton = makeFoldButton(((_b = _this.props.customStyle) === null || _b === void 0 ? void 0 : _b.ActionButton) || ActionButtonStyle);
+        _this.ScrollButton = makeScrollButton(((_c = _this.props.customStyle) === null || _c === void 0 ? void 0 : _c.ActionButton) || ActionButtonStyle);
         _this.state = {
             modalIsOpen: false,
             showArrowButton: false,
@@ -210,6 +215,7 @@ var TabListComponent = /** @class */ (function (_super) {
             this.scrollToIndex(this.props.activeIndex, 'left');
     };
     TabListComponent.prototype.componentDidUpdate = function (prevProps, prevState) {
+        var _a, _b, _c, _d, _e;
         if (prevProps.children.length !== this.props.children.length) {
             this.isShowArrowButton();
             this.isShowModalButton();
@@ -231,6 +237,11 @@ var TabListComponent = /** @class */ (function (_super) {
         }
         if (prevProps.showArrowButton !== this.props.showArrowButton) {
             this.isShowArrowButton();
+        }
+        if (((_a = this.props.customStyle) === null || _a === void 0 ? void 0 : _a.ActionButton) &&
+            ((_b = prevProps.customStyle) === null || _b === void 0 ? void 0 : _b.ActionButton) !== ((_c = this.props.customStyle) === null || _c === void 0 ? void 0 : _c.ActionButton)) {
+            this.FoldButton = makeFoldButton((_d = this.props.customStyle) === null || _d === void 0 ? void 0 : _d.ActionButton);
+            this.ScrollButton = makeScrollButton((_e = this.props.customStyle) === null || _e === void 0 ? void 0 : _e.ActionButton);
         }
     };
     TabListComponent.prototype.getTabNode = function (tab) {
@@ -355,12 +366,11 @@ var TabListComponent = /** @class */ (function (_super) {
     };
     TabListComponent.prototype.render = function () {
         var _this = this;
-        var _a = this.props, customStyle = _a.customStyle, ExtraButton = _a.ExtraButton; _a.activeIndex;
+        var ExtraButton = this.props.ExtraButton;
         var modalIsOpen = this.state.modalIsOpen;
-        var TabList = customStyle.TabList || TabListStyle;
-        var ActionButton = customStyle.ActionButton || ActionButtonStyle;
-        var ScrollButton = makeScrollButton(ActionButton);
-        var FoldButton = makeFoldButton(ActionButton);
+        var TabList = this.TabList;
+        var ScrollButton = this.ScrollButton;
+        var FoldButton = this.FoldButton;
         invariant__default["default"](this.props.children, 'React-tabtab Error: You MUST pass at least one tab');
         return (React__namespace.createElement("div", { style: { display: 'flex' } },
             React__namespace.createElement(TabList, { showModalButton: this.state.showModalButton, showArrowButton: this.state.showArrowButton },
@@ -395,7 +405,7 @@ var TabElement = React__namespace.memo(React__namespace.forwardRef(function (_a,
     _a.active; _a.closable; _a.vertical; var props = tslib.__rest(_a, ["active", "closable", "vertical"]);
     return (React__namespace.createElement("li", tslib.__assign({ ref: ref }, props), props.children));
 }));
-var TabStyle = styled__default["default"](TabElement)(templateObject_1$2 || (templateObject_1$2 = tslib.__makeTemplateObject(["\n    display: ", ";\n    color: #000000bb;\n    border-bottom: 2px solid transparent;\n    white-space: nowrap;\n    ", "\n\n    user-select: none;\n    &:hover,\n    &:active {\n        cursor: pointer;\n        color: black;\n    }\n    ", "\n"], ["\n    display: ", ";\n    color: #000000bb;\n    border-bottom: 2px solid transparent;\n    white-space: nowrap;\n    ", "\n\n    user-select: none;\n    &:hover,\n    &:active {\n        cursor: pointer;\n        color: black;\n    }\n    ", "\n"])), function (props) { return (props.vertical ? 'block' : 'inline-block'); }, function (props) {
+var TabStyle = styled__default["default"](TabElement)(templateObject_1$2 || (templateObject_1$2 = tslib.__makeTemplateObject(["\n    display: ", ";\n    touch-action: none;\n    color: #000000bb;\n    border-bottom: 2px solid transparent;\n    white-space: nowrap;\n    ", "\n\n    user-select: none;\n    &:hover,\n    &:active {\n        cursor: pointer;\n        color: black;\n    }\n    ", "\n"], ["\n    display: ", ";\n    touch-action: none;\n    color: #000000bb;\n    border-bottom: 2px solid transparent;\n    white-space: nowrap;\n    ", "\n\n    user-select: none;\n    &:hover,\n    &:active {\n        cursor: pointer;\n        color: black;\n    }\n    ", "\n"])), function (props) { return (props.vertical ? 'block' : 'inline-block'); }, function (props) {
     return props.vertical
         ? "\n      background-color: white;\n      color: black;\n      padding: 10px 10px;\n      z-index: 1;\n    "
         : function (props) { return (props.closable ? 'padding: 10px 10px 8px 15px;' : 'padding: 10px 15px 8px 15px;'); };
@@ -427,7 +437,7 @@ var Tab = /** @class */ (function (_super) {
         var _this = this;
         var _a = this.props, CustomTabStyle = _a.CustomTabStyle, active = _a.active, closable = _a.closable, vertical = _a.vertical, index = _a.index;
         var TabComponent = CustomTabStyle || TabStyle;
-        return (React__namespace.createElement(TabComponent, { ref: function (node) { return (_this.__INTERNAL_NODE = node); }, onClick: this.clickTab, active: active, vertical: vertical, closable: closable, role: "tab", id: "react-tabtab-tab-".concat(index), "aria-controls": "react-tabtab-panel-".concat(index), "aria-selected": active },
+        return (React__namespace.createElement(TabComponent, { ref: function (node) { return (_this.__INTERNAL_NODE = node); }, style: { touchAction: 'none' }, onClick: this.clickTab, active: active, vertical: vertical, closable: closable, role: "tab", id: "react-tabtab-tab-".concat(index), "aria-controls": "react-tabtab-panel-".concat(index), "aria-selected": active },
             React__namespace.createElement(TabText, null, this.props.children),
             closable ? React__namespace.createElement(CloseButton, { handleTabClose: this.clickDelete }) : null));
     };
@@ -458,7 +468,7 @@ var DragTabList = React.memo(function (_a) {
             distance: 10,
         },
     });
-    var sensors = core.useSensors(mouseSensor);
+    var sensors = core.useSensors(mouseSensor, core.useSensor(core.TouchSensor));
     var handleOnDragEnd = React.useCallback(function (event) {
         var active = event.active, over = event.over;
         if (!props.onTabSequenceChange || !(over === null || over === void 0 ? void 0 : over.id)) {

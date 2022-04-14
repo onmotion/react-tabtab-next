@@ -35,6 +35,9 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
     foldNode: React.ReactElement;
     tabRefs: React.ElementRef<'div'>[];
     scrollPosition: number;
+    FoldButton: React.ElementType;
+    ScrollButton: React.ElementType;
+    TabList: React.ElementType;
     constructor(props: TabListProps);
     chackActiveIndexRange(): boolean;
     componentDidMount(): void;
