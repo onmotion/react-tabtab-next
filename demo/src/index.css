@@ -1,7 +1,11 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #34475a;
 
-  color: #34475a;
+    background: linear-gradient(90deg, #fff 21px, transparent 1%) center,
+    linear-gradient(#fff 21px, transparent 1%) center,
+    #626c7c;
+    background-size: 22px 22px;
 }
 .container {
         max-width: 800px;
@@ -21,12 +25,13 @@ h2 {
     font-size: 1.1em;
     font-weight: bold;
 
-    margin-top: 0;
+    margin-top: 25px;
 }
 
 .example {
-      padding: 25px;
+      padding: 10px 25px;
       box-shadow: 0 3px 35px #0000001c;
       border-radius: 7px;
       margin: 25px 0;
+      background: #fff;
 }
