@@ -83,7 +83,7 @@ export default class Tab extends React.PureComponent<TabProps> {
     render() {
         const { CustomTabStyle, active, closable, vertical, index } = this.props;
         const TabComponent = CustomTabStyle || TabStyle;
-        console.log('render Tab');
+
         return (
             <TabComponent
                 ref={(node) => (this.__INTERNAL_NODE = node)}

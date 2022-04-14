@@ -74,6 +74,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
     scrollPosition: number;
     FoldButton: React.ElementType;
     ScrollButton: React.ElementType;
+    TabList: React.ElementType;
 
     constructor(props: TabListProps) {
         super(props);
@@ -87,6 +88,10 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
         this.chackActiveIndexRange = this.chackActiveIndexRange.bind(this);
         this.scrollPosition = 0;
         this.tabRefs = [];
+        this.TabList = this.props.customStyle?.TabList || TabListStyle;
+        this.FoldButton = makeFoldButton(this.props.customStyle?.ActionButton || ActionButtonStyle);
+        this.ScrollButton = makeScrollButton(this.props.customStyle?.ActionButton || ActionButtonStyle);
+
         this.state = {
             modalIsOpen: false,
             showArrowButton: false,
@@ -106,8 +111,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
         if (!this.chackActiveIndexRange()) return;
         this.isShowArrowButton();
         this.isShowModalButton();
-        this.FoldButton = makeFoldButton(this.props.customStyle?.ActionButton || ActionButtonStyle);
-        this.ScrollButton = makeScrollButton(this.props.customStyle?.ActionButton || ActionButtonStyle);
+
         if (this.props.activeIndex > 0) this.scrollToIndex(this.props.activeIndex, 'left');
     }
 
@@ -295,8 +299,6 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
     }
 
     renderModal() {
-        console.log('renderModal');
-
         return this.props.sortableContextProps ? (
             <DndContext {...this.props.dndContextProps}>
                 <SortableContext {...this.props.sortableContextProps}>
@@ -313,12 +315,10 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
     }
 
     render() {
-        console.log('render TabList');
-
-        const { customStyle, ExtraButton } = this.props;
+        const { ExtraButton } = this.props;
         const { modalIsOpen } = this.state;
-        const TabList = customStyle.TabList || TabListStyle;
 
+        const TabList = this.TabList;
         const ScrollButton = this.ScrollButton;
         const FoldButton = this.FoldButton;
 
