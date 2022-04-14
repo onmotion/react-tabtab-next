@@ -157,6 +157,12 @@ var ListScroll = styled__default["default"].ul(templateObject_3 || (templateObje
 var ActionButtonStyle = styled__default["default"].div(templateObject_4 || (templateObject_4 = tslib.__makeTemplateObject(["\n    height: 100%;\n    width: ", "px;\n    text-align: center;\n    background: #f9f9f9;\n    color: #555;\n    :hover {\n        color: #000;\n    }\n"], ["\n    height: 100%;\n    width: ", "px;\n    text-align: center;\n    background: #f9f9f9;\n    color: #555;\n    :hover {\n        color: #000;\n    }\n"])), buttonWidth);
 var templateObject_1$5, templateObject_2$2, templateObject_3, templateObject_4;
 
+var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
+
+var css = ".ReactModal__Overlay {\n    opacity: 0;\n    transition: opacity .3s ease-in-out;\n}\n\n.ReactModal__Overlay--after-open {\n    opacity: 1;\n}\n\n.ReactModal__Overlay--before-close {\n    opacity: 0;\n}\n\n.ReactModal__Content {\n    margin: auto;\n    background-color: #fff;\n    width: 200px;\n    padding: 20px;\n    margin-top: 40px;\n    overflow: auto;\n    max-height: calc(100vh - 120px);\n    outline: none;\n    border-radius: 10px;\n    box-shadow: 0 0 35px #0000001c;\n}";
+n(css,{});
+
+ReactModal__default["default"].setAppElement(document.querySelector('body'));
 var TabListModal = React.memo(function (_a) {
     var children = _a.children, isOpen = _a.isOpen, dndContextProps = _a.dndContextProps, sortableContextProps = _a.sortableContextProps, props = tslib.__rest(_a, ["children", "isOpen", "dndContextProps", "sortableContextProps"]);
     return (React__default["default"].createElement(React__default["default"].Fragment, null, dndContextProps ? (React__default["default"].createElement(core.DndContext, tslib.__assign({}, dndContextProps),

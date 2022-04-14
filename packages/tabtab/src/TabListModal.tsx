@@ -4,6 +4,8 @@ import React, { FC, memo } from 'react';
 import ReactModal from 'react-modal';
 import './styles/modal.css';
 
+ReactModal.setAppElement(document.querySelector('body'));
+
 interface ITabListModalProps extends ReactModal.Props {
     dndContextProps?: DndContextProps;
     sortableContextProps?: Omit<SortableContextProps, 'children'>;
