@@ -1,4 +1,16 @@
+import { LoremIpsum } from 'lorem-ipsum';
 import * as React from 'react';
+
+const lorem = new LoremIpsum({
+    sentencesPerParagraph: {
+        max: 8,
+        min: 4,
+    },
+    wordsPerSentence: {
+        max: 16,
+        min: 4,
+    },
+});
 
 export const makeData = (number: number, titlePrefix = 'Tab', useTitleCounter = true) => {
     const data = [];
@@ -7,11 +19,8 @@ export const makeData = (number: number, titlePrefix = 'Tab', useTitleCounter = 
             title: useTitleCounter ? `${titlePrefix} ${i + 1}` : titlePrefix,
             content: (
                 <div>
-                    <b>Content {i}</b>
-                    <p>
-                        Neu instabilis illas montibus glomeravit Montibus sed ignotas. Spisso legebantur phoebe montes.
-                        Dedit permisit. Glomeravit oppida formaeque ab consistere aera quam totidemque ipsa?
-                    </p>
+                    <b>Content {i + 1}</b>
+                    <p>{lorem.generateWords(15)}</p>
                 </div>
             ),
         });
