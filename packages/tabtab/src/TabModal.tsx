@@ -1,6 +1,4 @@
 import * as React from 'react';
-
-import SortMethod from './SortMethod';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
 

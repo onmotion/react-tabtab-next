@@ -1,5 +1,4 @@
 import React from 'react';
-import { Panel } from '.';
 import { PanelProps } from './Panel';
 import { TabElementProps } from './Tab';
 import { TabListElementProps } from './TabListElement';

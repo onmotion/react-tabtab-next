@@ -1,8 +1,7 @@
 // @flow
-import React, { FC, forwardRef, memo, MutableRefObject } from 'react';
+import React, { FC, forwardRef, memo } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import Tab from './Tab';
 
 interface Props {
     id: string;

@@ -1,6 +1,6 @@
-import React, { FC, memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { FC, memo, useCallback, useEffect, useState } from 'react';
 import { DndContext, useSensor, useSensors, MouseSensor, DndContextProps } from '@dnd-kit/core';
-import { arrayMove, SortableContext } from '@dnd-kit/sortable';
+import { SortableContext } from '@dnd-kit/sortable';
 import DragTab from './DragTab';
 import { TabList } from '.';
 import { TabProps } from './Tab';
