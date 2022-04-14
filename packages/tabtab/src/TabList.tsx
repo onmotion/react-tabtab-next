@@ -121,9 +121,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
         }
     }
 
-    getTabNode(
-        tab: HTMLDivElement & { __INTERNAL_NODE?: any; __DRAG_TAB_INTERNAL_NODE?: any }
-    ): React.ElementRef<'div'> {
+    getTabNode(tab: HTMLDivElement & { __INTERNAL_NODE?: any }): React.ElementRef<'div'> {
         return tab.__INTERNAL_NODE;
     }
 
@@ -135,15 +133,17 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
         let leftMove = 0;
         const containerOffset = this.listContainer.getBoundingClientRect();
         const containerWidth = this.listContainer.offsetWidth;
-        const tabFirstOffset = this.getTabNode(this.tabRefs[0]).getBoundingClientRect();
-        const tabLastOffset = this.getTabNode(this.tabRefs[this.tabRefs.length - 1]).getBoundingClientRect();
 
         if (direction === 'right') {
+            const tabLastOffset = this.getTabNode(this.tabRefs[this.tabRefs.length - 1]).getBoundingClientRect();
+
             leftMove = tabLastOffset.right - containerOffset.right;
             if (leftMove > containerWidth) {
                 leftMove = this.unifyScrollMax(containerWidth);
             }
         } else if (direction === 'left') {
+            const tabFirstOffset = this.getTabNode(this.tabRefs[0]).getBoundingClientRect();
+
             leftMove = tabFirstOffset.left - containerOffset.left;
             if (-leftMove > containerWidth) {
                 leftMove = -this.unifyScrollMax(containerWidth);
@@ -160,9 +160,11 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
     scrollToIndex(index: number, rectSide: 'left' | 'right') {
         const tabOffset = this.getTabNode(this.tabRefs[index]).getBoundingClientRect();
         const containerOffset = this.listContainer.getBoundingClientRect();
+
         // Cancel scrolling if the tab is visible
         if (tabOffset.right < containerOffset.right && tabOffset.left > containerOffset.left) return;
-        const leftMove = tabOffset[rectSide] - containerOffset[rectSide];
+
+        const leftMove = tabOffset['right'] + (rectSide === 'left' ? tabOffset['width'] : 0) - containerOffset['right'];
         this.scrollPosition += leftMove;
         if (this.scrollPosition < 0) {
             this.scrollPosition = 0;
@@ -267,27 +269,18 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
     }
 
     renderModal() {
-        const { activeIndex, handleTabChange, handleTabSequence } = this.props;
+        console.log('renderModal');
+
         return this.props.sortableContextProps ? (
             <DndContext {...this.props.dndContextProps}>
                 <SortableContext {...this.props.sortableContextProps}>
-                    <TabModal
-                        closeModal={this.toggleModal.bind(this, false)}
-                        handleTabSequence={handleTabSequence}
-                        handleTabChange={handleTabChange}
-                        activeIndex={activeIndex}
-                    >
+                    <TabModal closeModal={this.toggleModal.bind(this, false)}>
                         {this.renderTabs({ vertical: true }, true)}
                     </TabModal>
                 </SortableContext>
             </DndContext>
         ) : (
-            <TabModal
-                closeModal={this.toggleModal.bind(this, false)}
-                handleTabSequence={handleTabSequence}
-                handleTabChange={handleTabChange}
-                activeIndex={activeIndex}
-            >
+            <TabModal closeModal={this.toggleModal.bind(this, false)}>
                 {this.renderTabs({ vertical: true }, true)}
             </TabModal>
         );
@@ -315,7 +308,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
                         </FoldButton>
                     ) : null}
                     {this.renderArrowButton(ScrollButton)}
-                    <ListInner ref={(node) => (this.listContainer = node)}>
+                    <ListInner ref={(node) => (this.listContainer = node)} className="tabtab-list-container">
                         <ListScroll ref={(node) => (this.listScroll = node)} role="tablist">
                             {this.renderTabs()}
                         </ListScroll>

@@ -73,7 +73,23 @@ export default function App() {
                 ExtraButton={
                     <ExtraButton
                         onClick={(e) => {
-                            console.log(e);
+                            setTabs((prev) => {
+                                const newTabs = [...prev];
+                                const newItem = {
+                                    title: 'New Tab ' + newTabs.length,
+                                    content: (
+                                        <p>
+                                            Montibus sed ignotas. Spisso legebantur phoebe montes. Dedit permisit.
+                                            Glomeravit oppida formaeque ab consistere aera quam totidemque ipsa? Aera
+                                            extendi persidaque tanta membra spisso illi nam solidumque. Habitandae
+                                            triones
+                                        </p>
+                                    ),
+                                };
+                                newTabs.push(newItem);
+                                return newTabs;
+                            });
+                            setActiveTab(tabs.length);
                         }}
                     >
                         +
@@ -88,6 +104,7 @@ export default function App() {
             <Tabs
                 onTabClose={(i) => {
                     console.log('close', i);
+                    setTabs((prev) => prev.filter((_, idx) => idx !== i));
                 }}
                 showModalButton={false}
                 customStyle={bootstrap}

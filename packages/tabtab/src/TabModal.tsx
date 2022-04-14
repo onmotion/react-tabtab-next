@@ -8,9 +8,6 @@ ReactModal.setAppElement('#root');
 
 type Props = {
     closeModal: (event: any) => void;
-    handleTabSequence: (event: any) => void;
-    handleTabChange: (event: any) => void;
-    activeIndex: number;
     children: React.ReactNode[];
 };
 
