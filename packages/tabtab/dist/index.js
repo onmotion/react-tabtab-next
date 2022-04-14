@@ -85,7 +85,6 @@ var Tabs = /** @class */ (function (_super) {
         }
     };
     Tabs.prototype.render = function () {
-        console.log('render Tabs');
         var _a = this.props, children = _a.children, extraProps = tslib.__rest(_a, ["children"]);
         var activeIndex = this.state.activeIndex;
         var props = tslib.__assign({ handleTabChange: this.handleTabChange, handleTabSequence: this.handleTabSequence, handleTabClose: this.handleTabClose, activeIndex: activeIndex }, extraProps);
@@ -160,7 +159,6 @@ var templateObject_1$5, templateObject_2$2, templateObject_3, templateObject_4;
 
 var TabListModal = React.memo(function (_a) {
     var children = _a.children, isOpen = _a.isOpen, dndContextProps = _a.dndContextProps, sortableContextProps = _a.sortableContextProps, props = tslib.__rest(_a, ["children", "isOpen", "dndContextProps", "sortableContextProps"]);
-    console.log('render TabListModal');
     return (React__default["default"].createElement(React__default["default"].Fragment, null, dndContextProps ? (React__default["default"].createElement(core.DndContext, tslib.__assign({}, dndContextProps),
         React__default["default"].createElement(sortable.SortableContext, tslib.__assign({}, sortableContextProps),
             React__default["default"].createElement(ReactModal__default["default"], tslib.__assign({ isOpen: isOpen, closeTimeoutMS: 300 }, props, { contentLabel: "Modal", className: "tabtab-modal" }), children)))) : (React__default["default"].createElement(ReactModal__default["default"], tslib.__assign({ isOpen: isOpen, closeTimeoutMS: 300 }, props, { contentLabel: "Modal", className: "tabtab-modal" }), children))));

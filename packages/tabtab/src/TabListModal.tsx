@@ -13,8 +13,6 @@ interface ITabListModalProps extends ReactModal.Props {
 
 export const TabListModal: FC<ITabListModalProps> = memo(
     ({ children, isOpen, dndContextProps, sortableContextProps, ...props }) => {
-        console.log('render TabListModal');
-
         return (
             <>
                 {dndContextProps ? (
