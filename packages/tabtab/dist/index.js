@@ -124,7 +124,7 @@ function isNumber(number) {
 }
 
 ReactModal__default["default"].setAppElement('#root');
-var Modal = styled__default["default"](ReactModal__default["default"])(templateObject_1$6 || (templateObject_1$6 = tslib.__makeTemplateObject(["\n    margin: auto;\n    background-color: #fff;\n    width: 200px;\n    padding: 20px;\n    margin-top: 40px;\n    border: 1px solid #00000022;\n    overflow: auto;\n    max-height: calc(100vh - 120px);\n    outline: none;\n"], ["\n    margin: auto;\n    background-color: #fff;\n    width: 200px;\n    padding: 20px;\n    margin-top: 40px;\n    border: 1px solid #00000022;\n    overflow: auto;\n    max-height: calc(100vh - 120px);\n    outline: none;\n"])));
+var Modal = styled__default["default"](ReactModal__default["default"])(templateObject_1$6 || (templateObject_1$6 = tslib.__makeTemplateObject(["\n    margin: auto;\n    background-color: #fff;\n    width: 200px;\n    padding: 20px;\n    margin-top: 40px;\n    overflow: auto;\n    max-height: calc(100vh - 120px);\n    outline: none;\n    border-radius: 10px;\n    box-shadow: 0 0 35px #0000001c;\n"], ["\n    margin: auto;\n    background-color: #fff;\n    width: 200px;\n    padding: 20px;\n    margin-top: 40px;\n    overflow: auto;\n    max-height: calc(100vh - 120px);\n    outline: none;\n    border-radius: 10px;\n    box-shadow: 0 0 35px #0000001c;\n"])));
 var TabModal = /** @class */ (function (_super) {
     tslib.__extends(TabModal, _super);
     function TabModal() {
