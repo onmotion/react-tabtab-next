@@ -171,8 +171,8 @@ var ListScroll = styled__default["default"].ul(templateObject_3 || (templateObje
 var ActionButtonStyle = styled__default["default"].div(templateObject_4 || (templateObject_4 = tslib.__makeTemplateObject(["\n    height: 100%;\n    width: ", "px;\n    text-align: center;\n    background: #f9f9f9;\n    color: #555;\n    :hover {\n        color: #000;\n    }\n"], ["\n    height: 100%;\n    width: ", "px;\n    text-align: center;\n    background: #f9f9f9;\n    color: #555;\n    :hover {\n        color: #000;\n    }\n"])), buttonWidth);
 var templateObject_1$5, templateObject_2$2, templateObject_3, templateObject_4;
 
-var makeScrollButton = function (ActionButton) { return styled__default["default"](ActionButton)(templateObject_1$4 || (templateObject_1$4 = tslib.__makeTemplateObject(["\n    display: inline-block;\n    filter: none;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    position: absolute;\n    ", ";\n    &:hover {\n        cursor: pointer;\n    }\n"], ["\n    display: inline-block;\n    filter: none;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    position: absolute;\n    ", ";\n    &:hover {\n        cursor: pointer;\n    }\n"])), function (props) { return (props.left ? (props.showModalButton ? "left: ".concat(buttonWidth + 2, "px") : "left: 0") : 'right: 0'); }); };
-var makeFoldButton = function (ActionButton) { return styled__default["default"](ActionButton)(templateObject_2$1 || (templateObject_2$1 = tslib.__makeTemplateObject(["\n    display: inline-block;\n    filter: none;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    position: absolute;\n    left: 0;\n    &:hover {\n        cursor: pointer;\n    }\n"], ["\n    display: inline-block;\n    filter: none;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    position: absolute;\n    left: 0;\n    &:hover {\n        cursor: pointer;\n    }\n"]))); };
+var makeScrollButton = function (ActionButton) { return styled__default["default"](ActionButton)(templateObject_1$4 || (templateObject_1$4 = tslib.__makeTemplateObject(["\n    display: inline-block;\n    filter: none;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    position: absolute;\n    user-select: none;\n    ", ";\n    &:hover {\n        cursor: pointer;\n    }\n"], ["\n    display: inline-block;\n    filter: none;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    position: absolute;\n    user-select: none;\n    ", ";\n    &:hover {\n        cursor: pointer;\n    }\n"])), function (props) { return (props.left ? (props.showModalButton ? "left: ".concat(buttonWidth + 2, "px") : "left: 0") : 'right: 0'); }); };
+var makeFoldButton = function (ActionButton) { return styled__default["default"](ActionButton)(templateObject_2$1 || (templateObject_2$1 = tslib.__makeTemplateObject(["\n    display: inline-block;\n    filter: none;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    position: absolute;\n    user-select: none;\n    left: 0;\n    &:hover {\n        cursor: pointer;\n    }\n"], ["\n    display: inline-block;\n    filter: none;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    position: absolute;\n    user-select: none;\n    left: 0;\n    &:hover {\n        cursor: pointer;\n    }\n"]))); };
 var TabListComponent = /** @class */ (function (_super) {
     tslib.__extends(TabListComponent, _super);
     function TabListComponent(props) {
@@ -181,7 +181,7 @@ var TabListComponent = /** @class */ (function (_super) {
         _this.toggleModal = _this.toggleModal.bind(_this);
         _this.renderTabs = _this.renderTabs.bind(_this);
         _this.renderModal = _this.renderModal.bind(_this);
-        _this.renderArrowButton = _this.renderArrowButton.bind(_this);
+        _this.renderArrowButtons = _this.renderArrowButtons.bind(_this);
         _this.isShowModalButton = _this.isShowModalButton.bind(_this);
         _this.isShowArrowButton = _this.isShowArrowButton.bind(_this);
         _this.chackActiveIndexRange = _this.chackActiveIndexRange.bind(_this);
@@ -332,18 +332,18 @@ var TabListComponent = /** @class */ (function (_super) {
                 } }, props), options));
         });
     };
-    TabListComponent.prototype.renderArrowButton = function (ScrollButton) {
+    TabListComponent.prototype.renderArrowButtons = function (ScrollButton) {
         var _this = this;
         var showArrowButton = this.state.showArrowButton;
         if (showArrowButton) {
             return (React__namespace.createElement("div", null,
                 React__namespace.createElement(ScrollButton, { left: true, onClick: function () {
                         _this.handleScroll('left');
-                    }, ref: function (node) { return (_this.leftArrowNode = node); }, showModalButton: this.state.showModalButton },
+                    }, ref: function (node) { return (_this.leftArrowNode = node); }, showModalButton: this.state.showModalButton, className: 'tabtab-arrow-button_left' },
                     React__namespace.createElement(LeftIcon, null)),
                 React__namespace.createElement(ScrollButton, { onClick: function () {
                         _this.handleScroll('right');
-                    }, ref: function (node) { return (_this.rightArrowNode = node); } },
+                    }, ref: function (node) { return (_this.rightArrowNode = node); }, className: 'tabtab-arrow-button_right' },
                     React__namespace.createElement(RightIcon, null))));
         }
         return null;
@@ -366,7 +366,7 @@ var TabListComponent = /** @class */ (function (_super) {
             React__namespace.createElement(TabList, { showModalButton: this.state.showModalButton, showArrowButton: this.state.showArrowButton },
                 this.state.showModalButton ? (React__namespace.createElement(FoldButton, { ref: function (node) { return (_this.foldNode = node); }, onClick: this.toggleModal.bind(this, true), showArrowButton: this.state.showArrowButton },
                     React__namespace.createElement(BulletIcon, null))) : null,
-                this.renderArrowButton(ScrollButton),
+                this.renderArrowButtons(ScrollButton),
                 React__namespace.createElement(ListInner, { ref: function (node) { return (_this.listContainer = node); }, className: "tabtab-list-container" },
                     React__namespace.createElement(ListScroll, { ref: function (node) { return (_this.listScroll = node); }, role: "tablist" }, this.renderTabs()))),
             ExtraButton ? ExtraButton : null,

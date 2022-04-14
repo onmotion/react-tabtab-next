@@ -50,7 +50,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
     isShowModalButton(): void;
     isShowArrowButton(): void;
     renderTabs(options?: any, isModal?: boolean): React.ReactElement<any, string | React.JSXElementConstructor<any>>[];
-    renderArrowButton(ScrollButton: React.ElementType): JSX.Element;
+    renderArrowButtons(ScrollButton: React.ElementType): JSX.Element;
     renderModal(): JSX.Element;
     render(): JSX.Element;
 }
