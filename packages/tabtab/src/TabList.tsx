@@ -80,6 +80,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
         this.renderArrowButton = this.renderArrowButton.bind(this);
         this.isShowModalButton = this.isShowModalButton.bind(this);
         this.isShowArrowButton = this.isShowArrowButton.bind(this);
+        this.chackActiveIndexRange = this.chackActiveIndexRange.bind(this);
         this.scrollPosition = 0;
         this.tabRefs = [];
         this.state = {
@@ -89,7 +90,16 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
         };
     }
 
+    chackActiveIndexRange() {
+        if (this.props.activeIndex >= this.props.children.length) {
+            console.error('activeIndex is out of range 0-' + (this.props.children.length - 1));
+            return false;
+        }
+        return true;
+    }
+
     componentDidMount() {
+        if (!this.chackActiveIndexRange()) return;
         this.isShowArrowButton();
         this.isShowModalButton();
         if (this.props.activeIndex > 0) this.scrollToIndex(this.props.activeIndex, 'left');
@@ -103,6 +113,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
 
         if (prevProps.activeIndex !== this.props.activeIndex) {
             //if we scroll to the last tab, alignment is set to the right side of the tab
+            if (!this.chackActiveIndexRange()) return;
             const rectSide = this.props.activeIndex === this.props.children.length - 1 ? 'right' : 'left';
             this.scrollToIndex(this.props.activeIndex, rectSide);
         }
@@ -269,8 +280,6 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
     }
 
     renderModal() {
-        console.log('renderModal');
-
         return this.props.sortableContextProps ? (
             <DndContext {...this.props.dndContextProps}>
                 <SortableContext {...this.props.sortableContextProps}>
@@ -287,7 +296,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
     }
 
     render() {
-        const { customStyle, ExtraButton } = this.props;
+        const { customStyle, ExtraButton, activeIndex } = this.props;
         const { modalIsOpen } = this.state;
         const TabList = customStyle.TabList || TabListStyle;
         const ActionButton = customStyle.ActionButton || ActionButtonStyle;

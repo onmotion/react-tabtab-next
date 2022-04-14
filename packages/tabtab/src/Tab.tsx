@@ -68,8 +68,6 @@ export default class Tab extends React.PureComponent<TabProps> {
     }
 
     clickTab(e: React.MouseEvent<HTMLLIElement, MouseEvent>) {
-        console.log('clickTab');
-
         e.stopPropagation();
         const { handleTabChange, index } = this.props;
         handleTabChange(index);

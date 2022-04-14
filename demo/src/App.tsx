@@ -12,6 +12,7 @@ import {
     AsyncPanel,
 } from '../../packages/tabtab/src';
 import { md, bootstrap, bulma } from '../../packages/themes/src';
+import { CustomThemeExample } from './Components/CustomThemeExample';
 
 export default function App() {
     const [activeTab, setActiveTab] = useState(0);
@@ -108,8 +109,9 @@ export default function App() {
             <p className="title">Async data loading</p>
             <Tabs defaultIndex={0}>
                 <TabList>
-                    <Tab>Tab1</Tab>
-                    <Tab>Tab2</Tab>
+                    <Tab>Static Tab</Tab>
+                    <Tab>Async Tab</Tab>
+                    <Tab>Async Tab Cache</Tab>
                 </TabList>
                 <PanelList>
                     <Panel>Static content</Panel>
@@ -119,8 +121,23 @@ export default function App() {
                         renderLoading={() => <div>Loading...</div>}
                         cache={false}
                     />
+                    <AsyncPanel
+                        loadContent={loadContentFunc}
+                        render={(data) => <div>{JSON.stringify(data)}</div>}
+                        renderLoading={() => <div>Loading...</div>}
+                        cache={true}
+                    />
                 </PanelList>
             </Tabs>
+
+            <p className="title">Custom theme example</p>
+            <CustomThemeExample
+                activeIndex={activeTab > tabItems.length - 1 ? tabItems.length - 1 : activeTab}
+                onTabChange={handleOnTabChange}
+                panelItems={panelItems}
+                tabItems={tabItems}
+                onTabSequenceChange={handleOnTabSequenceChange}
+            ></CustomThemeExample>
             <p className="title">Bulma minimal</p>
             <Tabs
                 customStyle={bulma}
