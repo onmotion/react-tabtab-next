@@ -15,6 +15,7 @@ export const TabElement = React.memo(
 
 const TabStyle = styled(TabElement)`
     display: ${(props) => (props.vertical ? 'block' : 'inline-block')};
+    touch-action: none;
     color: #000000bb;
     border-bottom: 2px solid transparent;
     white-space: nowrap;
@@ -86,6 +87,7 @@ export default class Tab extends React.PureComponent<TabProps> {
         return (
             <TabComponent
                 ref={(node) => (this.__INTERNAL_NODE = node)}
+                style={{ touchAction: 'none' }}
                 onClick={this.clickTab}
                 active={active}
                 vertical={vertical}
