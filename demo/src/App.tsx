@@ -100,7 +100,7 @@ export default function App() {
                             console.log('close', i);
                             setTabs((prev) => prev.filter((_, idx) => idx !== i));
                         }}
-                        showModalButton={true}
+                        showModalButton={false}
                         customStyle={bootstrap}
                         activeIndex={activeTab}
                         onTabChange={handleOnTabChange}
