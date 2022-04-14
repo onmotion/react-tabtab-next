@@ -15,6 +15,8 @@ import { md, bootstrap, bulma } from '../../packages/themes/src';
 import { CustomThemeExample } from './Components/CustomThemeExample';
 
 export default function App() {
+    console.log('render App');
+
     const [activeTab, setActiveTab] = useState(0);
     const [tabs, setTabs] = useState(makeData(15, 'Some Tab'));
 
@@ -100,7 +102,7 @@ export default function App() {
                             console.log('close', i);
                             setTabs((prev) => prev.filter((_, idx) => idx !== i));
                         }}
-                        showModalButton={false}
+                        showModalButton={true}
                         customStyle={bootstrap}
                         activeIndex={activeTab}
                         onTabChange={handleOnTabChange}

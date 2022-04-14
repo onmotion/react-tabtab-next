@@ -49,12 +49,11 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
     handleScroll(direction: 'right' | 'left'): void;
     scrollToIndex(index: number, rectSide: 'left' | 'right'): void;
     scrollToZero(): void;
-    toggleModal(open: boolean): void;
+    toggleModal(): void;
     isShowModalButton(): void;
     isShowArrowButton(): void;
     renderTabs(options?: any, isModal?: boolean): React.ReactElement<any, string | React.JSXElementConstructor<any>>[];
     renderArrowButtons(ScrollButton: React.ElementType): JSX.Element;
-    renderModal(): JSX.Element;
     render(): JSX.Element;
 }
 export {};

@@ -2,7 +2,7 @@ import React, { FC, memo, useCallback, useEffect, useState } from 'react';
 import { DndContext, useSensor, useSensors, MouseSensor, DndContextProps, TouchSensor } from '@dnd-kit/core';
 import { SortableContext } from '@dnd-kit/sortable';
 import DragTab from './DragTab';
-import { TabList } from '.';
+import TabList from './TabList';
 import { TabProps } from './Tab';
 import { TabsProps } from './Tabs';
 

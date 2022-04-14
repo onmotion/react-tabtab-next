@@ -14,7 +14,8 @@ export const TabElement = React.memo(
 );
 
 const TabStyle = styled(TabElement)`
-    display: ${(props) => (props.vertical ? 'block' : 'inline-block')};
+    display: ${(props) => (props.vertical ? 'flex' : 'inline-block')};
+    justify-content: space-between;
     touch-action: auto;
     color: #000000bb;
     border-bottom: 2px solid transparent;
@@ -69,7 +70,6 @@ export default class Tab extends React.PureComponent<TabProps> {
     }
 
     clickTab(e: React.MouseEvent<HTMLLIElement, MouseEvent>) {
-        e.stopPropagation();
         const { handleTabChange, index } = this.props;
         handleTabChange(index);
     }

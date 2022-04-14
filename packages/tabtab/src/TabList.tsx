@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import invariant from 'invariant';
 import { LeftIcon, RightIcon, BulletIcon } from './IconSvg';
 import { isNumber } from './utils/isType';
-import TabModal from './TabModal';
 import { ActionButtonStyle, buttonWidth, ListInner, ListScroll, TabListStyle } from './styledElements';
 import { TabListElementProps } from './TabListElement';
 import { TabElementProps } from './Tab';
 import { PanelProps } from './Panel';
-import { SortableContext, SortableContextProps } from '@dnd-kit/sortable';
-import { DndContext, DndContextProps } from '@dnd-kit/core';
+import { SortableContextProps } from '@dnd-kit/sortable';
+import { DndContextProps } from '@dnd-kit/core';
+import { TabListModal } from './TabListModal';
 
 const makeScrollButton = (ActionButton: React.ElementType) => styled(ActionButton)`
     display: inline-block;
@@ -81,7 +81,6 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
         this.handleScroll = this.handleScroll.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
         this.renderTabs = this.renderTabs.bind(this);
-        this.renderModal = this.renderModal.bind(this);
         this.renderArrowButtons = this.renderArrowButtons.bind(this);
         this.isShowModalButton = this.isShowModalButton.bind(this);
         this.isShowArrowButton = this.isShowArrowButton.bind(this);
@@ -204,12 +203,8 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
         this.listScroll.style.transform = `translate3d(0, 0, 0)`;
     }
 
-    toggleModal(open: boolean) {
-        this.setState({ modalIsOpen: open }, () => {
-            if (!open) {
-                this.scrollToIndex(this.props.activeIndex, 'right');
-            }
-        });
+    toggleModal() {
+        this.setState({ modalIsOpen: !this.state.modalIsOpen });
     }
 
     isShowModalButton() {
@@ -298,22 +293,6 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
         return null;
     }
 
-    renderModal() {
-        return this.props.sortableContextProps ? (
-            <DndContext {...this.props.dndContextProps}>
-                <SortableContext {...this.props.sortableContextProps}>
-                    <TabModal closeModal={this.toggleModal.bind(this, false)}>
-                        {this.renderTabs({ vertical: true }, true)}
-                    </TabModal>
-                </SortableContext>
-            </DndContext>
-        ) : (
-            <TabModal closeModal={this.toggleModal.bind(this, false)}>
-                {this.renderTabs({ vertical: true }, true)}
-            </TabModal>
-        );
-    }
-
     render() {
         const { ExtraButton } = this.props;
         const { modalIsOpen } = this.state;
@@ -330,7 +309,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
                     {this.state.showModalButton ? (
                         <FoldButton
                             ref={(node: React.ReactElement) => (this.foldNode = node)}
-                            onClick={this.toggleModal.bind(this, true)}
+                            onClick={this.toggleModal}
                             showArrowButton={this.state.showArrowButton}
                         >
                             <BulletIcon />
@@ -343,8 +322,17 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
                         </ListScroll>
                     </ListInner>
                 </TabList>
-                {ExtraButton ? ExtraButton : null}
-                {modalIsOpen && this.renderModal()}
+                {!!ExtraButton && ExtraButton}
+                {this.isShowModalButton && (
+                    <TabListModal
+                        isOpen={modalIsOpen}
+                        onRequestClose={this.toggleModal}
+                        dndContextProps={this.props.dndContextProps}
+                        sortableContextProps={this.props.sortableContextProps}
+                    >
+                        {this.renderTabs({ vertical: true }, true)}
+                    </TabListModal>
+                )}
             </div>
         );
     }

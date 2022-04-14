@@ -85,6 +85,8 @@ export default class Tabs extends React.PureComponent<TabsProps, State> {
     }
 
     render() {
+        console.log('render Tabs');
+
         const { children, ...extraProps } = this.props;
         const { activeIndex } = this.state;
 

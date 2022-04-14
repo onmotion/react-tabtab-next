@@ -3,6 +3,7 @@ import path from 'path';
 import json from '@rollup/plugin-json';
 import typescript from '@rollup/plugin-typescript';
 import resolve from '@rollup/plugin-node-resolve';
+import css from 'rollup-plugin-import-css';
 
 const rootPackagePath = process.cwd();
 const input = path.join(rootPackagePath, 'src/index.ts');
@@ -18,7 +19,7 @@ const external = [
     ...Object.keys(pkg.peerDependencies || {}),
 ];
 
-const plugins = [json(), resolve(), typescript()];
+const plugins = [json(), resolve(), typescript(), css()];
 
 export default [
     {
