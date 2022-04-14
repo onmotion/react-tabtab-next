@@ -47,7 +47,7 @@ const DragTabList: FC<IDragTabListProps & Partial<TabProps>> = memo(({ children,
                     <TabList
                         {...props}
                         sortableContextProps={{ items }}
-                        dndContextProps={{ onDragEnd: handleOnDragEnd }}
+                        dndContextProps={{ onDragEnd: handleOnDragEnd, sensors }}
                     >
                         {React.Children.map(children, (child, i) => (
                             <DragTab id={i.toString()} key={i} index={i} {...props}>
