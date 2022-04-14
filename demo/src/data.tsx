@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-export const makeData = (number: number, titlePrefix = 'Tab') => {
+export const makeData = (number: number, titlePrefix = 'Tab', useTitleCounter = true) => {
     const data = [];
     for (let i = 0; i < number; i++) {
         data.push({
-            title: `${titlePrefix} ${i}`,
+            title: useTitleCounter ? `${titlePrefix} ${i + 1}` : titlePrefix,
             content: (
                 <div>
                     <b>Content {i}</b>

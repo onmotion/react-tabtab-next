@@ -75,17 +75,7 @@ export default function App() {
                         onClick={(e) => {
                             setTabs((prev) => {
                                 const newTabs = [...prev];
-                                const newItem = {
-                                    title: 'New Tab ' + newTabs.length,
-                                    content: (
-                                        <p>
-                                            Montibus sed ignotas. Spisso legebantur phoebe montes. Dedit permisit.
-                                            Glomeravit oppida formaeque ab consistere aera quam totidemque ipsa? Aera
-                                            extendi persidaque tanta membra spisso illi nam solidumque. Habitandae
-                                            triones
-                                        </p>
-                                    ),
-                                };
+                                const newItem = makeData(1, 'New Tab ' + (newTabs.length + 1), false)[0];
                                 newTabs.push(newItem);
                                 return newTabs;
                             });
@@ -115,17 +105,6 @@ export default function App() {
                 <TabList>{closableTabItems}</TabList>
                 <PanelList>{panelItems}</PanelList>
             </Tabs>
-
-            <p className="title">Bulma draggable</p>
-            <Tabs
-                customStyle={bulma}
-                activeIndex={activeTab > shortTabItems.length - 1 ? shortTabItems.length - 1 : activeTab}
-                onTabChange={handleOnTabChange}
-                onTabSequenceChange={handleOnTabSequenceChange}
-            >
-                <DragTabList>{shortTabItems}</DragTabList>
-                <PanelList>{panelItems}</PanelList>
-            </Tabs>
             <p className="title">Async data loading</p>
             <Tabs defaultIndex={0}>
                 <TabList>
@@ -141,6 +120,15 @@ export default function App() {
                         cache={false}
                     />
                 </PanelList>
+            </Tabs>
+            <p className="title">Bulma minimal</p>
+            <Tabs
+                customStyle={bulma}
+                activeIndex={activeTab > shortTabItems.length - 1 ? shortTabItems.length - 1 : activeTab}
+                onTabChange={handleOnTabChange}
+            >
+                <TabList>{shortTabItems}</TabList>
+                <PanelList>{panelItems}</PanelList>
             </Tabs>
         </div>
     );
