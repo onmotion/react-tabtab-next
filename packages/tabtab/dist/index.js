@@ -205,12 +205,15 @@ var TabListComponent = /** @class */ (function (_super) {
         return true;
     };
     TabListComponent.prototype.componentDidMount = function () {
+        var _this = this;
         if (!this.chackActiveIndexRange())
             return;
         this.isShowArrowButton();
         this.isShowModalButton();
-        if (this.props.activeIndex > 0)
-            this.scrollToIndex(this.props.activeIndex, 'left');
+        setTimeout(function () {
+            if (_this.props.activeIndex > 0)
+                _this.scrollToIndex(_this.props.activeIndex, 'left');
+        }, 100);
     };
     TabListComponent.prototype.componentDidUpdate = function (prevProps, prevState) {
         var _a, _b, _c, _d, _e;

@@ -111,7 +111,9 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
         this.isShowArrowButton();
         this.isShowModalButton();
 
-        if (this.props.activeIndex > 0) this.scrollToIndex(this.props.activeIndex, 'left');
+        setTimeout(() => {
+            if (this.props.activeIndex > 0) this.scrollToIndex(this.props.activeIndex, 'left');
+        }, 100);
     }
 
     componentDidUpdate(prevProps: TabListProps, prevState: State) {
