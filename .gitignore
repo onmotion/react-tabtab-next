@@ -6,3 +6,4 @@ yarn.lock
 bundle-stats.html
 coverage
 .vscode
+demo/__build__

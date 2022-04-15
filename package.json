@@ -14,7 +14,9 @@
         "prepublish": "npm run build",
         "validate": "npm ls",
         "demo": "npx webpack serve --config ./demo/webpack.config.js",
-        "demo:build": "npx webpack build --config ./demo/webpack.config.js"
+        "demo:build": "npx webpack build --config ./demo/webpack.config.js",
+        "gh-pages": "rimraf demo/__build__ && npm run demo:build && npm run gh-pages:publish",
+        "gh-pages:publish": "git-directory-deploy --directory demo/__build__ --branch gh-pages"
     },
     "repository": {
         "type": "git",
