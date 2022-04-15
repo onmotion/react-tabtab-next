@@ -46,8 +46,8 @@
     },
     "homepage": "https://github.com/onmotion/react-tabtab-next#readme",
     "dependencies": {
-        "react": ">=16.8.0",
-        "react-dom": ">=16.8.0"
+        "react": "^16.8.0 || ^17 || ^18",
+        "react-dom": "^16.8.0 || ^17 || ^18"
     },
     "devDependencies": {
         "@babel/preset-env": "^7.16.11",
