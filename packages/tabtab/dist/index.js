@@ -87,6 +87,7 @@ var Tabs = /** @class */ (function (_super) {
     Tabs.prototype.render = function () {
         var _a = this.props, children = _a.children, extraProps = tslib.__rest(_a, ["children"]);
         var activeIndex = this.state.activeIndex;
+        console.log('render Tabs');
         var props = tslib.__assign({ handleTabChange: this.handleTabChange, handleTabSequence: this.handleTabSequence, handleTabClose: this.handleTabClose, activeIndex: activeIndex }, extraProps);
         return (React__default["default"].createElement("div", { className: "tabtab-container" }, React__default["default"].Children.map(children, function (child) {
             return React__default["default"].cloneElement(child, props);
@@ -205,15 +206,13 @@ var TabListComponent = /** @class */ (function (_super) {
         return true;
     };
     TabListComponent.prototype.componentDidMount = function () {
-        var _this = this;
+        console.log('TabList componentDidMount');
         if (!this.chackActiveIndexRange())
             return;
         this.isShowArrowButton();
         this.isShowModalButton();
-        setTimeout(function () {
-            if (_this.props.activeIndex > 0)
-                _this.scrollToIndex(_this.props.activeIndex, 'left');
-        }, 100);
+        if (this.props.activeIndex > 0)
+            this.scrollToIndex(this.props.activeIndex, 'left');
     };
     TabListComponent.prototype.componentDidUpdate = function (prevProps, prevState) {
         var _a, _b, _c, _d, _e;
