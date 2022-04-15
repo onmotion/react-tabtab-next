@@ -9,7 +9,7 @@ type Props = {
     };
 };
 
-export default class PanelList extends React.PureComponent<Props> {
+export default class PanelList extends React.PureComponent<React.PropsWithChildren<Props>> {
     render() {
         const { children, activeIndex, customStyle } = this.props;
         if (!children || activeIndex === undefined) {
@@ -27,7 +27,7 @@ export default class PanelList extends React.PureComponent<Props> {
                 key: index,
                 active: index === activeIndex,
                 index,
-                ...props
+                ...props,
             })
         );
         return <div>{result}</div>;

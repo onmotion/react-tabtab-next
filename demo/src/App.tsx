@@ -52,7 +52,7 @@ export default function App() {
         setActiveTab(newIndex);
     }, []);
 
-    const handleOnTabChange = useCallback((i) => {
+    const handleOnTabChange = useCallback((i: number) => {
         console.log('select tab', i);
         setActiveTab(i);
     }, []);

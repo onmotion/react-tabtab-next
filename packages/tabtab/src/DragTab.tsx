@@ -7,6 +7,7 @@ interface Props {
     id: string;
     activeIndex?: number;
     index?: number;
+    children: React.ReactNode;
 }
 const DragTab: FC<Props> = memo(
     forwardRef<HTMLElement, Props>(({ children, id, index, activeIndex, ...rest }, ref) => {

@@ -14,7 +14,7 @@ export type PanelProps = {
     index?: number;
 };
 
-export default class PanelComponent extends React.PureComponent<PanelProps> {
+export default class PanelComponent extends React.PureComponent<React.PropsWithChildren<PanelProps>> {
     render() {
         const { active, index } = this.props;
         const Panel = this.props.CustomPanelStyle || PanelStyle;

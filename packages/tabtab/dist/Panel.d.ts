@@ -7,7 +7,7 @@ export declare type PanelProps = {
     active?: boolean;
     index?: number;
 };
-export default class PanelComponent extends React.PureComponent<PanelProps> {
+export default class PanelComponent extends React.PureComponent<React.PropsWithChildren<PanelProps>> {
     render(): JSX.Element;
 }
 export { PanelStyle };

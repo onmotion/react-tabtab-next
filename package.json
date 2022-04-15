@@ -45,6 +45,10 @@
         "url": "https://github.com/onmotion/react-tabtab-next/issues"
     },
     "homepage": "https://github.com/onmotion/react-tabtab-next#readme",
+    "dependencies": {
+        "react": ">=16.8.0",
+        "react-dom": ">=16.8.0"
+    },
     "devDependencies": {
         "@babel/preset-env": "^7.16.11",
         "@babel/preset-react": "^7.16.7",
@@ -86,10 +90,7 @@
         "webpack-cli": "^4.9.2",
         "webpack-dev-server": "^4.8.1"
     },
-    "peerDependencies": {
-        "react": ">=16.8.0",
-        "react-dom": ">=16.8.0"
-    },
+    "peerDependencies": {},
     "jest": {
         "setupFiles": [
             "./test/shim",

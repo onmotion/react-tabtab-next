@@ -8,6 +8,7 @@ import { TabsProps } from './Tabs';
 
 interface IDragTabListProps {
     onTabSequenceChange?: TabsProps['onTabSequenceChange'];
+    children: React.ReactNode;
 }
 
 const DragTabList: FC<IDragTabListProps & Partial<TabProps>> = memo(({ children, ...props }) => {

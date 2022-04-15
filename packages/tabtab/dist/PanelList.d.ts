@@ -5,7 +5,7 @@ declare type Props = {
         Panel: () => void;
     };
 };
-export default class PanelList extends React.PureComponent<Props> {
+export default class PanelList extends React.PureComponent<React.PropsWithChildren<Props>> {
     render(): JSX.Element;
 }
 export {};

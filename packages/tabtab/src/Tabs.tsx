@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { PanelProps } from './Panel';
 import { TabElementProps } from './Tab';
 import { TabListElementProps } from './TabListElement';
@@ -24,7 +24,7 @@ type State = {
     activeIndex: number;
 };
 
-export default class Tabs extends React.PureComponent<TabsProps, State> {
+export default class Tabs extends React.PureComponent<PropsWithChildren<TabsProps>, State> {
     constructor(props: TabsProps) {
         super(props);
         this.handleTabChange = this.handleTabChange.bind(this);

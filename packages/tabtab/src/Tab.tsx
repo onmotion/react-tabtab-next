@@ -60,7 +60,7 @@ export type TabProps = {
     tabIndex?: string;
 };
 
-export default class Tab extends React.PureComponent<TabProps> {
+export default class Tab extends React.PureComponent<React.PropsWithChildren<TabProps>> {
     __INTERNAL_NODE: React.ElementRef<any>;
 
     constructor(props: TabProps) {
