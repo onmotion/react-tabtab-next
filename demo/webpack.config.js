@@ -6,7 +6,7 @@ module.exports = {
     entry: path.resolve(__dirname, './src/index.jsx'),
     devServer: {
         //  static: './demo/__build__',
-        compress: false,
+        compress: !!process.env.PRODUCTION,
         port: 9000,
         open: true,
     },
@@ -14,7 +14,7 @@ module.exports = {
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, './__build__'),
-        publicPath: './',
+        publicPath: process.env.PRODUCTION ? './' : '/',
     },
     plugins: [
         new HtmlWebpackPlugin({

@@ -10,7 +10,7 @@
 <img src="./docs/ts.svg" width="20px" >
 <img src="./docs/js.svg" width="20px" >
 
-### [Demo Page](https://onmotion.github.io/csb-yk4moo/)
+### [Demo Page](https://onmotion.github.io/react-tabtab-next/)
 
 ### [Demo Playground](https://codesandbox.io/s/react-tabtab-next-yk4moo)
 
@@ -23,8 +23,6 @@ for build a local playground run
 ```bash
 npm run demo
 ```
-
-and go to http://127.0.0.1:9000
 
 also here Codesandbox [playground](https://codesandbox.io/s/react-tabtab-next-yk4moo)
 
