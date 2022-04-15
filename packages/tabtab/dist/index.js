@@ -278,14 +278,17 @@ var TabListComponent = /** @class */ (function (_super) {
     TabListComponent.prototype.scrollToIndex = function (index, rectSide) {
         var tabOffset = this.getTabNode(this.tabRefs[index]).getBoundingClientRect();
         var containerOffset = this.listContainer.getBoundingClientRect();
+        console.log({ tabOffset: tabOffset, containerOffset: containerOffset });
         // Cancel scrolling if the tab is visible
         if (tabOffset.right < containerOffset.right && tabOffset.left > containerOffset.left)
             return;
         var leftMove = tabOffset['right'] + (rectSide === 'left' ? tabOffset['width'] : 0) - containerOffset['right'];
+        console.log({ leftMove: leftMove });
         this.scrollPosition += leftMove;
         if (this.scrollPosition < 0) {
             this.scrollPosition = 0;
         }
+        console.log('this.scrollPosition', this.scrollPosition);
         this.listScroll.style.transform = "translate3d(-".concat(this.scrollPosition, "px, 0, 0)");
     };
     TabListComponent.prototype.scrollToZero = function () {

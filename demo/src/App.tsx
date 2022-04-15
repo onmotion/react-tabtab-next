@@ -15,7 +15,7 @@ import { md, bootstrap, bulma } from '../../packages/themes/src';
 import { CustomThemeExample } from './Components/CustomThemeExample';
 
 export default function App() {
-    const [activeTab, setActiveTab] = useState(0);
+    const [activeTab, setActiveTab] = useState(10);
     const [tabs, setTabs] = useState(makeData(15, 'Some Tab'));
 
     const closableTabItems = useMemo(() => {

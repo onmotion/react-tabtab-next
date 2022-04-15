@@ -189,15 +189,20 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
     scrollToIndex(index: number, rectSide: 'left' | 'right') {
         const tabOffset = this.getTabNode(this.tabRefs[index]).getBoundingClientRect();
         const containerOffset = this.listContainer.getBoundingClientRect();
+        console.log({ tabOffset, containerOffset });
 
         // Cancel scrolling if the tab is visible
         if (tabOffset.right < containerOffset.right && tabOffset.left > containerOffset.left) return;
 
         const leftMove = tabOffset['right'] + (rectSide === 'left' ? tabOffset['width'] : 0) - containerOffset['right'];
+        console.log({ leftMove });
+
         this.scrollPosition += leftMove;
         if (this.scrollPosition < 0) {
             this.scrollPosition = 0;
         }
+        console.log('this.scrollPosition', this.scrollPosition);
+
         this.listScroll.style.transform = `translate3d(-${this.scrollPosition}px, 0, 0)`;
     }
 
