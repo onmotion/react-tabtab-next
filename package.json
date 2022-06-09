@@ -1,6 +1,6 @@
 {
     "name": "react-tabtab-next",
-    "version": "3.2.15",
+    "version": "3.2.16",
     "description": "A mobile support, draggable, editable and api based Tab for ReactJS",
     "workspaces": [
         "./packages/*"
