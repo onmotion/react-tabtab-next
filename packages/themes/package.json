@@ -1,6 +1,6 @@
 {
     "name": "@react-tabtab-next/themes",
-    "version": "3.2.14",
+    "version": "3.2.15",
     "description": "[TypeScript] Themes for @react-tabtab-next/tabtab",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -39,7 +39,7 @@
     },
     "homepage": "https://github.com/onmotion/react-tabtab-next#readme",
     "dependencies": {
-        "styled-components": "^5.3.5",
+        "styled-components": "^5.3.4",
         "@react-tabtab-next/tabtab": "*"
     },
     "devDependencies": {
