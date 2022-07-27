@@ -1,6 +1,6 @@
 {
     "name": "react-tabtab-next",
-    "version": "3.2.16",
+    "version": "3.3.0",
     "description": "A mobile support, draggable, editable and api based Tab for ReactJS",
     "workspaces": [
         "./packages/*"
@@ -47,7 +47,8 @@
     "homepage": "https://github.com/onmotion/react-tabtab-next#readme",
     "dependencies": {
         "react": "^16.8.0 || ^17 || ^18",
-        "react-dom": "^16.8.0 || ^17 || ^18"
+        "react-dom": "^16.8.0 || ^17 || ^18",
+        "styled-components": "5.3.3"
     },
     "devDependencies": {
         "@babel/preset-env": "^7.16.11",

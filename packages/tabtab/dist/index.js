@@ -273,6 +273,8 @@ var TabListComponent = /** @class */ (function (_super) {
         this.listScroll.style.transform = "translate3d(-".concat(this.scrollPosition, "px, 0, 0)");
     };
     TabListComponent.prototype.scrollToIndex = function (index, rectSide) {
+        if (index < 0)
+            return;
         var tabOffset = this.getTabNode(this.tabRefs[index]).getBoundingClientRect();
         var containerOffset = this.listContainer.getBoundingClientRect();
         // Cancel scrolling if the tab is visible

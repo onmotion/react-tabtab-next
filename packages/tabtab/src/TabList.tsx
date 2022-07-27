@@ -185,6 +185,7 @@ export default class TabListComponent extends React.PureComponent<TabListProps, 
     }
 
     scrollToIndex(index: number, rectSide: 'left' | 'right') {
+        if (index < 0) return
         const tabOffset = this.getTabNode(this.tabRefs[index]).getBoundingClientRect();
         const containerOffset = this.listContainer.getBoundingClientRect();
 
